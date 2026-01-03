@@ -151,8 +151,9 @@
             "command": "grep -q 'startingPrompt' src/components/SettingsWindow.jsx && echo 'OK'",
             "expected": "OK"
           },
-          "status": "pending",
-          "notes": "Add useState for startingPrompt, update in handleSettings when settings.starting_prompt is received"
+          "status": "completed",
+          "notes": "Added startingPrompt state with useState('') and loading from settings.starting_prompt in useEffect handleSettings callback, following the faceAuthEnabled pattern",
+          "updated_at": "2026-01-03T20:39:14.785497+00:00"
         },
         {
           "id": "subtask-3-2",
@@ -355,5 +356,5 @@
   "updated_at": "2026-01-03T20:31:10.600Z",
   "status": "in_progress",
   "planStatus": "in_progress",
-  "last_updated": "2026-01-03T20:38:12.350412+00:00"
+  "last_updated": "2026-01-03T20:39:14.785505+00:00"
 }

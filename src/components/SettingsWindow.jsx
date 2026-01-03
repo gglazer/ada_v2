@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
 const TOOLS = [
@@ -39,6 +39,22 @@ const SettingsWindow = ({
     const [permissions, setPermissions] = useState({});
     const [faceAuthEnabled, setFaceAuthEnabled] = useState(false);
     const [startingPrompt, setStartingPrompt] = useState('');
+    const startingPromptTimeoutRef = useRef(null);
+
+    // Debounced update for starting prompt changes
+    const updateStartingPrompt = (value) => {
+        setStartingPrompt(value); // Optimistic Update
+
+        // Clear existing timeout
+        if (startingPromptTimeoutRef.current) {
+            clearTimeout(startingPromptTimeoutRef.current);
+        }
+
+        // Debounce socket emit by 500ms
+        startingPromptTimeoutRef.current = setTimeout(() => {
+            socket.emit('update_settings', { starting_prompt: value });
+        }, 500);
+    };
 
     useEffect(() => {
         // Request initial permissions
@@ -65,6 +81,10 @@ const SettingsWindow = ({
 
         return () => {
             socket.off('settings', handleSettings);
+            // Clear pending debounce timeout
+            if (startingPromptTimeoutRef.current) {
+                clearTimeout(startingPromptTimeoutRef.current);
+            }
         };
     }, [socket]);
 
