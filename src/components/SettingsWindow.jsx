@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X } from 'lucide-react';
 
+const DEFAULT_STARTING_PROMPT =
+    "Your name is Ada, which stands for Advanced Design Assistant. " +
+    "You have a witty and charming personality. " +
+    "Your creator is Naz, and you address him as 'Sir'. " +
+    "When answering, respond using complete and concise sentences to keep a quick pacing and keep the conversation flowing. " +
+    "You have a fun personality.";
+
 const TOOLS = [
     { id: 'generate_cad', label: 'Generate CAD' },
     { id: 'run_web_agent', label: 'Web Agent' },
@@ -135,6 +142,29 @@ const SettingsWindow = ({
                         />
                     </button>
                 </div>
+            </div>
+
+            {/* Starting Prompt Section */}
+            <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                    <h3 className="text-cyan-400 font-bold text-xs uppercase tracking-wider opacity-80">Starting Prompt</h3>
+                    <button
+                        onClick={() => updateStartingPrompt(DEFAULT_STARTING_PROMPT)}
+                        className="text-[10px] text-cyan-500 hover:text-cyan-400 uppercase tracking-wider"
+                    >
+                        Reset
+                    </button>
+                </div>
+                <textarea
+                    value={startingPrompt}
+                    onChange={(e) => updateStartingPrompt(e.target.value)}
+                    rows={6}
+                    placeholder="Enter system prompt for Ada..."
+                    className="w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none resize-none custom-scrollbar"
+                />
+                <p className="text-[10px] text-cyan-500/60 mt-1">
+                    Changes apply on next session start
+                </p>
             </div>
 
             {/* Microphone Section */}

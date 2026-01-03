@@ -171,8 +171,9 @@
             "command": "grep -q 'debounce\\|setTimeout' src/components/SettingsWindow.jsx && echo 'OK'",
             "expected": "OK"
           },
-          "status": "pending",
-          "notes": "Use useRef for debounce timer, update after 500ms of no typing to avoid excessive socket emissions"
+          "status": "completed",
+          "notes": "Added debounced update function for starting prompt changes using useRef and setTimeout. The function updates local state immediately for responsive UI, then debounces the socket emit by 500ms to avoid sending updates on every keystroke. Also added cleanup in useEffect return to clear pending timeouts on unmount.",
+          "updated_at": "2026-01-03T20:40:33.604687+00:00"
         },
         {
           "id": "subtask-3-3",
@@ -356,5 +357,5 @@
   "updated_at": "2026-01-03T20:31:10.600Z",
   "status": "in_progress",
   "planStatus": "in_progress",
-  "last_updated": "2026-01-03T20:39:14.785505+00:00"
+  "last_updated": "2026-01-03T20:40:33.604696+00:00"
 }
