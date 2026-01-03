@@ -47,8 +47,9 @@
             "command": "grep -A2 'starting_prompt' backend/server.py | grep -q 'SETTINGS' && echo 'OK'",
             "expected": "OK"
           },
-          "status": "pending",
-          "notes": "Follow the pattern: if 'starting_prompt' in data: SETTINGS['starting_prompt'] = data['starting_prompt']"
+          "status": "completed",
+          "notes": "Added starting_prompt handler in update_settings Socket.IO event. Handler follows the same pattern as camera_flipped - checks if key exists in data, updates SETTINGS dictionary, and logs the action.",
+          "updated_at": "2026-01-03T20:33:21.050608+00:00"
         }
       ]
     },
@@ -351,5 +352,5 @@
   "updated_at": "2026-01-03T20:31:10.600Z",
   "status": "in_progress",
   "planStatus": "in_progress",
-  "last_updated": "2026-01-03T20:32:11.935417+00:00"
+  "last_updated": "2026-01-03T20:33:21.050619+00:00"
 }

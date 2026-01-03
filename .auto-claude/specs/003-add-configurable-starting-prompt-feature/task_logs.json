@@ -1,7 +1,7 @@
 {
   "spec_id": "003-add-configurable-starting-prompt-feature",
   "created_at": "2026-01-03T19:42:31.264069+00:00",
-  "updated_at": "2026-01-03T20:33:11.400715+00:00",
+  "updated_at": "2026-01-03T20:34:17.758404+00:00",
   "phases": {
     "planning": {
       "phase": "planning",
@@ -1110,6 +1110,159 @@
           "tool_input": "git add . && git commit -m \"auto-claude: subtas...",
           "subtask_id": "subtask-1-2",
           "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:33:13.332201+00:00",
+          "type": "tool_end",
+          "content": "[Bash] Done",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "subtask_id": "subtask-1-2",
+          "session": 2,
+          "detail": "[auto-claude/003-add-configurable-starting-prompt-feature 1404181] auto-claude: subtask-1-2 - Add starting_prompt handler in update_settings Socket.IO event\n 16 files changed, 2338 insertions(+)\n create mode 100644 .auto-claude-status\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/build-progress.txt\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/complexity_assessment.json\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/context.json\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/implementation_plan.json\n create mode 100755 .auto-claude/specs/003-add-configurable-starting-prompt-feature/init.sh\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/memory/attempt_history.json\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/memory/build_commits.json\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/memory/session_insights/session_001.json\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/project_index.json\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/requirements.json\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/spec.md\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/task_logs.json\n create mode 100644 .auto-claude/specs/003-add-configurable-starting-prompt-feature/task_metadata.json\n create mode 100644 .claude_settings.json",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:33:19.039244+00:00",
+          "type": "text",
+          "content": "Now let me update the subtask status to completed:",
+          "phase": "coding",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:33:21.030591+00:00",
+          "type": "tool_start",
+          "content": "[mcp__auto-claude__update_subtask_status]",
+          "phase": "coding",
+          "tool_name": "mcp__auto-claude__update_subtask_status",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:33:21.062597+00:00",
+          "type": "tool_end",
+          "content": "[mcp__auto-claude__update_subtask_status] Done",
+          "phase": "coding",
+          "tool_name": "mcp__auto-claude__update_subtask_status",
+          "subtask_id": "subtask-1-2",
+          "session": 2,
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:33:28.729354+00:00",
+          "type": "text",
+          "content": "## ✅ Subtask Complete\n\n**Subtask ID:** `subtask-1-2`  \n**Description:** Add starting_prompt handler in update_settings Socket.IO event\n\n### Changes Made\nAdded the `starting_prompt` handler in the `update_settings` Socket.IO event in `backend/server.py`:\n\n```python\nif \"starting_prompt\" in data:\n    SETTINGS[\"starting_prompt\"] = data[\"starting_prompt\"]\n    print(f\"[SERVER] Starting prompt updated\")\n```\n\n### Pattern Followed\nThe handler follows the exact same pattern as the `camera_flipped` handler:\n1. Check if the key exists in the incoming data\n2. Update the `SETTINGS` dictionary with the new value\n3. Log the change to console\n\n### Verification\n✅ `grep -A2 'starting_prompt' backend/server.py | grep -q 'SETTINGS' && echo 'OK'` → **OK**\n\n### Commit\n`auto-claude: subtask-1-2 - Add starting_prompt handler in update_settings Socket.IO event`",
+          "phase": "coding",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:33:42.994130+00:00",
+          "type": "tool_start",
+          "content": "[Read] ./backend/ada.py",
+          "phase": "coding",
+          "tool_name": "Read",
+          "tool_input": "./backend/ada.py",
+          "subtask_id": "subtask-2-1",
+          "session": 3
+        },
+        {
+          "timestamp": "2026-01-03T20:33:44.311352+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...dd-configurable-starting-prompt-feature/spec.md",
+          "phase": "coding",
+          "tool_name": "Read",
+          "tool_input": "...dd-configurable-starting-prompt-feature/spec.md",
+          "subtask_id": "subtask-2-1",
+          "session": 3
+        },
+        {
+          "timestamp": "2026-01-03T20:33:44.366035+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "coding",
+          "tool_name": "Read",
+          "subtask_id": "subtask-2-1",
+          "session": 3,
+          "detail": "     1→# Specification: Add Configurable Starting Prompt Feature\n     2→\n     3→## Overview\n     4→\n     5→This feature enables users to configure a custom starting/system prompt for the AI assistant through the frontend settings UI. The prompt defines the AI's identity (\"who am I\") and general behavior guidelines. Currently, the system prompt is hardcoded in the backend (`ada.py`). This change will make it user-configurable, persisted in `settings.json`, and editable via the existing Settings Window.\n     6→\n     7→## Workflow Type\n     8→\n     9→**Type**: feature\n    10→\n    11→**Rationale**: This is a new user-facing feature that requires changes across the frontend (UI), backend (settings handling), and core AI configuration (system instruction). It follows the existing settings pattern already established in the codebase.\n    12→\n    13→## Task Scope\n    14→\n    15→### Services Involved\n    16→- **Frontend (React/Electron)** (primary) - Add UI for editing the starting prompt in SettingsWindow\n    17→- **Backend (Python/FastAPI)** (primary) - Handle storage and application of the starting prompt\n    18→\n    19→### This Task Will:\n    20→- [ ] Add a `starting_prompt` field to settings.json schema\n    21→- [ ] Add a textarea UI component in SettingsWindow.jsx for editing the prompt\n    22→- [ ] Modify backend to read the custom prompt from settings\n    23→- [ ] Pass the custom prompt to the Gemini API session configuration\n    24→- [ ] Persist and load the prompt via the existing settings mechanism\n    25→\n    26→### Out of Scope:\n    27→- Multiple prompt profiles/presets\n    28→- Prompt templates with placeholders\n    29→- Real-time prompt switching (requires session restart)\n    30→- Prompt validation or sanitization (user has full control)\n    31→\n    32→## Service Context\n    33→\n    34→### Frontend (React + Electron + Vite)\n    35→\n    36→**Tech Stack:**\n    37→- Language: JavaScript/JSX\n    38→- Framework: React 18 with Vite bundler\n    39→- Styling: Tailwind CSS\n    40→- Communication: Socket.IO client\n    41→- Key directories: `src/`, `src/components/`\n    42→\n    43→**Entry Point:** `src/App.jsx`\n    44→\n    45→**How to Run:**\n    46→```bash\n    47→npm run dev\n    48→```\n    49→\n    50→**Port:** 5173 (Vite dev server)\n    51→\n    52→### Backend (Python + FastAPI)\n    53→\n    54→**Tech Stack:**\n    55→- Language: Python 3.11\n    56→- Framework: FastAPI + Socket.IO (python-socketio)\n    57→- AI: Google Gemini 2.5 Live API\n    58→- Key directories: `backend/`\n    59→\n    60→**Entry Point:** `backend/server.py`\n    61→\n    62→**How to Run:**\n    63→```bash\n    64→conda activate ada_v2 && python backend/server.py\n    65→```\n    66→\n    67→**Port:** 8000\n    68→\n    69→## Files to Modify\n    70→\n    71→| File | Service | What to Change |\n    72→|------|---------|---------------|\n    73→| `backend/settings.json` | Backend | Add `starting_prompt` field with default value |\n    74→| `backend/server.py` | Backend | Include `starting_prompt` in DEFAULT_SETTINGS, pass to AudioLoop |\n    75→| `backend/ada.py` | Backend | Accept and use custom system_instruction instead of hardcoded value |\n    76→| `src/components/SettingsWindow.jsx` | Frontend | Add textarea for editing starting prompt, save on change |\n    77→\n    78→## Files to Reference\n    79→\n    80→These files show patterns to follow:\n    81→\n    82→| File | Pattern to Copy |\n    83→|------|----------------|\n    84→| `src/components/SettingsWindow.jsx` | Existing settings UI patterns (toggles, dropdowns, Socket.IO integration) |\n    85→| `backend/server.py` | Settings load/save pattern, Socket.IO event handlers (`get_settings`, `update_settings`) |\n    86→| `backend/ada.py` | How `config` is structured with `system_instruction` |\n    87→\n    88→## Patterns to Follow\n    89→\n    90→### Settings Toggle Pattern (SettingsWindow.jsx)\n    91→\n    92→From `src/components/SettingsWindow.jsx`:\n    93→\n    94→```jsx\n    95→const toggleFaceAuth = () => {\n    96→    const newVal = !faceAuthEnabled;\n    97→    setFaceAuthEnabled(newVal); // Optimistic Update\n    98→    localStorage.setItem('face_auth_enabled', newVal);\n    99→    socket.emit('update_settings', { face_auth_enabled: newVal });\n   100→};\n   101→```\n   102→\n   103→**Key Points:**\n   104→- Use optimistic UI update for responsiveness\n   105→- Emit `update_settings` event to backend\n   106→- Backend broadcasts updated settings back to all clients\n   107→\n   108→### Settings Persistence (server.py)\n   109→\n   110→From `backend/server.py`:\n   111→\n   112→```python\n   113→DEFAULT_SETTINGS = {\n   114→    \"face_auth_enabled\": False,\n   115→    \"tool_permissions\": {...},\n   116→    \"printers\": [],\n   117→    \"kasa_devices\": [],\n   118→    \"camera_flipped\": False\n   119→}\n   120→\n   121→@sio.event\n   122→async def update_settings(sid, data):\n   123→    # Handle specific keys\n   124→    if \"camera_flipped\" in data:\n   125→        SETTINGS[\"camera_flipped\"] = data[\"camera_flipped\"]\n   126→    save_settings()\n   127→    await sio.emit('settings', SETTINGS)\n   128→```\n   129→\n   130→**Key Points:**\n   131→- DEFAULT_SETTINGS provides schema and defaults\n   132→- update_settings handler processes incoming changes\n   133→- save_settings() persists to settings.json\n   134→- Broadcast updated settings to all connected clients\n   135→\n   136→### System Instruction Configuration (ada.py)\n   137→\n   138→From `backend/ada.py`:\n   139→\n   140→```python\n   141→config = types.LiveConnectConfig(\n   142→    response_modalities=[\"AUDIO\"],\n   143→    output_audio_transcription={},\n   144→    input_audio_transcription={},\n   145→    system_instruction=\"Your name is Ada, which stands for Advanced Design Assistant. \"\n   146→        \"You have a witty and charming personality. \"\n   147→        \"Your creator is Gábor, and you address him as 'Sir'. ...\",\n   148→    tools=tools,\n   149→    speech_config=types.SpeechConfig(...)\n   150→)\n   151→```\n   152→\n   153→**Key Points:**\n   154→- `system_instruction` is a string passed to LiveConnectConfig\n   155→- This is what needs to be made dynamic\n   156→- The config is used when connecting: `client.aio.live.connect(model=MODEL, config=config)`\n   157→\n   158→## Requirements\n   159→\n   160→### Functional Requirements\n   161→\n   162→1. **Starting Prompt Storage**\n   163→   - Description: Store the custom starting prompt in settings.json\n   164→   - Acceptance: The `starting_prompt` field exists in settings.json and persists across restarts\n   165→\n   166→2. **Starting Prompt UI**\n   167→   - Description: Add a textarea in SettingsWindow for editing the prompt\n   168→   - Acceptance: User can view, edit, and save the starting prompt via the Settings panel\n   169→\n   170→3. **Prompt Application**\n   171→   - Description: The custom prompt is used as the Gemini system_instruction\n   172→   - Acceptance: AI behavior reflects the custom prompt content when session starts\n   173→\n   174→4. **Default Prompt**\n   175→   - Description: Provide a sensible default prompt if none is configured\n   176→   - Acceptance: First-time users get the current default ADA personality\n   177→\n   178→### Edge Cases\n   179→\n   180→1. **Empty Prompt** - Use default prompt if user clears the field completely\n   181→2. **Very Long Prompt** - No hard limit, but display scrollable textarea (Gemini has its own limits)\n   182→3. **Session Already Running** - Show info that changes take effect on next session start\n   183→4. **Special Characters** - Prompt is plain text, no escaping needed\n   184→\n   185→## Implementation Notes\n   186→\n   187→### DO\n   188→- Follow the existing pattern in SettingsWindow.jsx for the textarea styling\n   189→- Use the same Socket.IO event flow (`update_settings` / `settings`) as other settings\n   190→- Add a debounce on the textarea to avoid sending every keystroke\n   191→- Provide a \"Reset to Default\" button for convenience\n   192→- Show a note that changes apply on next session restart\n   193→\n   194→### DON'T\n   195→- Create a new Socket.IO event - reuse existing `update_settings` pattern\n   196→- Store the prompt in localStorage (keep it server-side in settings.json)\n   197→- Try to hot-reload the prompt into an active Gemini session (requires restart)\n   198→- Add complex validation - let the user write whatever they want\n   199→\n   200→## Development Environment\n   201→\n   202→### Start Services\n   203→\n   204→```bash\n   205→# Single command (starts backend automatically)\n   206→conda activate ada_v2 && npm run dev\n   207→\n   208→# Two-terminal setup (recommended for debugging)\n   209→# Terminal 1 - Backend:\n   210→conda activate ada_v2 && python backend/server.py\n   211→# Terminal 2 - Frontend:\n   212→npm run dev\n   213→```\n   214→\n   215→### Service URLs\n   216→- Frontend: http://localhost:5173\n   217→- Backend API: http://localhost:8000\n   218→- Backend Docs: http://localhost:8000/docs\n   219→\n   220→### Required Environment Variables\n   221→- `GEMINI_API_KEY`: Google Gemini API key (in `.env` file)\n   222→\n   223→## Success Criteria\n   224→\n   225→The task is complete when:\n   226→\n   227→1. [ ] `starting_prompt` field exists in settings.json with a default value\n   228→2. [ ] SettingsWindow displays a textarea for editing the starting prompt\n   229→3. [ ] Changes to the prompt are persisted via the existing settings mechanism\n   230→4. [ ] The backend uses the custom prompt when initializing the Gemini session\n   231→5. [ ] Default prompt matches the current hardcoded ADA personality\n   232→6. [ ] No console errors in frontend or backend\n   233→7. [ ] Existing settings functionality remains unaffected\n   234→\n   235→## QA Acceptance Criteria\n   236→\n   237→**CRITICAL**: These criteria must be verified by the QA Agent before sign-off.\n   238→\n   239→### Unit Tests\n   240→| Test | File | What to Verify |\n   241→|------|------|----------------|\n   242→| Settings Load | `tests/test_settings.py` | Default starting_prompt is loaded when not present |\n   243→| Settings Save | `tests/test_settings.py` | starting_prompt is persisted correctly |\n   244→\n   245→### Integration Tests\n   246→| Test | Services | What to Verify |\n   247→|------|----------|----------------|\n   248→| Settings Round-trip | Frontend <-> Backend | Update startin\n\n... [truncated - full output was 12054 chars]",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:33:57.299422+00:00",
+          "type": "text",
+          "content": "Now I understand the task. I need to add a `system_instruction` parameter to the `AudioLoop.__init__` method and store it as an instance variable. Let me implement this change:",
+          "phase": "coding",
+          "subtask_id": "subtask-2-1",
+          "session": 3
+        },
+        {
+          "timestamp": "2026-01-03T20:34:02.492858+00:00",
+          "type": "tool_start",
+          "content": "[Edit] ./backend/ada.py",
+          "phase": "coding",
+          "tool_name": "Edit",
+          "tool_input": "./backend/ada.py",
+          "subtask_id": "subtask-2-1",
+          "session": 3
+        },
+        {
+          "timestamp": "2026-01-03T20:34:02.523885+00:00",
+          "type": "tool_end",
+          "content": "[Edit] Done",
+          "phase": "coding",
+          "tool_name": "Edit",
+          "subtask_id": "subtask-2-1",
+          "session": 3,
+          "detail": "The file ./backend/ada.py has been updated. Here's the result of running `cat -n` on a snippet of the edited file:\n   209→from web_agent import WebAgent\n   210→from kasa_agent import KasaAgent\n   211→from printer_agent import PrinterAgent\n   212→\n   213→class AudioLoop:\n   214→    def __init__(self, video_mode=DEFAULT_MODE, on_audio_data=None, on_video_frame=None, on_cad_data=None, on_web_data=None, on_transcription=None, on_tool_confirmation=None, on_cad_status=None, on_cad_thought=None, on_project_update=None, on_device_update=None, on_error=None, input_device_index=None, input_device_name=None, output_device_index=None, kasa_agent=None, system_instruction=None):\n   215→        self.video_mode = video_mode\n   216→        self.system_instruction = system_instruction\n   217→        self.on_audio_data = on_audio_data\n   218→        self.on_video_frame = on_video_frame\n   219→        self.on_cad_data = on_cad_data\n   220→        self.on_web_data = on_web_data",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:34:07.099317+00:00",
+          "type": "text",
+          "content": "Now let me run the verification command to confirm the change:",
+          "phase": "coding",
+          "subtask_id": "subtask-2-1",
+          "session": 3
+        },
+        {
+          "timestamp": "2026-01-03T20:34:09.443069+00:00",
+          "type": "tool_start",
+          "content": "[Bash] grep -q 'system_instruction' backend/ada.py && ...",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "tool_input": "grep -q 'system_instruction' backend/ada.py && ...",
+          "subtask_id": "subtask-2-1",
+          "session": 3
+        },
+        {
+          "timestamp": "2026-01-03T20:34:09.593967+00:00",
+          "type": "tool_end",
+          "content": "[Bash] Done",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "subtask_id": "subtask-2-1",
+          "session": 3,
+          "detail": "OK",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:34:13.262110+00:00",
+          "type": "text",
+          "content": "Verification passed. Now let me commit the changes:",
+          "phase": "coding",
+          "subtask_id": "subtask-2-1",
+          "session": 3
+        },
+        {
+          "timestamp": "2026-01-03T20:34:17.758366+00:00",
+          "type": "tool_start",
+          "content": "[Bash] git add . && git commit -m \"$(cat <<'EOF'\nauto-...",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "tool_input": "git add . && git commit -m \"$(cat <<'EOF'\nauto-...",
+          "subtask_id": "subtask-2-1",
+          "session": 3
         }
       ]
     },
