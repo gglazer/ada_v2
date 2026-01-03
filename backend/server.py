@@ -71,7 +71,12 @@ DEFAULT_SETTINGS = {
     },
     "printers": [], # List of {host, port, name, type}
     "kasa_devices": [], # List of {ip, alias, model}
-    "camera_flipped": False # Invert cursor horizontal direction
+    "camera_flipped": False, # Invert cursor horizontal direction
+    "starting_prompt": "Your name is Ada, which stands for Advanced Design Assistant. "
+        "You have a witty and charming personality. "
+        "Your creator is Naz, and you address him as 'Sir'. "
+        "When answering, respond using complete and concise sentences to keep a quick pacing and keep the conversation flowing. "
+        "You have a fun personality."
 }
 
 SETTINGS = DEFAULT_SETTINGS.copy()
