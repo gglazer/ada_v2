@@ -45,7 +45,7 @@ const SettingsWindow = ({
 }) => {
     const [permissions, setPermissions] = useState({});
     const [faceAuthEnabled, setFaceAuthEnabled] = useState(false);
-    const [startingPrompt, setStartingPrompt] = useState('');
+    const [startingPrompt, setStartingPrompt] = useState(DEFAULT_STARTING_PROMPT);
     const startingPromptTimeoutRef = useRef(null);
 
     // Debounced update for starting prompt changes
