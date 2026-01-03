@@ -119,8 +119,9 @@
             "command": "grep 'AudioLoop' backend/server.py | grep -q 'system_instruction' && echo 'OK'",
             "expected": "OK"
           },
-          "status": "pending",
-          "notes": "Pass system_instruction=SETTINGS.get('starting_prompt') when creating AudioLoop instance"
+          "status": "completed",
+          "notes": "Updated AudioLoop instantiation in server.py to pass system_instruction=SETTINGS.get(\"starting_prompt\"). The starting_prompt from settings is now passed to the AudioLoop constructor, which uses it to configure the LiveConnectConfig system instruction.",
+          "updated_at": "2026-01-03T20:38:12.350403+00:00"
         }
       ]
     },
@@ -354,5 +355,5 @@
   "updated_at": "2026-01-03T20:31:10.600Z",
   "status": "in_progress",
   "planStatus": "in_progress",
-  "last_updated": "2026-01-03T20:36:33.254442+00:00"
+  "last_updated": "2026-01-03T20:38:12.350412+00:00"
 }

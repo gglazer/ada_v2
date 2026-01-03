@@ -38,6 +38,7 @@ const SettingsWindow = ({
 }) => {
     const [permissions, setPermissions] = useState({});
     const [faceAuthEnabled, setFaceAuthEnabled] = useState(false);
+    const [startingPrompt, setStartingPrompt] = useState('');
 
     useEffect(() => {
         // Request initial permissions
@@ -51,6 +52,9 @@ const SettingsWindow = ({
                 if (typeof settings.face_auth_enabled !== 'undefined') {
                     setFaceAuthEnabled(settings.face_auth_enabled);
                     localStorage.setItem('face_auth_enabled', settings.face_auth_enabled);
+                }
+                if (typeof settings.starting_prompt !== 'undefined') {
+                    setStartingPrompt(settings.starting_prompt);
                 }
             }
         };
