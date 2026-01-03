@@ -79,8 +79,9 @@
             "command": "grep -q 'system_instruction' backend/ada.py && echo 'OK'",
             "expected": "OK"
           },
-          "status": "pending",
-          "notes": "Add system_instruction=None parameter to __init__, store as self.system_instruction with fallback to DEFAULT_PROMPT constant"
+          "status": "completed",
+          "notes": "Added system_instruction parameter to AudioLoop.__init__ with default None value. Stored as self.system_instruction instance variable. Follows existing pattern for optional parameters.",
+          "updated_at": "2026-01-03T20:34:23.991182+00:00"
         },
         {
           "id": "subtask-2-2",
@@ -352,5 +353,5 @@
   "updated_at": "2026-01-03T20:31:10.600Z",
   "status": "in_progress",
   "planStatus": "in_progress",
-  "last_updated": "2026-01-03T20:33:21.050619+00:00"
+  "last_updated": "2026-01-03T20:34:23.991190+00:00"
 }

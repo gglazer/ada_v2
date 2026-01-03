@@ -182,25 +182,13 @@ iterate_cad_tool = {
 
 tools = [{'google_search': {}}, {"function_declarations": [generate_cad, run_web_agent, create_project_tool, switch_project_tool, list_projects_tool, list_smart_devices_tool, control_light_tool, discover_printers_tool, print_stl_tool, get_print_status_tool, iterate_cad_tool] + tools_list[0]['function_declarations'][1:]}]
 
-# --- CONFIG UPDATE: Enabled Transcription ---
-config = types.LiveConnectConfig(
-    response_modalities=["AUDIO"],
-    # We switch these from [] to {} to enable them with default settings
-    output_audio_transcription={}, 
-    input_audio_transcription={},
-    system_instruction="Your name is Ada, which stands for Advanced Design Assistant. "
-        "You have a witty and charming personality. "
-        "Your creator is Naz, and you address him as 'Sir'. "
-        "When answering, respond using complete and concise sentences to keep a quick pacing and keep the conversation flowing. "
-        "You have a fun personality.",
-    tools=tools,
-    speech_config=types.SpeechConfig(
-        voice_config=types.VoiceConfig(
-            prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                voice_name="Kore"
-            )
-        )
-    )
+# Default system instruction (used when no custom prompt is provided)
+DEFAULT_SYSTEM_INSTRUCTION = (
+    "Your name is Ada, which stands for Advanced Design Assistant. "
+    "You have a witty and charming personality. "
+    "Your creator is Naz, and you address him as 'Sir'. "
+    "When answering, respond using complete and concise sentences to keep a quick pacing and keep the conversation flowing. "
+    "You have a fun personality."
 )
 
 pya = pyaudio.PyAudio()
@@ -1174,9 +1162,25 @@ class AudioLoop:
     async def run(self, start_message=None):
         retry_delay = 1
         is_reconnect = False
-        
+
         while not self.stop_event.is_set():
             try:
+                # Create config with dynamic system_instruction
+                config = types.LiveConnectConfig(
+                    response_modalities=["AUDIO"],
+                    output_audio_transcription={},
+                    input_audio_transcription={},
+                    system_instruction=self.system_instruction or DEFAULT_SYSTEM_INSTRUCTION,
+                    tools=tools,
+                    speech_config=types.SpeechConfig(
+                        voice_config=types.VoiceConfig(
+                            prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                                voice_name="Kore"
+                            )
+                        )
+                    )
+                )
+
                 print(f"[ADA DEBUG] [CONNECT] Connecting to Gemini Live API...")
                 async with (
                     client.aio.live.connect(model=MODEL, config=config) as session,
