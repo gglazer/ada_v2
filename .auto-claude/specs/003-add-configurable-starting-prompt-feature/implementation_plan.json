@@ -355,10 +355,43 @@
       ]
     }
   },
-  "qa_signoff": null,
+  "qa_signoff": {
+    "status": "approved",
+    "qa_session": 0,
+    "issues_found": [
+      {
+        "description": "None - all acceptance criteria verified"
+      }
+    ],
+    "tests_passed": {},
+    "timestamp": "2026-01-03T21:46:10.125820+00:00",
+    "ready_for_qa_revalidation": false
+  },
   "created_at": "2026-01-03T21:00:00Z",
-  "updated_at": "2026-01-03T20:31:10.600Z",
-  "status": "in_progress",
-  "planStatus": "in_progress",
-  "last_updated": "2026-01-03T20:46:41.594236+00:00"
+  "updated_at": "2026-01-03T21:50:00.000Z",
+  "status": "human_review",
+  "planStatus": "review",
+  "last_updated": "2026-01-03T21:46:10.125831+00:00",
+  "qa_iteration_history": [
+    {
+      "iteration": 1,
+      "status": "approved",
+      "timestamp": "2026-01-03T20:51:26.479684+00:00",
+      "issues": [],
+      "duration_seconds": 241.5
+    },
+    {
+      "iteration": 1,
+      "status": "approved",
+      "timestamp": "2026-01-03T21:46:36.799257+00:00",
+      "issues": [],
+      "duration_seconds": 239.0
+    }
+  ],
+  "qa_stats": {
+    "total_iterations": 2,
+    "last_iteration": 1,
+    "last_status": "approved",
+    "issues_by_type": {}
+  }
 }
