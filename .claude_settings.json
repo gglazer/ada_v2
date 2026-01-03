@@ -1,0 +1,34 @@
+{
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true
+  },
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Read(./**)",
+      "Write(./**)",
+      "Edit(./**)",
+      "Glob(./**)",
+      "Grep(./**)",
+      "Read(/Users/gglazer/Projects/ada_v2/.worktrees/003-add-configurable-starting-prompt-feature/**)",
+      "Write(/Users/gglazer/Projects/ada_v2/.worktrees/003-add-configurable-starting-prompt-feature/**)",
+      "Edit(/Users/gglazer/Projects/ada_v2/.worktrees/003-add-configurable-starting-prompt-feature/**)",
+      "Glob(/Users/gglazer/Projects/ada_v2/.worktrees/003-add-configurable-starting-prompt-feature/**)",
+      "Grep(/Users/gglazer/Projects/ada_v2/.worktrees/003-add-configurable-starting-prompt-feature/**)",
+      "Read(/Users/gglazer/Projects/ada_v2/.worktrees/003-add-configurable-starting-prompt-feature/.auto-claude/specs/003-add-configurable-starting-prompt-feature/**)",
+      "Write(/Users/gglazer/Projects/ada_v2/.worktrees/003-add-configurable-starting-prompt-feature/.auto-claude/specs/003-add-configurable-starting-prompt-feature/**)",
+      "Edit(/Users/gglazer/Projects/ada_v2/.worktrees/003-add-configurable-starting-prompt-feature/.auto-claude/specs/003-add-configurable-starting-prompt-feature/**)",
+      "Bash(*)",
+      "WebFetch(*)",
+      "WebSearch(*)",
+      "mcp__context7__resolve-library-id(*)",
+      "mcp__context7__get-library-docs(*)",
+      "mcp__graphiti-memory__search_nodes(*)",
+      "mcp__graphiti-memory__search_facts(*)",
+      "mcp__graphiti-memory__add_episode(*)",
+      "mcp__graphiti-memory__get_episodes(*)",
+      "mcp__graphiti-memory__get_entity_edge(*)"
+    ]
+  }
+}

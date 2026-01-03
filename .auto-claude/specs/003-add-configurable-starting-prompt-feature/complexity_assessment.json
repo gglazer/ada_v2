@@ -1,0 +1,83 @@
+{
+  "complexity": "standard",
+  "workflow_type": "feature",
+  "confidence": 0.90,
+  "reasoning": "Adding a configurable starting prompt is a well-scoped feature that follows existing patterns. The codebase already has a complete settings system (settings.json, server.py socket events, SettingsWindow.jsx component) that this feature can extend. Changes are localized to 4 files with no external integrations or infrastructure modifications needed.",
+
+  "analysis": {
+    "scope": {
+      "estimated_files": 4,
+      "estimated_services": 1,
+      "is_cross_cutting": false,
+      "notes": "Changes needed: SettingsWindow.jsx (add textarea), ada.py (read dynamic prompt), server.py (handle new setting), settings.json (add field)"
+    },
+    "integrations": {
+      "external_services": [],
+      "new_dependencies": [],
+      "research_needed": false,
+      "notes": "No external integrations. Uses existing Socket.IO communication pattern already established for settings."
+    },
+    "infrastructure": {
+      "docker_changes": false,
+      "database_changes": false,
+      "config_changes": true,
+      "notes": "Only change is adding a new field to settings.json - no schema migrations or infrastructure setup required."
+    },
+    "knowledge": {
+      "patterns_exist": true,
+      "research_required": false,
+      "unfamiliar_tech": [],
+      "notes": "Existing patterns: Socket.IO get_settings/update_settings events, SETTINGS dict in server.py, SettingsWindow.jsx toggle controls. Current system_instruction is hardcoded in ada.py line 191."
+    },
+    "risk": {
+      "level": "low",
+      "concerns": [
+        "Ensure prompt changes take effect on next session (not mid-session)",
+        "Consider character limit for prompt field",
+        "Default prompt should preserve current behavior"
+      ],
+      "notes": "Low risk as this extends existing functionality. Main consideration is when the new prompt takes effect (requires session restart)."
+    }
+  },
+
+  "key_files_identified": {
+    "backend/ada.py": "Line 191 - hardcoded system_instruction needs to read from settings",
+    "backend/server.py": "DEFAULT_SETTINGS, load_settings(), update_settings event handler",
+    "backend/settings.json": "Add system_prompt field",
+    "src/components/SettingsWindow.jsx": "Add textarea for prompt editing"
+  },
+
+  "recommended_phases": [
+    "discovery",
+    "requirements",
+    "context",
+    "spec_writing",
+    "planning",
+    "validation"
+  ],
+
+  "flags": {
+    "needs_research": false,
+    "needs_self_critique": false,
+    "needs_infrastructure_setup": false
+  },
+
+  "validation_recommendations": {
+    "risk_level": "low",
+    "skip_validation": false,
+    "minimal_mode": true,
+    "test_types_required": ["unit"],
+    "security_scan_required": false,
+    "staging_deployment_required": false,
+    "reasoning": "Single service change with no security implications. The feature is isolated to settings management. Unit tests to verify settings persistence and prompt loading are sufficient."
+  },
+
+  "implementation_notes": {
+    "current_prompt_location": "backend/ada.py line 191 - hardcoded in LiveConnectConfig",
+    "settings_pattern": "Socket.IO events 'get_settings'/'update_settings' sync between frontend and backend",
+    "ui_pattern": "SettingsWindow.jsx uses sections with toggles and inputs following cyan/dark theme",
+    "suggested_approach": "Add 'system_prompt' to DEFAULT_SETTINGS, create textarea in SettingsWindow, pass prompt to AudioLoop constructor"
+  },
+
+  "created_at": "2025-01-03T21:30:00Z"
+}

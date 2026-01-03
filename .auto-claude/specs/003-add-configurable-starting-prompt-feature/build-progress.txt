@@ -1,0 +1,118 @@
+=== AUTO-BUILD PROGRESS ===
+
+Project: Configurable Starting Prompt
+Spec: 003-add-configurable-starting-prompt-feature
+Workspace: /Users/gglazer/Projects/ada_v2
+Started: 2026-01-03
+
+Workflow Type: feature
+Rationale: New user-facing feature that adds the ability to configure the AI's system prompt
+through the existing settings UI. Follows established settings pattern in the codebase.
+
+================================================================================
+Session 1 (Planner):
+================================================================================
+
+Completed Tasks:
+- [x] Deep codebase investigation (Phase 0)
+- [x] Created/updated context.json with patterns and files
+- [x] Created implementation_plan.json with 4 phases, 9 subtasks
+- [x] Created init.sh startup script
+
+Investigation Findings:
+- Settings pattern: DEFAULT_SETTINGS dict in server.py, load_settings()/save_settings()
+- Socket.IO: get_settings and update_settings events for sync
+- Frontend: SettingsWindow.jsx with toggle/select patterns, Tailwind styling
+- System instruction: Hardcoded in ada.py line 191-195, needs to be dynamic
+
+================================================================================
+Phase Summary:
+================================================================================
+
+Phase 1 - Backend Settings Schema (2 subtasks)
+  - Add starting_prompt to DEFAULT_SETTINGS
+  - Add handler in update_settings event
+  Depends on: None
+
+Phase 2 - Backend Prompt Application (3 subtasks)
+  - Add system_instruction parameter to AudioLoop
+  - Move config creation to run() for dynamic instruction
+  - Update AudioLoop instantiation in server.py
+  Depends on: Phase 1
+
+Phase 3 - Frontend Settings UI (3 subtasks)
+  - Add startingPrompt state and useEffect loading
+  - Add debounced update function
+  - Add textarea section with Reset button
+  Depends on: Phase 1
+
+Phase 4 - Integration Verification (2 subtasks)
+  - Verify settings.json persistence
+  - End-to-end flow verification
+  Depends on: Phase 2, Phase 3
+
+================================================================================
+Services Involved:
+================================================================================
+
+- Backend (Python/FastAPI):
+  - backend/settings.json: Add starting_prompt field
+  - backend/server.py: DEFAULT_SETTINGS, update_settings handler, AudioLoop init
+  - backend/ada.py: Accept dynamic system_instruction parameter
+
+- Frontend (React/Vite):
+  - src/components/SettingsWindow.jsx: Add textarea UI for prompt editing
+
+================================================================================
+Parallelism Analysis:
+================================================================================
+
+- Max parallel phases: 2
+- Recommended workers: 1 (sequential)
+- Parallel groups: Phase 2 and Phase 3 can run in parallel after Phase 1
+- Rationale: Tight integration between backend and frontend suggests sequential approach
+
+================================================================================
+Key Files to Modify:
+================================================================================
+
+1. backend/server.py
+   - Add to DEFAULT_SETTINGS (around line 60)
+   - Add handler in update_settings (around line 937)
+   - Pass to AudioLoop (around line 274)
+
+2. backend/ada.py
+   - Add system_instruction parameter to AudioLoop.__init__ (line 214)
+   - Move config to run() method (line 1173)
+   - Use dynamic system_instruction in LiveConnectConfig
+
+3. src/components/SettingsWindow.jsx
+   - Add useState for startingPrompt
+   - Add debounced update function
+   - Add new section with textarea and Reset button
+
+================================================================================
+Verification Strategy:
+================================================================================
+
+Risk Level: Low
+Tests Required: Unit tests (pytest)
+Security Scan: Not required
+Staging Deploy: Not required
+
+Verification Commands:
+- pytest tests/ -v (ensure no regressions)
+- grep 'starting_prompt' backend/server.py (schema verification)
+- grep 'Starting Prompt' src/components/SettingsWindow.jsx (UI verification)
+
+=== STARTUP COMMAND ===
+
+To continue building this spec, run:
+
+  source auto-claude/.venv/bin/activate && python auto-claude/run.py --spec 003 --parallel 1
+
+Or manually start the environment:
+
+  conda activate ada_v2 && npm run dev
+
+=== END SESSION 1 ===

@@ -1,0 +1,102 @@
+{
+  "project_root": "/Users/gglazer/Projects/ada_v2",
+  "project_type": "single",
+  "services": {
+    "main": {
+      "name": "main",
+      "path": "/Users/gglazer/Projects/ada_v2",
+      "language": "Python",
+      "framework": "FastAPI",
+      "type": "backend",
+      "package_manager": "pip",
+      "default_port": 8000,
+      "key_directories": {
+        "src": {
+          "path": "src",
+          "purpose": "Source code"
+        },
+        "tests": {
+          "path": "tests",
+          "purpose": "Tests"
+        }
+      },
+      "entry_point": "src/App.jsx",
+      "dependencies": [
+        "@mediapipe/tasks-vision",
+        "@react-three/drei",
+        "@react-three/fiber",
+        "@types/three",
+        "clsx",
+        "framer-motion",
+        "lucide-react",
+        "react",
+        "react-dom",
+        "socket.io-client",
+        "tailwind-merge",
+        "three"
+      ],
+      "dev_dependencies": [
+        "@vitejs/plugin-react",
+        "autoprefixer",
+        "concurrently",
+        "cross-env",
+        "electron",
+        "postcss",
+        "tailwindcss",
+        "vite",
+        "wait-on"
+      ],
+      "test_directory": "tests",
+      "environment": {
+        "variables": {
+          "GEMINI_API_KEY": {
+            "value": "<REDACTED>",
+            "source": ".env",
+            "type": "string",
+            "sensitive": true,
+            "required": true
+          }
+        },
+        "required_count": 1,
+        "optional_count": 0,
+        "detected_count": 1
+      },
+      "api": {
+        "routes": [
+          {
+            "path": "/status",
+            "methods": [
+              "GET"
+            ],
+            "file": "backend/server.py",
+            "framework": "FastAPI",
+            "requires_auth": false
+          },
+          {
+            "path": "/status",
+            "methods": [
+              "GET"
+            ],
+            "file": ".worktrees/001-fix-voice-assistant-noise-sensitivity-issue/backend/server.py",
+            "framework": "FastAPI",
+            "requires_auth": false
+          }
+        ],
+        "total_routes": 2,
+        "methods": [
+          "GET"
+        ],
+        "protected_routes": []
+      },
+      "api_documentation": {
+        "type": "openapi",
+        "auto_generated": true,
+        "docs_url": "/docs",
+        "redoc_url": "/redoc",
+        "openapi_url": "/openapi.json"
+      }
+    }
+  },
+  "infrastructure": {},
+  "conventions": {}
+}

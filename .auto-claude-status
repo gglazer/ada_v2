@@ -1,0 +1,25 @@
+{
+  "active": true,
+  "spec": "003-add-configurable-starting-prompt-feature",
+  "state": "building",
+  "subtasks": {
+    "completed": 1,
+    "total": 10,
+    "in_progress": 1,
+    "failed": 0
+  },
+  "phase": {
+    "current": "Backend Settings Schema",
+    "id": null,
+    "total": 2
+  },
+  "workers": {
+    "active": 0,
+    "max": 1
+  },
+  "session": {
+    "number": 2,
+    "started_at": "2026-01-03T21:31:11.491631"
+  },
+  "last_update": "2026-01-03T21:32:25.769166"
+}

@@ -1,0 +1,355 @@
+{
+  "feature": "Configurable Starting Prompt",
+  "workflow_type": "feature",
+  "workflow_rationale": "This is a new user-facing feature that adds the ability to configure the AI's system prompt through the existing settings UI. It follows the established settings pattern and affects frontend (UI) and backend (configuration, storage, application).",
+  "phases": [
+    {
+      "id": "phase-1-backend-settings",
+      "name": "Backend Settings Schema",
+      "type": "implementation",
+      "description": "Add starting_prompt field to settings schema and persistence layer",
+      "depends_on": [],
+      "parallel_safe": true,
+      "subtasks": [
+        {
+          "id": "subtask-1-1",
+          "description": "Add starting_prompt to DEFAULT_SETTINGS in server.py with the default ADA personality prompt",
+          "service": "backend",
+          "files_to_modify": [
+            "backend/server.py"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "backend/server.py - DEFAULT_SETTINGS dict pattern"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "grep -q 'starting_prompt' backend/server.py && echo 'OK'",
+            "expected": "OK"
+          },
+          "status": "completed",
+          "notes": "Added starting_prompt to DEFAULT_SETTINGS in server.py with the default ADA personality prompt matching the hardcoded value in ada.py. Verification passed.",
+          "updated_at": "2026-01-03T20:32:11.935393+00:00"
+        },
+        {
+          "id": "subtask-1-2",
+          "description": "Add starting_prompt handler in update_settings Socket.IO event",
+          "service": "backend",
+          "files_to_modify": [
+            "backend/server.py"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "backend/server.py - camera_flipped handling in update_settings"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "grep -A2 'starting_prompt' backend/server.py | grep -q 'SETTINGS' && echo 'OK'",
+            "expected": "OK"
+          },
+          "status": "pending",
+          "notes": "Follow the pattern: if 'starting_prompt' in data: SETTINGS['starting_prompt'] = data['starting_prompt']"
+        }
+      ]
+    },
+    {
+      "id": "phase-2-backend-ada",
+      "name": "Backend Prompt Application",
+      "type": "implementation",
+      "description": "Modify ada.py to accept dynamic system_instruction and apply it to Gemini config",
+      "depends_on": [
+        "phase-1-backend-settings"
+      ],
+      "parallel_safe": false,
+      "subtasks": [
+        {
+          "id": "subtask-2-1",
+          "description": "Add system_instruction parameter to AudioLoop.__init__ and store as instance variable",
+          "service": "backend",
+          "files_to_modify": [
+            "backend/ada.py"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "backend/ada.py - AudioLoop.__init__ existing parameters"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "grep -q 'system_instruction' backend/ada.py && echo 'OK'",
+            "expected": "OK"
+          },
+          "status": "pending",
+          "notes": "Add system_instruction=None parameter to __init__, store as self.system_instruction with fallback to DEFAULT_PROMPT constant"
+        },
+        {
+          "id": "subtask-2-2",
+          "description": "Move config creation inside AudioLoop.run() to use dynamic system_instruction",
+          "service": "backend",
+          "files_to_modify": [
+            "backend/ada.py"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "backend/ada.py - current config = types.LiveConnectConfig(...)"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "grep -B5 'LiveConnectConfig' backend/ada.py | grep -q 'self.system_instruction' && echo 'OK'",
+            "expected": "OK"
+          },
+          "status": "pending",
+          "notes": "Keep DEFAULT_PROMPT as a module constant, create config inside run() using self.system_instruction or DEFAULT_PROMPT"
+        },
+        {
+          "id": "subtask-2-3",
+          "description": "Update AudioLoop instantiation in server.py to pass starting_prompt from SETTINGS",
+          "service": "backend",
+          "files_to_modify": [
+            "backend/server.py"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "backend/server.py - line 274 AudioLoop instantiation"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "grep 'AudioLoop' backend/server.py | grep -q 'system_instruction' && echo 'OK'",
+            "expected": "OK"
+          },
+          "status": "pending",
+          "notes": "Pass system_instruction=SETTINGS.get('starting_prompt') when creating AudioLoop instance"
+        }
+      ]
+    },
+    {
+      "id": "phase-3-frontend-ui",
+      "name": "Frontend Settings UI",
+      "type": "implementation",
+      "description": "Add textarea UI component in SettingsWindow for editing the starting prompt",
+      "depends_on": [
+        "phase-1-backend-settings"
+      ],
+      "parallel_safe": true,
+      "subtasks": [
+        {
+          "id": "subtask-3-1",
+          "description": "Add startingPrompt state and load it from settings in useEffect",
+          "service": "frontend",
+          "files_to_modify": [
+            "src/components/SettingsWindow.jsx"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "src/components/SettingsWindow.jsx - faceAuthEnabled state pattern"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "grep -q 'startingPrompt' src/components/SettingsWindow.jsx && echo 'OK'",
+            "expected": "OK"
+          },
+          "status": "pending",
+          "notes": "Add useState for startingPrompt, update in handleSettings when settings.starting_prompt is received"
+        },
+        {
+          "id": "subtask-3-2",
+          "description": "Add debounced update function for starting prompt changes",
+          "service": "frontend",
+          "files_to_modify": [
+            "src/components/SettingsWindow.jsx"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "src/components/SettingsWindow.jsx - toggleFaceAuth pattern"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "grep -q 'debounce\\|setTimeout' src/components/SettingsWindow.jsx && echo 'OK'",
+            "expected": "OK"
+          },
+          "status": "pending",
+          "notes": "Use useRef for debounce timer, update after 500ms of no typing to avoid excessive socket emissions"
+        },
+        {
+          "id": "subtask-3-3",
+          "description": "Add Starting Prompt section with textarea and Reset button UI",
+          "service": "frontend",
+          "files_to_modify": [
+            "src/components/SettingsWindow.jsx"
+          ],
+          "files_to_create": [],
+          "patterns_from": [
+            "src/components/SettingsWindow.jsx - existing section structure"
+          ],
+          "verification": {
+            "type": "command",
+            "command": "grep -q 'Starting Prompt' src/components/SettingsWindow.jsx && echo 'OK'",
+            "expected": "OK"
+          },
+          "status": "pending",
+          "notes": "Add section between Security and Microphone, include textarea with rows=6, Reset to Default button, and info text about restart requirement"
+        }
+      ]
+    },
+    {
+      "id": "phase-4-integration",
+      "name": "Integration Verification",
+      "type": "integration",
+      "description": "Verify end-to-end flow from UI to Gemini session configuration",
+      "depends_on": [
+        "phase-2-backend-ada",
+        "phase-3-frontend-ui"
+      ],
+      "parallel_safe": false,
+      "subtasks": [
+        {
+          "id": "subtask-4-1",
+          "description": "Verify settings.json contains starting_prompt after save",
+          "all_services": true,
+          "files_to_modify": [],
+          "files_to_create": [],
+          "patterns_from": [],
+          "verification": {
+            "type": "command",
+            "command": "grep -q 'starting_prompt' backend/settings.json && echo 'OK' || echo 'MISSING'",
+            "expected": "OK"
+          },
+          "status": "pending",
+          "notes": "After running app and saving prompt, settings.json should contain the starting_prompt field"
+        },
+        {
+          "id": "subtask-4-2",
+          "description": "End-to-end verification of starting prompt flow",
+          "all_services": true,
+          "files_to_modify": [],
+          "files_to_create": [],
+          "patterns_from": [],
+          "verification": {
+            "type": "e2e",
+            "steps": [
+              "Start application with npm run dev",
+              "Open Settings window",
+              "Locate Starting Prompt textarea",
+              "Modify the prompt text",
+              "Verify save completes (no errors)",
+              "Stop and restart session",
+              "Verify new prompt is active in AI behavior"
+            ]
+          },
+          "status": "pending",
+          "notes": "Full manual verification of the feature"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_phases": 4,
+    "total_subtasks": 9,
+    "services_involved": [
+      "backend",
+      "frontend"
+    ],
+    "parallelism": {
+      "max_parallel_phases": 2,
+      "parallel_groups": [
+        {
+          "phases": [
+            "phase-3-frontend-ui"
+          ],
+          "reason": "Frontend UI can be developed in parallel with phase-2 backend changes once phase-1 schema is complete"
+        }
+      ],
+      "recommended_workers": 1,
+      "speedup_estimate": "Sequential recommended due to tight integration between backend and frontend"
+    },
+    "startup_command": "source auto-claude/.venv/bin/activate && python auto-claude/run.py --spec 003 --parallel 1"
+  },
+  "verification_strategy": {
+    "risk_level": "low",
+    "skip_validation": false,
+    "test_creation_phase": "post_implementation",
+    "test_types_required": [
+      "unit"
+    ],
+    "security_scanning_required": false,
+    "staging_deployment_required": false,
+    "acceptance_criteria": [
+      "All existing tests pass (pytest)",
+      "settings.json contains starting_prompt field",
+      "SettingsWindow displays Starting Prompt textarea",
+      "Changes persist across app restarts",
+      "Custom prompt is applied to Gemini session"
+    ],
+    "verification_steps": [
+      {
+        "name": "Existing Tests Pass",
+        "command": "cd /Users/gglazer/Projects/ada_v2 && pytest tests/ -v",
+        "expected_outcome": "All tests pass",
+        "type": "test",
+        "required": true,
+        "blocking": true
+      },
+      {
+        "name": "Settings Schema Verification",
+        "command": "grep 'starting_prompt' backend/server.py",
+        "expected_outcome": "starting_prompt found in DEFAULT_SETTINGS",
+        "type": "command",
+        "required": true,
+        "blocking": true
+      },
+      {
+        "name": "Frontend Component Verification",
+        "command": "grep -c 'Starting Prompt\\|startingPrompt' src/components/SettingsWindow.jsx",
+        "expected_outcome": "Multiple matches found",
+        "type": "command",
+        "required": true,
+        "blocking": true
+      }
+    ],
+    "reasoning": "Low risk feature extending existing settings pattern. Unit tests for settings persistence are sufficient. Integration can be verified manually through the UI."
+  },
+  "qa_acceptance": {
+    "unit_tests": {
+      "required": true,
+      "commands": [
+        "pytest tests/"
+      ],
+      "minimum_coverage": null
+    },
+    "integration_tests": {
+      "required": false,
+      "commands": [],
+      "services_to_test": []
+    },
+    "e2e_tests": {
+      "required": false,
+      "commands": [],
+      "flows": []
+    },
+    "browser_verification": {
+      "required": true,
+      "pages": [
+        {
+          "url": "http://localhost:5173",
+          "checks": [
+            "Settings window opens",
+            "Starting Prompt textarea visible",
+            "Reset button works",
+            "Save persists value"
+          ]
+        }
+      ]
+    },
+    "database_verification": {
+      "required": true,
+      "checks": [
+        "settings.json contains starting_prompt field after save"
+      ]
+    }
+  },
+  "qa_signoff": null,
+  "created_at": "2026-01-03T21:00:00Z",
+  "updated_at": "2026-01-03T20:31:10.600Z",
+  "status": "in_progress",
+  "planStatus": "in_progress",
+  "last_updated": "2026-01-03T20:32:11.935417+00:00"
+}

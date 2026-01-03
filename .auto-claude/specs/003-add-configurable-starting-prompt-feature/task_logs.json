@@ -1,0 +1,1124 @@
+{
+  "spec_id": "003-add-configurable-starting-prompt-feature",
+  "created_at": "2026-01-03T19:42:31.264069+00:00",
+  "updated_at": "2026-01-03T20:33:11.400715+00:00",
+  "phases": {
+    "planning": {
+      "phase": "planning",
+      "status": "completed",
+      "started_at": "2026-01-03T19:42:31.264550+00:00",
+      "completed_at": "2026-01-03T19:53:29.386054+00:00",
+      "entries": [
+        {
+          "timestamp": "2026-01-03T19:42:31.264582+00:00",
+          "type": "phase_start",
+          "content": "Starting spec creation process",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:42:31.265981+00:00",
+          "type": "info",
+          "content": "Starting phase 1: PROJECT DISCOVERY",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:42:38.356505+00:00",
+          "type": "success",
+          "content": "Discovered 31 files in project",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:42:38.357720+00:00",
+          "type": "info",
+          "content": "Starting phase 2: REQUIREMENTS GATHERING",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:42:55.785954+00:00",
+          "type": "info",
+          "content": "Starting phase 3: COMPLEXITY ASSESSMENT",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:42:55.788437+00:00",
+          "type": "info",
+          "content": "Analyzing task complexity with AI...",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:06.859031+00:00",
+          "type": "text",
+          "content": "I'll analyze the complexity of this task. Let me start by reading the requirements file and exploring the codebase to understand the scope.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:06.863958+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...rable-starting-prompt-feature/requirements.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...rable-starting-prompt-feature/requirements.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:06.866274+00:00",
+          "type": "tool_start",
+          "content": "[Glob] pattern: **/settings*.{js,jsx,ts,tsx,json,py}",
+          "phase": "planning",
+          "tool_name": "Glob",
+          "tool_input": "pattern: **/settings*.{js,jsx,ts,tsx,json,py}"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:06.867044+00:00",
+          "type": "tool_start",
+          "content": "[Glob] pattern: **/Settings*.{js,jsx,ts,tsx}",
+          "phase": "planning",
+          "tool_name": "Glob",
+          "tool_input": "pattern: **/Settings*.{js,jsx,ts,tsx}"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:06.920951+00:00",
+          "type": "tool_end",
+          "content": "[Glob] Done",
+          "phase": "planning",
+          "tool_name": "Glob",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:43:15.973522+00:00",
+          "type": "text",
+          "content": "Let me examine the existing settings architecture and understand how prompts are currently handled:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:15.988450+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...ojects/ada_v2/src/components/SettingsWindow.jsx",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...ojects/ada_v2/src/components/SettingsWindow.jsx"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:15.989306+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...s/gglazer/Projects/ada_v2/backend/settings.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...s/gglazer/Projects/ada_v2/backend/settings.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:15.990196+00:00",
+          "type": "tool_start",
+          "content": "[Grep] pattern: system.?prompt|starting.?prompt|instruction",
+          "phase": "planning",
+          "tool_name": "Grep",
+          "tool_input": "pattern: system.?prompt|starting.?prompt|instruction"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:16.005722+00:00",
+          "type": "tool_end",
+          "content": "[Grep] Done",
+          "phase": "planning",
+          "tool_name": "Grep",
+          "detail": "     1→import React, { useState, useEffect } from 'react';\n     2→import { X } from 'lucide-react';\n     3→\n     4→const TOOLS = [\n     5→    { id: 'generate_cad', label: 'Generate CAD' },\n     6→    { id: 'run_web_agent', label: 'Web Agent' },\n     7→    { id: 'create_directory', label: 'Create Folder' },\n     8→    { id: 'write_file', label: 'Write File' },\n     9→    { id: 'read_directory', label: 'Read Directory' },\n    10→    { id: 'read_file', label: 'Read File' },\n    11→    { id: 'create_project', label: 'Create Project' },\n    12→    { id: 'switch_project', label: 'Switch Project' },\n    13→    { id: 'list_projects', label: 'List Projects' },\n    14→    { id: 'list_smart_devices', label: 'List Devices' },\n    15→    { id: 'control_light', label: 'Control Light' },\n    16→    { id: 'discover_printers', label: 'Discover Printers' },\n    17→    { id: 'print_stl', label: 'Print 3D Model' },\n    18→    { id: 'iterate_cad', label: 'Iterate CAD' },\n    19→];\n    20→\n    21→const SettingsWindow = ({\n    22→    socket,\n    23→    micDevices,\n    24→    speakerDevices,\n    25→    webcamDevices,\n    26→    selectedMicId,\n    27→    setSelectedMicId,\n    28→    selectedSpeakerId,\n    29→    setSelectedSpeakerId,\n    30→    selectedWebcamId,\n    31→    setSelectedWebcamId,\n    32→    cursorSensitivity,\n    33→    setCursorSensitivity,\n    34→    isCameraFlipped,\n    35→    setIsCameraFlipped,\n    36→    handleFileUpload,\n    37→    onClose\n    38→}) => {\n    39→    const [permissions, setPermissions] = useState({});\n    40→    const [faceAuthEnabled, setFaceAuthEnabled] = useState(false);\n    41→\n    42→    useEffect(() => {\n    43→        // Request initial permissions\n    44→        socket.emit('get_settings');\n    45→\n    46→        // Listen for updates\n    47→        const handleSettings = (settings) => {\n    48→            console.log(\"Received settings:\", settings);\n    49→            if (settings) {\n    50→                if (settings.tool_permissions) setPermissions(settings.tool_permissions);\n    51→                if (typeof settings.face_auth_enabled !== 'undefined') {\n    52→                    setFaceAuthEnabled(settings.face_auth_enabled);\n    53→                    localStorage.setItem('face_auth_enabled', settings.face_auth_enabled);\n    54→                }\n    55→            }\n    56→        };\n    57→\n    58→        socket.on('settings', handleSettings);\n    59→        // Also listen for legacy tool_permissions if needed, but 'settings' covers it\n    60→        // socket.on('tool_permissions', handlePermissions); \n    61→\n    62→        return () => {\n    63→            socket.off('settings', handleSettings);\n    64→        };\n    65→    }, [socket]);\n    66→\n    67→    const togglePermission = (toolId) => {\n    68→        const currentVal = permissions[toolId] !== false; // Default True\n    69→        const nextVal = !currentVal;\n    70→\n    71→        // Update local mostly for responsiveness, but socket roundtrip handles truth\n    72→        // setPermissions(prev => ({ ...prev, [toolId]: nextVal }));\n    73→\n    74→        // Send update\n    75→        socket.emit('update_settings', { tool_permissions: { [toolId]: nextVal } });\n    76→    };\n    77→\n    78→    const toggleFaceAuth = () => {\n    79→        const newVal = !faceAuthEnabled;\n    80→        setFaceAuthEnabled(newVal); // Optimistic Update\n    81→        localStorage.setItem('face_auth_enabled', newVal);\n    82→        socket.emit('update_settings', { face_auth_enabled: newVal });\n    83→    };\n    84→\n    85→    const toggleCameraFlip = () => {\n    86→        const newVal = !isCameraFlipped;\n    87→        setIsCameraFlipped(newVal);\n    88→        socket.emit('update_settings', { camera_flipped: newVal });\n    89→    };\n    90→\n    91→    return (\n    92→        <div className=\"absolute top-20 right-10 bg-black/90 border border-cyan-500/50 p-4 rounded-lg z-50 w-80 backdrop-blur-xl shadow-[0_0_30px_rgba(6,182,212,0.2)]\">\n    93→            <div className=\"flex justify-between items-center mb-4 border-b border-cyan-900/50 pb-2\">\n    94→                <h2 className=\"text-cyan-400 font-bold text-sm uppercase tracking-wider\">Settings</h2>\n    95→                <button onClick={onClose} className=\"text-cyan-600 hover:text-cyan-400\">\n    96→                    <X size={16} />\n    97→                </button>\n    98→            </div>\n    99→\n   100→            {/* Authentication Section */}\n   101→            <div className=\"mb-6\">\n   102→                <h3 className=\"text-cyan-400 font-bold mb-3 text-xs uppercase tracking-wider opacity-80\">Security</h3>\n   103→                <div className=\"flex items-center justify-between text-xs bg-gray-900/50 p-2 rounded border border-cyan-900/30\">\n   104→                    <span className=\"text-cyan-100/80\">Face Authentication</span>\n   105→                    <button\n   106→                        onClick={toggleFaceAuth}\n   107→                        className={`relative w-8 h-4 rounded-full transition-colors duration-200 ${faceAuthEnabled ? 'bg-cyan-500/80' : 'bg-gray-700'}`}\n   108→                    >\n   109→                        <div\n   110→                            className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-transform duration-200 ${faceAuthEnabled ? 'translate-x-4' : 'translate-x-0'}`}\n   111→                        />\n   112→                    </button>\n   113→                </div>\n   114→            </div>\n   115→\n   116→            {/* Microphone Section */}\n   117→            <div className=\"mb-4\">\n   118→                <h3 className=\"text-cyan-400 font-bold mb-2 text-xs uppercase tracking-wider opacity-80\">Microphone</h3>\n   119→                <select\n   120→                    value={selectedMicId}\n   121→                    onChange={(e) => setSelectedMicId(e.target.value)}\n   122→                    className=\"w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none\"\n   123→                >\n   124→                    {micDevices.map((device, i) => (\n   125→                        <option key={device.deviceId} value={device.deviceId}>\n   126→                            {device.label || `Microphone ${i + 1}`}\n   127→                        </option>\n   128→                    ))}\n   129→                </select>\n   130→            </div>\n   131→\n   132→            {/* Speaker Section */}\n   133→            <div className=\"mb-4\">\n   134→                <h3 className=\"text-cyan-400 font-bold mb-2 text-xs uppercase tracking-wider opacity-80\">Speaker</h3>\n   135→                <select\n   136→                    value={selectedSpeakerId}\n   137→                    onChange={(e) => setSelectedSpeakerId(e.target.value)}\n   138→                    className=\"w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none\"\n   139→                >\n   140→                    {speakerDevices.map((device, i) => (\n   141→                        <option key={device.deviceId} value={device.deviceId}>\n   142→                            {device.label || `Speaker ${i + 1}`}\n   143→                        </option>\n   144→                    ))}\n   145→                </select>\n   146→            </div>\n   147→\n   148→            {/* Webcam Section */}\n   149→            <div className=\"mb-6\">\n   150→                <h3 className=\"text-cyan-400 font-bold mb-2 text-xs uppercase tracking-wider opacity-80\">Webcam</h3>\n   151→                <select\n   152→                    value={selectedWebcamId}\n   153→                    onChange={(e) => setSelectedWebcamId(e.target.value)}\n   154→                    className=\"w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none\"\n   155→                >\n   156→                    {webcamDevices.map((device, i) => (\n   157→                        <option key={device.deviceId} value={device.deviceId}>\n   158→                            {device.label || `Camera ${i + 1}`}\n   159→                        </option>\n   160→                    ))}\n   161→                </select>\n   162→            </div>\n   163→\n   164→            {/* Cursor Section */}\n   165→            <div className=\"mb-6\">\n   166→                <div className=\"flex justify-between mb-2\">\n   167→                    <h3 className=\"text-cyan-400 font-bold text-xs uppercase tracking-wider opacity-80\">Cursor Sensitivity</h3>\n   168→                    <span className=\"text-xs text-cyan-500\">{cursorSensitivity}x</span>\n   169→                </div>\n   170→                <input\n   171→                    type=\"range\"\n   172→                    min=\"1.0\"\n   173→                    max=\"5.0\"\n   174→                    step=\"0.1\"\n   175→                    value={cursorSensitivity}\n   176→                    onChange={(e) => setCursorSensitivity(parseFloat(e.target.value))}\n   177→                    className=\"w-full accent-cyan-400 cursor-pointer h-1 bg-gray-800 rounded-lg appearance-none\"\n   178→                />\n   179→            </div>\n   180→\n   181→            {/* Gesture Control Section */}\n   182→            <div className=\"mb-6\">\n   183→                <h3 className=\"text-cyan-400 font-bold mb-3 text-xs uppercase tracking-wider opacity-80\">Gesture Control</h3>\n   184→                <div className=\"flex items-center justify-between text-xs bg-gray-900/50 p-2 rounded border border-cyan-900/30\">\n   185→                    <span className=\"text-cyan-100/80\">Flip Camera Horizontal</span>\n   186→                    <button\n   187→                        onClick={toggleCameraFlip}\n   188→                        className={`relative w-8 h-4 rounded-full transition-colors duration-200 ${isCameraFlipped ? 'bg-cyan-500/80' : 'bg-gray-700'}`}\n   189→                    >\n   190→                        <div\n   191→                            className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-transform duration-200 ${isCameraFlipped ? 'translate-x-4' : 'translate-x-0'}`}\n   192→                        />\n   193→                    </button>\n   194→                </div>\n   195→            </div>\n   196→\n   \n\n... [truncated - full output was 13221 chars]",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:43:25.578827+00:00",
+          "type": "text",
+          "content": "Let me check how the system prompt is currently configured in the backend:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:25.582717+00:00",
+          "type": "tool_start",
+          "content": "[Grep] pattern: system_instruction|SYSTEM_PROMPT|prompt|instructions",
+          "phase": "planning",
+          "tool_name": "Grep",
+          "tool_input": "pattern: system_instruction|SYSTEM_PROMPT|prompt|instructions"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:25.584727+00:00",
+          "type": "tool_start",
+          "content": "[Read] /Users/gglazer/Projects/ada_v2/backend/server.py",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "/Users/gglazer/Projects/ada_v2/backend/server.py"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:25.615565+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "planning",
+          "tool_name": "Read",
+          "detail": "     1→import sys\n     2→import asyncio\n     3→\n     4→# Fix for asyncio subprocess support on Windows\n     5→# MUST BE SET BEFORE OTHER IMPORTS\n     6→if sys.platform == 'win32':\n     7→    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())\n     8→\n     9→import socketio\n    10→import uvicorn\n    11→from fastapi import FastAPI\n    12→import asyncio\n    13→import threading\n    14→import sys\n    15→import os\n    16→import json\n    17→from datetime import datetime\n    18→from pathlib import Path\n    19→\n    20→\n    21→\n    22→# Ensure we can import ada\n    23→sys.path.append(os.path.dirname(os.path.abspath(__file__)))\n    24→\n    25→import ada\n    26→from authenticator import FaceAuthenticator\n    27→from kasa_agent import KasaAgent\n    28→\n    29→# Create a Socket.IO server\n    30→sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')\n    31→app = FastAPI()\n    32→app_socketio = socketio.ASGIApp(sio, app)\n    33→\n    34→import signal\n    35→\n    36→# --- SHUTDOWN HANDLER ---\n    37→def signal_handler(sig, frame):\n    38→    print(f\"\\n[SERVER] Caught signal {sig}. Exiting gracefully...\")\n    39→    # Clean up audio loop\n    40→    if audio_loop:\n    41→        try:\n    42→            print(\"[SERVER] Stopping Audio Loop...\")\n    43→            audio_loop.stop() \n    44→        except:\n    45→            pass\n    46→    # Force kill\n    47→    print(\"[SERVER] Force exiting...\")\n    48→    os._exit(0)\n    49→\n    50→signal.signal(signal.SIGINT, signal_handler)\n    51→signal.signal(signal.SIGTERM, signal_handler)\n    52→\n    53→# Global state\n    54→audio_loop = None\n    55→loop_task = None\n    56→authenticator = None\n    57→kasa_agent = KasaAgent()\n    58→SETTINGS_FILE = \"settings.json\"\n    59→\n    60→DEFAULT_SETTINGS = {\n    61→    \"face_auth_enabled\": False, # Default OFF as requested\n    62→    \"tool_permissions\": {\n    63→        \"generate_cad\": True,\n    64→        \"run_web_agent\": True,\n    65→        \"write_file\": True,\n    66→        \"read_directory\": True,\n    67→        \"read_file\": True,\n    68→        \"create_project\": True,\n    69→        \"switch_project\": True,\n    70→        \"list_projects\": True\n    71→    },\n    72→    \"printers\": [], # List of {host, port, name, type}\n    73→    \"kasa_devices\": [], # List of {ip, alias, model}\n    74→    \"camera_flipped\": False # Invert cursor horizontal direction\n    75→}\n    76→\n    77→SETTINGS = DEFAULT_SETTINGS.copy()\n    78→\n    79→def load_settings():\n    80→    global SETTINGS\n    81→    if os.path.exists(SETTINGS_FILE):\n    82→        try:\n    83→            with open(SETTINGS_FILE, 'r') as f:\n    84→                loaded = json.load(f)\n    85→                # Merge with defaults to ensure new keys exist\n    86→                # Deep merge for tool_permissions would be better but shallow merge of top keys + tool_permissions check is okay for now\n    87→                for k, v in loaded.items():\n    88→                    if k == \"tool_permissions\" and isinstance(v, dict):\n    89→                         SETTINGS[\"tool_permissions\"].update(v)\n    90→                    else:\n    91→                        SETTINGS[k] = v\n    92→            print(f\"Loaded settings: {SETTINGS}\")\n    93→        except Exception as e:\n    94→            print(f\"Error loading settings: {e}\")\n    95→\n    96→def save_settings():\n    97→    try:\n    98→        with open(SETTINGS_FILE, 'w') as f:\n    99→            json.dump(SETTINGS, f, indent=4)\n   100→        print(\"Settings saved.\")\n\n<system-reminder>\nWhenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.\n</system-reminder>\n",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:43:43.791395+00:00",
+          "type": "text",
+          "content": "Now I have a clear picture of the architecture. Let me check how the settings are synced between frontend and backend:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:43.794149+00:00",
+          "type": "tool_start",
+          "content": "[Grep] pattern: update_settings|get_settings",
+          "phase": "planning",
+          "tool_name": "Grep",
+          "tool_input": "pattern: update_settings|get_settings"
+        },
+        {
+          "timestamp": "2026-01-03T19:43:44.996341+00:00",
+          "type": "tool_end",
+          "content": "[Grep] Done",
+          "phase": "planning",
+          "tool_name": "Grep",
+          "detail": "928-    except Exception as e:\n929-         print(f\"Error controlling kasa: {e}\")\n930-         await sio.emit('error', {'msg': f\"Kasa Control Error: {str(e)}\"})\n931-\n932-@sio.event\n933:async def get_settings(sid):\n934-    await sio.emit('settings', SETTINGS)\n935-\n936-@sio.event\n937:async def update_settings(sid, data):\n938-    # Generic update\n939-    print(f\"Updating settings: {data}\")\n940-    \n941-    # Handle specific keys if needed\n942-    if \"tool_permissions\" in data:",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:44:14.902383+00:00",
+          "type": "text",
+          "content": "Now I have a complete understanding of the task. Let me create the complexity assessment:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:44:14.913168+00:00",
+          "type": "tool_start",
+          "content": "[Write] ...rting-prompt-feature/complexity_assessment.json",
+          "phase": "planning",
+          "tool_name": "Write",
+          "tool_input": "...rting-prompt-feature/complexity_assessment.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:44:15.993676+00:00",
+          "type": "tool_end",
+          "content": "[Write] Done",
+          "phase": "planning",
+          "tool_name": "Write",
+          "detail": "File created successfully at: /Users/gglazer/Projects/ada_v2/.auto-claude/specs/003-add-configurable-starting-prompt-feature/complexity_assessment.json",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:44:29.757748+00:00",
+          "type": "text",
+          "content": "## Complexity Assessment Complete ✅\n\n**Assessment Summary:**\n\n| Dimension | Value |\n|-----------|-------|\n| **Complexity** | `STANDARD` |\n| **Workflow Type** | `feature` |\n| **Confidence** | `0.90` |\n| **Estimated Files** | 4 |\n| **Risk Level** | `LOW` |\n\n### Key Findings:\n\n1. **Existing Patterns Found**: The codebase has a complete settings system:\n   - `settings.json` - persists configuration\n   - `server.py` - Socket.IO events (`get_settings`/`update_settings`)\n   - `SettingsWindow.jsx` - UI with toggles and inputs\n\n2. **Current Prompt Location**: The system instruction is **hardcoded** in `backend/ada.py` line 191:\n   ```python\n   system_instruction=\"Your name is Ada, which stands for Advanced Design Assistant...\"\n   ```\n\n3. **Files to Modify**:\n   - `backend/settings.json` - Add `system_prompt` field\n   - `backend/server.py` - Add default prompt to DEFAULT_SETTINGS\n   - `backend/ada.py` - Read prompt from settings instead of hardcoded value\n   - `src/components/SettingsWindow.jsx` - Add textarea for editing prompt\n\n4. **No Research Needed**: All patterns exist in the codebase. This is a straightforward extension of existing functionality.\n\n### Recommended Phases:\n```\ndiscovery → requirements → context → spec_writing → planning → validation\n```\n(6 phases - standard workflow without research phase)",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:44:29.789905+00:00",
+          "type": "info",
+          "content": "Starting phase 4: CONTEXT DISCOVERY",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:44:49.534940+00:00",
+          "type": "info",
+          "content": "Starting phase 5: SPEC DOCUMENT CREATION",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:03.212417+00:00",
+          "type": "text",
+          "content": "I'll start by reading all the input files to gather the necessary context for writing the spec.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:03.218613+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...able-starting-prompt-feature/project_index.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...able-starting-prompt-feature/project_index.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:03.219593+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...rable-starting-prompt-feature/requirements.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...rable-starting-prompt-feature/requirements.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:03.220437+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...nfigurable-starting-prompt-feature/context.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...nfigurable-starting-prompt-feature/context.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:03.265102+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "planning",
+          "tool_name": "Read",
+          "detail": "     1→{\n     2→  \"project_root\": \"/Users/gglazer/Projects/ada_v2\",\n     3→  \"project_type\": \"single\",\n     4→  \"services\": {\n     5→    \"main\": {\n     6→      \"name\": \"main\",\n     7→      \"path\": \"/Users/gglazer/Projects/ada_v2\",\n     8→      \"language\": \"Python\",\n     9→      \"framework\": \"FastAPI\",\n    10→      \"type\": \"backend\",\n    11→      \"package_manager\": \"pip\",\n    12→      \"default_port\": 8000,\n    13→      \"key_directories\": {\n    14→        \"src\": {\n    15→          \"path\": \"src\",\n    16→          \"purpose\": \"Source code\"\n    17→        },\n    18→        \"tests\": {\n    19→          \"path\": \"tests\",\n    20→          \"purpose\": \"Tests\"\n    21→        }\n    22→      },\n    23→      \"entry_point\": \"src/App.jsx\",\n    24→      \"dependencies\": [\n    25→        \"@mediapipe/tasks-vision\",\n    26→        \"@react-three/drei\",\n    27→        \"@react-three/fiber\",\n    28→        \"@types/three\",\n    29→        \"clsx\",\n    30→        \"framer-motion\",\n    31→        \"lucide-react\",\n    32→        \"react\",\n    33→        \"react-dom\",\n    34→        \"socket.io-client\",\n    35→        \"tailwind-merge\",\n    36→        \"three\"\n    37→      ],\n    38→      \"dev_dependencies\": [\n    39→        \"@vitejs/plugin-react\",\n    40→        \"autoprefixer\",\n    41→        \"concurrently\",\n    42→        \"cross-env\",\n    43→        \"electron\",\n    44→        \"postcss\",\n    45→        \"tailwindcss\",\n    46→        \"vite\",\n    47→        \"wait-on\"\n    48→      ],\n    49→      \"test_directory\": \"tests\",\n    50→      \"environment\": {\n    51→        \"variables\": {\n    52→          \"GEMINI_API_KEY\": {\n    53→            \"value\": \"<REDACTED>\",\n    54→            \"source\": \".env\",\n    55→            \"type\": \"string\",\n    56→            \"sensitive\": true,\n    57→            \"required\": true\n    58→          }\n    59→        },\n    60→        \"required_count\": 1,\n    61→        \"optional_count\": 0,\n    62→        \"detected_count\": 1\n    63→      },\n    64→      \"api\": {\n    65→        \"routes\": [\n    66→          {\n    67→            \"path\": \"/status\",\n    68→            \"methods\": [\n    69→              \"GET\"\n    70→            ],\n    71→            \"file\": \"backend/server.py\",\n    72→            \"framework\": \"FastAPI\",\n    73→            \"requires_auth\": false\n    74→          },\n    75→          {\n    76→            \"path\": \"/status\",\n    77→            \"methods\": [\n    78→              \"GET\"\n    79→            ],\n    80→            \"file\": \".worktrees/001-fix-voice-assistant-noise-sensitivity-issue/backend/server.py\",\n    81→            \"framework\": \"FastAPI\",\n    82→            \"requires_auth\": false\n    83→          }\n    84→        ],\n    85→        \"total_routes\": 2,\n    86→        \"methods\": [\n    87→          \"GET\"\n    88→        ],\n    89→        \"protected_routes\": []\n    90→      },\n    91→      \"api_documentation\": {\n    92→        \"type\": \"openapi\",\n    93→        \"auto_generated\": true,\n    94→        \"docs_url\": \"/docs\",\n    95→        \"redoc_url\": \"/redoc\",\n    96→        \"openapi_url\": \"/openapi.json\"\n    97→      }\n    98→    }\n    99→  },\n   100→  \"infrastructure\": {},\n   101→  \"conventions\": {}\n   102→}\n\n<system-reminder>\nWhenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.\n</system-reminder>\n",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:45:16.257994+00:00",
+          "type": "text",
+          "content": "The context.json is empty. I need to explore the codebase to gather the necessary context before writing the spec. Let me explore the project structure, settings patterns, and relevant files.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:16.291854+00:00",
+          "type": "tool_start",
+          "content": "[Glob] pattern: src/**/*.{jsx,js}",
+          "phase": "planning",
+          "tool_name": "Glob",
+          "tool_input": "pattern: src/**/*.{jsx,js}"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:16.294080+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...s/gglazer/Projects/ada_v2/backend/settings.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...s/gglazer/Projects/ada_v2/backend/settings.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:16.298746+00:00",
+          "type": "tool_start",
+          "content": "[Glob] pattern: **/Settings*.{jsx,js}",
+          "phase": "planning",
+          "tool_name": "Glob",
+          "tool_input": "pattern: **/Settings*.{jsx,js}"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:16.406955+00:00",
+          "type": "tool_end",
+          "content": "[Glob] Done",
+          "phase": "planning",
+          "tool_name": "Glob",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:45:24.205109+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...ojects/ada_v2/src/components/SettingsWindow.jsx",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...ojects/ada_v2/src/components/SettingsWindow.jsx"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:24.208942+00:00",
+          "type": "tool_start",
+          "content": "[Read] /Users/gglazer/Projects/ada_v2/src/App.jsx",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "/Users/gglazer/Projects/ada_v2/src/App.jsx"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:24.210931+00:00",
+          "type": "tool_start",
+          "content": "[Read] /Users/gglazer/Projects/ada_v2/backend/ada.py",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "/Users/gglazer/Projects/ada_v2/backend/ada.py"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:24.242512+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "planning",
+          "tool_name": "Read",
+          "detail": "     1→import React, { useState, useEffect } from 'react';\n     2→import { X } from 'lucide-react';\n     3→\n     4→const TOOLS = [\n     5→    { id: 'generate_cad', label: 'Generate CAD' },\n     6→    { id: 'run_web_agent', label: 'Web Agent' },\n     7→    { id: 'create_directory', label: 'Create Folder' },\n     8→    { id: 'write_file', label: 'Write File' },\n     9→    { id: 'read_directory', label: 'Read Directory' },\n    10→    { id: 'read_file', label: 'Read File' },\n    11→    { id: 'create_project', label: 'Create Project' },\n    12→    { id: 'switch_project', label: 'Switch Project' },\n    13→    { id: 'list_projects', label: 'List Projects' },\n    14→    { id: 'list_smart_devices', label: 'List Devices' },\n    15→    { id: 'control_light', label: 'Control Light' },\n    16→    { id: 'discover_printers', label: 'Discover Printers' },\n    17→    { id: 'print_stl', label: 'Print 3D Model' },\n    18→    { id: 'iterate_cad', label: 'Iterate CAD' },\n    19→];\n    20→\n    21→const SettingsWindow = ({\n    22→    socket,\n    23→    micDevices,\n    24→    speakerDevices,\n    25→    webcamDevices,\n    26→    selectedMicId,\n    27→    setSelectedMicId,\n    28→    selectedSpeakerId,\n    29→    setSelectedSpeakerId,\n    30→    selectedWebcamId,\n    31→    setSelectedWebcamId,\n    32→    cursorSensitivity,\n    33→    setCursorSensitivity,\n    34→    isCameraFlipped,\n    35→    setIsCameraFlipped,\n    36→    handleFileUpload,\n    37→    onClose\n    38→}) => {\n    39→    const [permissions, setPermissions] = useState({});\n    40→    const [faceAuthEnabled, setFaceAuthEnabled] = useState(false);\n    41→\n    42→    useEffect(() => {\n    43→        // Request initial permissions\n    44→        socket.emit('get_settings');\n    45→\n    46→        // Listen for updates\n    47→        const handleSettings = (settings) => {\n    48→            console.log(\"Received settings:\", settings);\n    49→            if (settings) {\n    50→                if (settings.tool_permissions) setPermissions(settings.tool_permissions);\n    51→                if (typeof settings.face_auth_enabled !== 'undefined') {\n    52→                    setFaceAuthEnabled(settings.face_auth_enabled);\n    53→                    localStorage.setItem('face_auth_enabled', settings.face_auth_enabled);\n    54→                }\n    55→            }\n    56→        };\n    57→\n    58→        socket.on('settings', handleSettings);\n    59→        // Also listen for legacy tool_permissions if needed, but 'settings' covers it\n    60→        // socket.on('tool_permissions', handlePermissions); \n    61→\n    62→        return () => {\n    63→            socket.off('settings', handleSettings);\n    64→        };\n    65→    }, [socket]);\n    66→\n    67→    const togglePermission = (toolId) => {\n    68→        const currentVal = permissions[toolId] !== false; // Default True\n    69→        const nextVal = !currentVal;\n    70→\n    71→        // Update local mostly for responsiveness, but socket roundtrip handles truth\n    72→        // setPermissions(prev => ({ ...prev, [toolId]: nextVal }));\n    73→\n    74→        // Send update\n    75→        socket.emit('update_settings', { tool_permissions: { [toolId]: nextVal } });\n    76→    };\n    77→\n    78→    const toggleFaceAuth = () => {\n    79→        const newVal = !faceAuthEnabled;\n    80→        setFaceAuthEnabled(newVal); // Optimistic Update\n    81→        localStorage.setItem('face_auth_enabled', newVal);\n    82→        socket.emit('update_settings', { face_auth_enabled: newVal });\n    83→    };\n    84→\n    85→    const toggleCameraFlip = () => {\n    86→        const newVal = !isCameraFlipped;\n    87→        setIsCameraFlipped(newVal);\n    88→        socket.emit('update_settings', { camera_flipped: newVal });\n    89→    };\n    90→\n    91→    return (\n    92→        <div className=\"absolute top-20 right-10 bg-black/90 border border-cyan-500/50 p-4 rounded-lg z-50 w-80 backdrop-blur-xl shadow-[0_0_30px_rgba(6,182,212,0.2)]\">\n    93→            <div className=\"flex justify-between items-center mb-4 border-b border-cyan-900/50 pb-2\">\n    94→                <h2 className=\"text-cyan-400 font-bold text-sm uppercase tracking-wider\">Settings</h2>\n    95→                <button onClick={onClose} className=\"text-cyan-600 hover:text-cyan-400\">\n    96→                    <X size={16} />\n    97→                </button>\n    98→            </div>\n    99→\n   100→            {/* Authentication Section */}\n   101→            <div className=\"mb-6\">\n   102→                <h3 className=\"text-cyan-400 font-bold mb-3 text-xs uppercase tracking-wider opacity-80\">Security</h3>\n   103→                <div className=\"flex items-center justify-between text-xs bg-gray-900/50 p-2 rounded border border-cyan-900/30\">\n   104→                    <span className=\"text-cyan-100/80\">Face Authentication</span>\n   105→                    <button\n   106→                        onClick={toggleFaceAuth}\n   107→                        className={`relative w-8 h-4 rounded-full transition-colors duration-200 ${faceAuthEnabled ? 'bg-cyan-500/80' : 'bg-gray-700'}`}\n   108→                    >\n   109→                        <div\n   110→                            className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-transform duration-200 ${faceAuthEnabled ? 'translate-x-4' : 'translate-x-0'}`}\n   111→                        />\n   112→                    </button>\n   113→                </div>\n   114→            </div>\n   115→\n   116→            {/* Microphone Section */}\n   117→            <div className=\"mb-4\">\n   118→                <h3 className=\"text-cyan-400 font-bold mb-2 text-xs uppercase tracking-wider opacity-80\">Microphone</h3>\n   119→                <select\n   120→                    value={selectedMicId}\n   121→                    onChange={(e) => setSelectedMicId(e.target.value)}\n   122→                    className=\"w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none\"\n   123→                >\n   124→                    {micDevices.map((device, i) => (\n   125→                        <option key={device.deviceId} value={device.deviceId}>\n   126→                            {device.label || `Microphone ${i + 1}`}\n   127→                        </option>\n   128→                    ))}\n   129→                </select>\n   130→            </div>\n   131→\n   132→            {/* Speaker Section */}\n   133→            <div className=\"mb-4\">\n   134→                <h3 className=\"text-cyan-400 font-bold mb-2 text-xs uppercase tracking-wider opacity-80\">Speaker</h3>\n   135→                <select\n   136→                    value={selectedSpeakerId}\n   137→                    onChange={(e) => setSelectedSpeakerId(e.target.value)}\n   138→                    className=\"w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none\"\n   139→                >\n   140→                    {speakerDevices.map((device, i) => (\n   141→                        <option key={device.deviceId} value={device.deviceId}>\n   142→                            {device.label || `Speaker ${i + 1}`}\n   143→                        </option>\n   144→                    ))}\n   145→                </select>\n   146→            </div>\n   147→\n   148→            {/* Webcam Section */}\n   149→            <div className=\"mb-6\">\n   150→                <h3 className=\"text-cyan-400 font-bold mb-2 text-xs uppercase tracking-wider opacity-80\">Webcam</h3>\n   151→                <select\n   152→                    value={selectedWebcamId}\n   153→                    onChange={(e) => setSelectedWebcamId(e.target.value)}\n   154→                    className=\"w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none\"\n   155→                >\n   156→                    {webcamDevices.map((device, i) => (\n   157→                        <option key={device.deviceId} value={device.deviceId}>\n   158→                            {device.label || `Camera ${i + 1}`}\n   159→                        </option>\n   160→                    ))}\n   161→                </select>\n   162→            </div>\n   163→\n   164→            {/* Cursor Section */}\n   165→            <div className=\"mb-6\">\n   166→                <div className=\"flex justify-between mb-2\">\n   167→                    <h3 className=\"text-cyan-400 font-bold text-xs uppercase tracking-wider opacity-80\">Cursor Sensitivity</h3>\n   168→                    <span className=\"text-xs text-cyan-500\">{cursorSensitivity}x</span>\n   169→                </div>\n   170→                <input\n   171→                    type=\"range\"\n   172→                    min=\"1.0\"\n   173→                    max=\"5.0\"\n   174→                    step=\"0.1\"\n   175→                    value={cursorSensitivity}\n   176→                    onChange={(e) => setCursorSensitivity(parseFloat(e.target.value))}\n   177→                    className=\"w-full accent-cyan-400 cursor-pointer h-1 bg-gray-800 rounded-lg appearance-none\"\n   178→                />\n   179→            </div>\n   180→\n   181→            {/* Gesture Control Section */}\n   182→            <div className=\"mb-6\">\n   183→                <h3 className=\"text-cyan-400 font-bold mb-3 text-xs uppercase tracking-wider opacity-80\">Gesture Control</h3>\n   184→                <div className=\"flex items-center justify-between text-xs bg-gray-900/50 p-2 rounded border border-cyan-900/30\">\n   185→                    <span className=\"text-cyan-100/80\">Flip Camera Horizontal</span>\n   186→                    <button\n   187→                        onClick={toggleCameraFlip}\n   188→                        className={`relative w-8 h-4 rounded-full transition-colors duration-200 ${isCameraFlipped ? 'bg-cyan-500/80' : 'bg-gray-700'}`}\n   189→                    >\n   190→                        <div\n   191→                            className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-transform duration-200 ${isCameraFlipped ? 'translate-x-4' : 'translate-x-0'}`}\n   192→                        />\n   193→                    </button>\n   194→                </div>\n   195→            </div>\n   196→\n   \n\n... [truncated - full output was 13221 chars]",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:45:32.309466+00:00",
+          "type": "text",
+          "content": "Let me also check the backend server.py to understand how settings are managed:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:32.326731+00:00",
+          "type": "tool_start",
+          "content": "[Read] /Users/gglazer/Projects/ada_v2/backend/server.py",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "/Users/gglazer/Projects/ada_v2/backend/server.py"
+        },
+        {
+          "timestamp": "2026-01-03T19:45:32.686675+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "planning",
+          "tool_name": "Read",
+          "detail": "     1→import sys\n     2→import asyncio\n     3→\n     4→# Fix for asyncio subprocess support on Windows\n     5→# MUST BE SET BEFORE OTHER IMPORTS\n     6→if sys.platform == 'win32':\n     7→    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())\n     8→\n     9→import socketio\n    10→import uvicorn\n    11→from fastapi import FastAPI\n    12→import asyncio\n    13→import threading\n    14→import sys\n    15→import os\n    16→import json\n    17→from datetime import datetime\n    18→from pathlib import Path\n    19→\n    20→\n    21→\n    22→# Ensure we can import ada\n    23→sys.path.append(os.path.dirname(os.path.abspath(__file__)))\n    24→\n    25→import ada\n    26→from authenticator import FaceAuthenticator\n    27→from kasa_agent import KasaAgent\n    28→\n    29→# Create a Socket.IO server\n    30→sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')\n    31→app = FastAPI()\n    32→app_socketio = socketio.ASGIApp(sio, app)\n    33→\n    34→import signal\n    35→\n    36→# --- SHUTDOWN HANDLER ---\n    37→def signal_handler(sig, frame):\n    38→    print(f\"\\n[SERVER] Caught signal {sig}. Exiting gracefully...\")\n    39→    # Clean up audio loop\n    40→    if audio_loop:\n    41→        try:\n    42→            print(\"[SERVER] Stopping Audio Loop...\")\n    43→            audio_loop.stop() \n    44→        except:\n    45→            pass\n    46→    # Force kill\n    47→    print(\"[SERVER] Force exiting...\")\n    48→    os._exit(0)\n    49→\n    50→signal.signal(signal.SIGINT, signal_handler)\n    51→signal.signal(signal.SIGTERM, signal_handler)\n    52→\n    53→# Global state\n    54→audio_loop = None\n    55→loop_task = None\n    56→authenticator = None\n    57→kasa_agent = KasaAgent()\n    58→SETTINGS_FILE = \"settings.json\"\n    59→\n    60→DEFAULT_SETTINGS = {\n    61→    \"face_auth_enabled\": False, # Default OFF as requested\n    62→    \"tool_permissions\": {\n    63→        \"generate_cad\": True,\n    64→        \"run_web_agent\": True,\n    65→        \"write_file\": True,\n    66→        \"read_directory\": True,\n    67→        \"read_file\": True,\n    68→        \"create_project\": True,\n    69→        \"switch_project\": True,\n    70→        \"list_projects\": True\n    71→    },\n    72→    \"printers\": [], # List of {host, port, name, type}\n    73→    \"kasa_devices\": [], # List of {ip, alias, model}\n    74→    \"camera_flipped\": False # Invert cursor horizontal direction\n    75→}\n    76→\n    77→SETTINGS = DEFAULT_SETTINGS.copy()\n    78→\n    79→def load_settings():\n    80→    global SETTINGS\n    81→    if os.path.exists(SETTINGS_FILE):\n    82→        try:\n    83→            with open(SETTINGS_FILE, 'r') as f:\n    84→                loaded = json.load(f)\n    85→                # Merge with defaults to ensure new keys exist\n    86→                # Deep merge for tool_permissions would be better but shallow merge of top keys + tool_permissions check is okay for now\n    87→                for k, v in loaded.items():\n    88→                    if k == \"tool_permissions\" and isinstance(v, dict):\n    89→                         SETTINGS[\"tool_permissions\"].update(v)\n    90→                    else:\n    91→                        SETTINGS[k] = v\n    92→            print(f\"Loaded settings: {SETTINGS}\")\n    93→        except Exception as e:\n    94→            print(f\"Error loading settings: {e}\")\n    95→\n    96→def save_settings():\n    97→    try:\n    98→        with open(SETTINGS_FILE, 'w') as f:\n    99→            json.dump(SETTINGS, f, indent=4)\n   100→        print(\"Settings saved.\")\n   101→    except Exception as e:\n   102→        print(f\"Error saving settings: {e}\")\n   103→\n   104→# Load on startup\n   105→load_settings()\n   106→\n   107→authenticator = None\n   108→kasa_agent = KasaAgent(known_devices=SETTINGS.get(\"kasa_devices\"))\n   109→# tool_permissions is now SETTINGS[\"tool_permissions\"]\n   110→\n   111→@app.on_event(\"startup\")\n   112→async def startup_event():\n   113→    import sys\n   114→    print(f\"[SERVER DEBUG] Startup Event Triggered\")\n   115→    print(f\"[SERVER DEBUG] Python Version: {sys.version}\")\n   116→    try:\n   117→        loop = asyncio.get_running_loop()\n   118→        print(f\"[SERVER DEBUG] Running Loop: {type(loop)}\")\n   119→        policy = asyncio.get_event_loop_policy()\n   120→        print(f\"[SERVER DEBUG] Current Policy: {type(policy)}\")\n   121→    except Exception as e:\n   122→        print(f\"[SERVER DEBUG] Error checking loop: {e}\")\n   123→\n   124→    print(\"[SERVER] Startup: Initializing Kasa Agent...\")\n   125→    await kasa_agent.initialize()\n   126→\n   127→@app.get(\"/status\")\n   128→async def status():\n   129→    return {\"status\": \"running\", \"service\": \"A.D.A Backend\"}\n   130→\n   131→@sio.event\n   132→async def connect(sid, environ):\n   133→    print(f\"Client connected: {sid}\")\n   134→    await sio.emit('status', {'msg': 'Connected to A.D.A Backend'}, room=sid)\n   135→\n   136→    global authenticator\n   137→    \n   138→    # Callback for Auth Status\n   139→    async def on_auth_status(is_auth):\n   140→        print(f\"[SERVER] Auth status change: {is_auth}\")\n   141→        await sio.emit('auth_status', {'authenticated': is_auth})\n   142→\n   143→    # Callback for Auth Camera Frames\n   144→    async def on_auth_frame(frame_b64):\n   145→        await sio.emit('auth_frame', {'image': frame_b64})\n   146→\n   147→    # Initialize Authenticator if not already done\n   148→    if authenticator is None:\n   149→        authenticator = FaceAuthenticator(\n   150→            reference_image_path=\"reference.jpg\",\n   151→            on_status_change=on_auth_status,\n   152→            on_frame=on_auth_frame\n   153→        )\n   154→    \n   155→    # Check if already authenticated or needs to start\n   156→    if authenticator.authenticated:\n   157→        await sio.emit('auth_status', {'authenticated': True})\n   158→    else:\n   159→        # Check Settings for Auth\n   160→        if SETTINGS.get(\"face_auth_enabled\", False):\n   161→            await sio.emit('auth_status', {'authenticated': False})\n   162→            # Start the auth loop in background\n   163→            asyncio.create_task(authenticator.start_authentication_loop())\n   164→        else:\n   165→            # Bypass Auth\n   166→            print(\"Face Auth Disabled. Auto-authenticating.\")\n   167→            # We don't change authenticator state to true to avoid confusion if re-enabled? \n   168→            # Or we should just tell client it's auth'd.\n   169→            await sio.emit('auth_status', {'authenticated': True})\n   170→\n   171→@sio.event\n   172→async def disconnect(sid):\n   173→    print(f\"Client disconnected: {sid}\")\n   174→\n   175→@sio.event\n   176→async def start_audio(sid, data=None):\n   177→    global audio_loop, loop_task\n   178→    \n   179→    # Optional: Block if not authenticated\n   180→    # Only block if auth is ENABLED and not authenticated\n   181→    if SETTINGS.get(\"face_auth_enabled\", False):\n   182→        if authenticator and not authenticator.authenticated:\n   183→            print(\"Blocked start_audio: Not authenticated.\")\n   184→            await sio.emit('error', {'msg': 'Authentication Required'})\n   185→            return\n   186→\n   187→    print(\"Starting Audio Loop...\")\n   188→    \n   189→    device_index = None\n   190→    device_name = None\n   191→    if data:\n   192→        if 'device_index' in data:\n   193→            device_index = data['device_index']\n   194→        if 'device_name' in data:\n   195→            device_name = data['device_name']\n   196→            \n   197→    print(f\"Using input device: Name='{device_name}', Index={device_index}\")\n   198→    \n   199→    if audio_loop:\n   200→        if loop_task and (loop_task.done() or loop_task.cancelled()):\n   201→             print(\"Audio loop task appeared finished/cancelled. Clearing and restarting...\")\n   202→             audio_loop = None\n   203→             loop_task = None\n   204→        else:\n   205→             print(\"Audio loop already running. Re-connecting client to session.\")\n   206→             await sio.emit('status', {'msg': 'A.D.A Already Running'})\n   207→             return\n   208→\n   209→\n   210→    # Callback to send audio data to frontend\n   211→    def on_audio_data(data_bytes):\n   212→        # We need to schedule this on the event loop\n   213→        # This is high frequency, so we might want to downsample or batch if it's too much\n   214→        asyncio.create_task(sio.emit('audio_data', {'data': list(data_bytes)}))\n   215→\n   216→    # Callback to send CAL data to frontend\n   217→    def on_cad_data(data):\n   218→        info = f\"{len(data.get('vertices', []))} vertices\" if 'vertices' in data else f\"{len(data.get('data', ''))} bytes (STL)\"\n   219→        print(f\"Sending CAD data to frontend: {info}\")\n   220→        asyncio.create_task(sio.emit('cad_data', data))\n   221→\n   222→    # Callback to send Browser data to frontend\n   223→    def on_web_data(data):\n   224→        print(f\"Sending Browser data to frontend: {len(data.get('log', ''))} chars logs\")\n   225→        asyncio.create_task(sio.emit('browser_frame', data))\n   226→        \n   227→    # Callback to send Transcription data to frontend\n   228→    def on_transcription(data):\n   229→        # data = {\"sender\": \"User\"|\"ADA\", \"text\": \"...\"}\n   230→        asyncio.create_task(sio.emit('transcription', data))\n   231→\n   232→    # Callback to send Confirmation Request to frontend\n   233→    def on_tool_confirmation(data):\n   234→        # data = {\"id\": \"uuid\", \"tool\": \"tool_name\", \"args\": {...}}\n   235→        print(f\"Requesting confirmation for tool: {data.get('tool')}\")\n   236→        asyncio.create_task(sio.emit('tool_confirmation_request', data))\n   237→\n   238→    # Callback to send CAD status to frontend\n   239→    def on_cad_status(status):\n   240→        # status can be: \n   241→        # - a string like \"generating\" (from ada.py handle_cad_request)\n   242→        # - a dict with {status, attempt, max_attempts, error} (from CadAgent)\n   243→        if isinstance(status, dict):\n   244→            print(f\"Sending CAD Status: {status.get('status')} (attempt {status.get('attempt')}/{status.get('max_attempts')})\")\n   245→            asyncio.create_task(sio.emit('cad_status', status))\n   246→        else:\n   247→            # L\n\n... [truncated - full output was 44026 chars]",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:46:50.998173+00:00",
+          "type": "text",
+          "content": "Now I have all the context I need. Let me write the comprehensive spec.md:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:46:51.003233+00:00",
+          "type": "tool_start",
+          "content": "[Write] ...dd-configurable-starting-prompt-feature/spec.md",
+          "phase": "planning",
+          "tool_name": "Write",
+          "tool_input": "...dd-configurable-starting-prompt-feature/spec.md"
+        },
+        {
+          "timestamp": "2026-01-03T19:46:51.666886+00:00",
+          "type": "tool_end",
+          "content": "[Write] Done",
+          "phase": "planning",
+          "tool_name": "Write",
+          "detail": "File created successfully at: /Users/gglazer/Projects/ada_v2/.auto-claude/specs/003-add-configurable-starting-prompt-feature/spec.md",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:46:59.313195+00:00",
+          "type": "text",
+          "content": "Now let me verify the spec has all required sections:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:46:59.318341+00:00",
+          "type": "tool_start",
+          "content": "[Bash] cd /Users/gglazer/Projects/ada_v2/.auto-claude/...",
+          "phase": "planning",
+          "tool_name": "Bash",
+          "tool_input": "cd /Users/gglazer/Projects/ada_v2/.auto-claude/..."
+        },
+        {
+          "timestamp": "2026-01-03T19:46:59.898501+00:00",
+          "type": "tool_end",
+          "content": "[Bash] Done",
+          "phase": "planning",
+          "tool_name": "Bash",
+          "detail": "## Overview\n✓ Overview\n## Workflow Type\n✓ Workflow Type\n## Task Scope\n✓ Task Scope\n## Success Criteria\n✓ Success Criteria\n---\n     276 spec.md",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:47:05.732244+00:00",
+          "type": "text",
+          "content": "```\n=== SPEC DOCUMENT CREATED ===\n\nFile: spec.md\nSections:\n- Overview\n- Workflow Type\n- Task Scope\n- Service Context\n- Files to Modify\n- Files to Reference\n- Patterns to Follow\n- Requirements\n- Implementation Notes\n- Development Environment\n- Success Criteria\n- QA Acceptance Criteria\n\nLength: 276 lines\n\nRequired sections: ✓ All present\n\nNext phase: Implementation Planning\n```",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:47:37.982617+00:00",
+          "type": "info",
+          "content": "Starting phase 6: IMPLEMENTATION PLANNING",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:47:56.537535+00:00",
+          "type": "text",
+          "content": "I'll start by thoroughly investigating the codebase to understand existing patterns before creating the implementation plan.\n\n## PHASE 0: Deep Codebase Investigation\n\nLet me explore the project structure and understand the existing patterns for settings and prompts.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:47:56.576435+00:00",
+          "type": "tool_start",
+          "content": "[Bash] find /Users/gglazer/Projects/ada_v2 -type f \\( ...",
+          "phase": "planning",
+          "tool_name": "Bash",
+          "tool_input": "find /Users/gglazer/Projects/ada_v2 -type f \\( ..."
+        },
+        {
+          "timestamp": "2026-01-03T19:47:56.584011+00:00",
+          "type": "tool_start",
+          "content": "[Bash] ls -la /Users/gglazer/Projects/ada_v2",
+          "phase": "planning",
+          "tool_name": "Bash",
+          "tool_input": "ls -la /Users/gglazer/Projects/ada_v2"
+        },
+        {
+          "timestamp": "2026-01-03T19:47:56.924819+00:00",
+          "type": "tool_end",
+          "content": "[Bash] Done",
+          "phase": "planning",
+          "tool_name": "Bash",
+          "detail": "total 600\ndrwxr-xr-x@  39 gglazer  staff    1248 Jan  3 20:45 .\ndrwxr-xr-x@  23 gglazer  staff     736 Dec 30 01:16 ..\ndrwxr-xr-x    9 gglazer  staff     288 Jan  3 20:41 .auto-claude\n-rw-r--r--@   1 gglazer  staff    1232 Jan  3 20:47 .claude_settings.json\n-rw-r--r--    1 gglazer  staff      55 Dec 30 01:20 .env\n-rw-r--r--@   1 gglazer  staff     114 Dec 30 01:16 .env.example\ndrwxr-xr-x@  15 gglazer  staff     480 Jan  3 20:47 .git\n-rw-r--r--@   1 gglazer  staff     434 Jan  3 17:46 .gitignore\ndrwxr-xr-x@   6 gglazer  staff     192 Jan  3 20:45 .pytest_cache\ndrwxr-xr-x@   3 gglazer  staff      96 Jan  3 20:41 .worktrees\n-rw-------@   1 gglazer  staff    3099 Dec 30 14:29 CLAUDE.md\n-rw-r--r--@   1 gglazer  staff    1070 Dec 30 01:16 LICENSE\n-rw-r--r--@   1 gglazer  staff   15318 Dec 30 01:16 README.md\ndrwxr-xr-x@  19 gglazer  staff     608 Dec 30 01:21 backend\n-rw-r--r--@   1 gglazer  staff     166 Dec 30 01:16 check_cuda.py\n-rw-r--r--@   1 gglazer  staff    1264 Dec 30 01:16 debug_mdns.py\n-rw-r--r--@   1 gglazer  staff    2000 Dec 30 01:16 debug_printer_connection.py\ndrwxr-xr-x@   3 gglazer  staff      96 Dec 30 14:45 electron\n-rw-r--r--@   1 gglazer  staff     503 Dec 30 01:16 grep_trace.py\n-rw-r--r--@   1 gglazer  staff    3452 Dec 30 01:16 hand_gesture_test.py\n-rw-r--r--@   1 gglazer  staff     292 Dec 30 01:16 index.html\ndrwxr-xr-x  277 gglazer  staff    8864 Dec 30 01:20 node_modules\n-rw-r--r--@   1 gglazer  staff  177613 Dec 30 01:19 package-lock.json\n-rw-r--r--@   1 gglazer  staff    1024 Dec 30 01:16 package.json\n-rw-r--r--@   1 gglazer  staff      94 Dec 30 01:16 postcss.config.js\ndrwxr-xr-x@   3 gglazer  staff      96 Jan  3 10:19 projects\ndrwxr-xr-x@   3 gglazer  staff      96 Dec 30 01:16 public\n-rw-r--r--@   1 gglazer  staff     167 Dec 30 01:16 pytest.ini\n-rw-r--r--@   1 gglazer  staff     248 Dec 30 01:16 read_trace.py\n-rw-r--r--@   1 gglazer  staff     339 Dec 30 01:16 requirements.txt\ndrwxr-xr-x@   6 gglazer  staff     192 Dec 30 15:18 src\n-rw-r--r--@   1 gglazer  staff     515 Dec 30 01:16 tailwind.config.js\n-rw-r--r--@   1 gglazer  staff    2898 Dec 30 01:16 temp_cad_gen.py\n-rw-r--r--@   1 gglazer  staff     298 Dec 30 01:16 test_cad_install.py\n-rw-r--r--@   1 gglazer  staff    1429 Dec 30 01:16 test_face_rec.py\n-rw-r--r--@   1 gglazer  staff     512 Dec 30 01:16 test_imports.py\ndrwxr-xr-x@  11 gglazer  staff     352 Dec 30 01:16 tests\n-rw-r--r--@   1 gglazer  staff   15464 Dec 30 01:16 trace.txt\n-rw-r--r--@   1 gglazer  staff     247 Dec 30 01:16 vite.config.js",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:48:08.625623+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...s/gglazer/Projects/ada_v2/backend/settings.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...s/gglazer/Projects/ada_v2/backend/settings.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:08.629269+00:00",
+          "type": "tool_start",
+          "content": "[Read] /Users/gglazer/Projects/ada_v2/backend/server.py",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "/Users/gglazer/Projects/ada_v2/backend/server.py"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:08.630985+00:00",
+          "type": "tool_start",
+          "content": "[Read] /Users/gglazer/Projects/ada_v2/backend/ada.py",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "/Users/gglazer/Projects/ada_v2/backend/ada.py"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:08.662906+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "planning",
+          "tool_name": "Read",
+          "detail": "     1→{\n     2→    \"face_auth_enabled\": false,\n     3→    \"tool_permissions\": {\n     4→        \"generate_cad\": false,\n     5→        \"run_web_agent\": true,\n     6→        \"write_file\": false,\n     7→        \"read_directory\": false,\n     8→        \"read_file\": false,\n     9→        \"create_project\": false,\n    10→        \"switch_project\": false,\n    11→        \"list_projects\": false,\n    12→        \"create_directory\": false,\n    13→        \"iterate_cad\": false,\n    14→        \"print_stl\": false,\n    15→        \"discover_printers\": false,\n    16→        \"control_light\": false,\n    17→        \"list_smart_devices\": true\n    18→    },\n    19→    \"printers\": [\n    20→        {\n    21→            \"name\": \"Creality K1\",\n    22→            \"host\": \"10.0.0.142\",\n    23→            \"port\": 7125,\n    24→            \"type\": \"moonraker\",\n    25→            \"camera_url\": null\n    26→        },\n    27→        {\n    28→            \"name\": \"Creality K1 SE\",\n    29→            \"host\": \"10.0.0.34\",\n    30→            \"port\": 7125,\n    31→            \"type\": \"moonraker\",\n    32→            \"camera_url\": null\n    33→        }\n    34→    ],\n    35→    \"kasa_devices\": [],\n    36→    \"camera_flipped\": false\n    37→}\n\n<system-reminder>\nWhenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.\n</system-reminder>\n",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:48:16.178779+00:00",
+          "type": "text",
+          "content": "Now let me read the frontend SettingsWindow component to understand the existing settings UI patterns:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:16.189256+00:00",
+          "type": "tool_start",
+          "content": "[Glob] pattern: **/SettingsWindow.jsx",
+          "phase": "planning",
+          "tool_name": "Glob",
+          "tool_input": "pattern: **/SettingsWindow.jsx"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:16.197168+00:00",
+          "type": "tool_start",
+          "content": "[Glob] pattern: src/components/*.jsx",
+          "phase": "planning",
+          "tool_name": "Glob",
+          "tool_input": "pattern: src/components/*.jsx"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:18.703277+00:00",
+          "type": "tool_end",
+          "content": "[Glob] Done",
+          "phase": "planning",
+          "tool_name": "Glob",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:48:23.300462+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...ojects/ada_v2/src/components/SettingsWindow.jsx",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...ojects/ada_v2/src/components/SettingsWindow.jsx"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:23.328605+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "planning",
+          "tool_name": "Read",
+          "detail": "     1→import React, { useState, useEffect } from 'react';\n     2→import { X } from 'lucide-react';\n     3→\n     4→const TOOLS = [\n     5→    { id: 'generate_cad', label: 'Generate CAD' },\n     6→    { id: 'run_web_agent', label: 'Web Agent' },\n     7→    { id: 'create_directory', label: 'Create Folder' },\n     8→    { id: 'write_file', label: 'Write File' },\n     9→    { id: 'read_directory', label: 'Read Directory' },\n    10→    { id: 'read_file', label: 'Read File' },\n    11→    { id: 'create_project', label: 'Create Project' },\n    12→    { id: 'switch_project', label: 'Switch Project' },\n    13→    { id: 'list_projects', label: 'List Projects' },\n    14→    { id: 'list_smart_devices', label: 'List Devices' },\n    15→    { id: 'control_light', label: 'Control Light' },\n    16→    { id: 'discover_printers', label: 'Discover Printers' },\n    17→    { id: 'print_stl', label: 'Print 3D Model' },\n    18→    { id: 'iterate_cad', label: 'Iterate CAD' },\n    19→];\n    20→\n    21→const SettingsWindow = ({\n    22→    socket,\n    23→    micDevices,\n    24→    speakerDevices,\n    25→    webcamDevices,\n    26→    selectedMicId,\n    27→    setSelectedMicId,\n    28→    selectedSpeakerId,\n    29→    setSelectedSpeakerId,\n    30→    selectedWebcamId,\n    31→    setSelectedWebcamId,\n    32→    cursorSensitivity,\n    33→    setCursorSensitivity,\n    34→    isCameraFlipped,\n    35→    setIsCameraFlipped,\n    36→    handleFileUpload,\n    37→    onClose\n    38→}) => {\n    39→    const [permissions, setPermissions] = useState({});\n    40→    const [faceAuthEnabled, setFaceAuthEnabled] = useState(false);\n    41→\n    42→    useEffect(() => {\n    43→        // Request initial permissions\n    44→        socket.emit('get_settings');\n    45→\n    46→        // Listen for updates\n    47→        const handleSettings = (settings) => {\n    48→            console.log(\"Received settings:\", settings);\n    49→            if (settings) {\n    50→                if (settings.tool_permissions) setPermissions(settings.tool_permissions);\n    51→                if (typeof settings.face_auth_enabled !== 'undefined') {\n    52→                    setFaceAuthEnabled(settings.face_auth_enabled);\n    53→                    localStorage.setItem('face_auth_enabled', settings.face_auth_enabled);\n    54→                }\n    55→            }\n    56→        };\n    57→\n    58→        socket.on('settings', handleSettings);\n    59→        // Also listen for legacy tool_permissions if needed, but 'settings' covers it\n    60→        // socket.on('tool_permissions', handlePermissions); \n    61→\n    62→        return () => {\n    63→            socket.off('settings', handleSettings);\n    64→        };\n    65→    }, [socket]);\n    66→\n    67→    const togglePermission = (toolId) => {\n    68→        const currentVal = permissions[toolId] !== false; // Default True\n    69→        const nextVal = !currentVal;\n    70→\n    71→        // Update local mostly for responsiveness, but socket roundtrip handles truth\n    72→        // setPermissions(prev => ({ ...prev, [toolId]: nextVal }));\n    73→\n    74→        // Send update\n    75→        socket.emit('update_settings', { tool_permissions: { [toolId]: nextVal } });\n    76→    };\n    77→\n    78→    const toggleFaceAuth = () => {\n    79→        const newVal = !faceAuthEnabled;\n    80→        setFaceAuthEnabled(newVal); // Optimistic Update\n    81→        localStorage.setItem('face_auth_enabled', newVal);\n    82→        socket.emit('update_settings', { face_auth_enabled: newVal });\n    83→    };\n    84→\n    85→    const toggleCameraFlip = () => {\n    86→        const newVal = !isCameraFlipped;\n    87→        setIsCameraFlipped(newVal);\n    88→        socket.emit('update_settings', { camera_flipped: newVal });\n    89→    };\n    90→\n    91→    return (\n    92→        <div className=\"absolute top-20 right-10 bg-black/90 border border-cyan-500/50 p-4 rounded-lg z-50 w-80 backdrop-blur-xl shadow-[0_0_30px_rgba(6,182,212,0.2)]\">\n    93→            <div className=\"flex justify-between items-center mb-4 border-b border-cyan-900/50 pb-2\">\n    94→                <h2 className=\"text-cyan-400 font-bold text-sm uppercase tracking-wider\">Settings</h2>\n    95→                <button onClick={onClose} className=\"text-cyan-600 hover:text-cyan-400\">\n    96→                    <X size={16} />\n    97→                </button>\n    98→            </div>\n    99→\n   100→            {/* Authentication Section */}\n   101→            <div className=\"mb-6\">\n   102→                <h3 className=\"text-cyan-400 font-bold mb-3 text-xs uppercase tracking-wider opacity-80\">Security</h3>\n   103→                <div className=\"flex items-center justify-between text-xs bg-gray-900/50 p-2 rounded border border-cyan-900/30\">\n   104→                    <span className=\"text-cyan-100/80\">Face Authentication</span>\n   105→                    <button\n   106→                        onClick={toggleFaceAuth}\n   107→                        className={`relative w-8 h-4 rounded-full transition-colors duration-200 ${faceAuthEnabled ? 'bg-cyan-500/80' : 'bg-gray-700'}`}\n   108→                    >\n   109→                        <div\n   110→                            className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-transform duration-200 ${faceAuthEnabled ? 'translate-x-4' : 'translate-x-0'}`}\n   111→                        />\n   112→                    </button>\n   113→                </div>\n   114→            </div>\n   115→\n   116→            {/* Microphone Section */}\n   117→            <div className=\"mb-4\">\n   118→                <h3 className=\"text-cyan-400 font-bold mb-2 text-xs uppercase tracking-wider opacity-80\">Microphone</h3>\n   119→                <select\n   120→                    value={selectedMicId}\n   121→                    onChange={(e) => setSelectedMicId(e.target.value)}\n   122→                    className=\"w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none\"\n   123→                >\n   124→                    {micDevices.map((device, i) => (\n   125→                        <option key={device.deviceId} value={device.deviceId}>\n   126→                            {device.label || `Microphone ${i + 1}`}\n   127→                        </option>\n   128→                    ))}\n   129→                </select>\n   130→            </div>\n   131→\n   132→            {/* Speaker Section */}\n   133→            <div className=\"mb-4\">\n   134→                <h3 className=\"text-cyan-400 font-bold mb-2 text-xs uppercase tracking-wider opacity-80\">Speaker</h3>\n   135→                <select\n   136→                    value={selectedSpeakerId}\n   137→                    onChange={(e) => setSelectedSpeakerId(e.target.value)}\n   138→                    className=\"w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none\"\n   139→                >\n   140→                    {speakerDevices.map((device, i) => (\n   141→                        <option key={device.deviceId} value={device.deviceId}>\n   142→                            {device.label || `Speaker ${i + 1}`}\n   143→                        </option>\n   144→                    ))}\n   145→                </select>\n   146→            </div>\n   147→\n   148→            {/* Webcam Section */}\n   149→            <div className=\"mb-6\">\n   150→                <h3 className=\"text-cyan-400 font-bold mb-2 text-xs uppercase tracking-wider opacity-80\">Webcam</h3>\n   151→                <select\n   152→                    value={selectedWebcamId}\n   153→                    onChange={(e) => setSelectedWebcamId(e.target.value)}\n   154→                    className=\"w-full bg-gray-900 border border-cyan-800 rounded p-2 text-xs text-cyan-100 focus:border-cyan-400 outline-none\"\n   155→                >\n   156→                    {webcamDevices.map((device, i) => (\n   157→                        <option key={device.deviceId} value={device.deviceId}>\n   158→                            {device.label || `Camera ${i + 1}`}\n   159→                        </option>\n   160→                    ))}\n   161→                </select>\n   162→            </div>\n   163→\n   164→            {/* Cursor Section */}\n   165→            <div className=\"mb-6\">\n   166→                <div className=\"flex justify-between mb-2\">\n   167→                    <h3 className=\"text-cyan-400 font-bold text-xs uppercase tracking-wider opacity-80\">Cursor Sensitivity</h3>\n   168→                    <span className=\"text-xs text-cyan-500\">{cursorSensitivity}x</span>\n   169→                </div>\n   170→                <input\n   171→                    type=\"range\"\n   172→                    min=\"1.0\"\n   173→                    max=\"5.0\"\n   174→                    step=\"0.1\"\n   175→                    value={cursorSensitivity}\n   176→                    onChange={(e) => setCursorSensitivity(parseFloat(e.target.value))}\n   177→                    className=\"w-full accent-cyan-400 cursor-pointer h-1 bg-gray-800 rounded-lg appearance-none\"\n   178→                />\n   179→            </div>\n   180→\n   181→            {/* Gesture Control Section */}\n   182→            <div className=\"mb-6\">\n   183→                <h3 className=\"text-cyan-400 font-bold mb-3 text-xs uppercase tracking-wider opacity-80\">Gesture Control</h3>\n   184→                <div className=\"flex items-center justify-between text-xs bg-gray-900/50 p-2 rounded border border-cyan-900/30\">\n   185→                    <span className=\"text-cyan-100/80\">Flip Camera Horizontal</span>\n   186→                    <button\n   187→                        onClick={toggleCameraFlip}\n   188→                        className={`relative w-8 h-4 rounded-full transition-colors duration-200 ${isCameraFlipped ? 'bg-cyan-500/80' : 'bg-gray-700'}`}\n   189→                    >\n   190→                        <div\n   191→                            className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-transform duration-200 ${isCameraFlipped ? 'translate-x-4' : 'translate-x-0'}`}\n   192→                        />\n   193→                    </button>\n   194→                </div>\n   195→            </div>\n   196→\n   \n\n... [truncated - full output was 13221 chars]",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:48:39.414933+00:00",
+          "type": "text",
+          "content": "Now let me read the spec.md file for this feature:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:39.417082+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...dd-configurable-starting-prompt-feature/spec.md",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...dd-configurable-starting-prompt-feature/spec.md"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:39.418974+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...rting-prompt-feature/complexity_assessment.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...rting-prompt-feature/complexity_assessment.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:39.434563+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "planning",
+          "tool_name": "Read",
+          "detail": "     1→# Specification: Add Configurable Starting Prompt Feature\n     2→\n     3→## Overview\n     4→\n     5→This feature enables users to configure a custom starting/system prompt for the AI assistant through the frontend settings UI. The prompt defines the AI's identity (\"who am I\") and general behavior guidelines. Currently, the system prompt is hardcoded in the backend (`ada.py`). This change will make it user-configurable, persisted in `settings.json`, and editable via the existing Settings Window.\n     6→\n     7→## Workflow Type\n     8→\n     9→**Type**: feature\n    10→\n    11→**Rationale**: This is a new user-facing feature that requires changes across the frontend (UI), backend (settings handling), and core AI configuration (system instruction). It follows the existing settings pattern already established in the codebase.\n    12→\n    13→## Task Scope\n    14→\n    15→### Services Involved\n    16→- **Frontend (React/Electron)** (primary) - Add UI for editing the starting prompt in SettingsWindow\n    17→- **Backend (Python/FastAPI)** (primary) - Handle storage and application of the starting prompt\n    18→\n    19→### This Task Will:\n    20→- [ ] Add a `starting_prompt` field to settings.json schema\n    21→- [ ] Add a textarea UI component in SettingsWindow.jsx for editing the prompt\n    22→- [ ] Modify backend to read the custom prompt from settings\n    23→- [ ] Pass the custom prompt to the Gemini API session configuration\n    24→- [ ] Persist and load the prompt via the existing settings mechanism\n    25→\n    26→### Out of Scope:\n    27→- Multiple prompt profiles/presets\n    28→- Prompt templates with placeholders\n    29→- Real-time prompt switching (requires session restart)\n    30→- Prompt validation or sanitization (user has full control)\n    31→\n    32→## Service Context\n    33→\n    34→### Frontend (React + Electron + Vite)\n    35→\n    36→**Tech Stack:**\n    37→- Language: JavaScript/JSX\n    38→- Framework: React 18 with Vite bundler\n    39→- Styling: Tailwind CSS\n    40→- Communication: Socket.IO client\n    41→- Key directories: `src/`, `src/components/`\n    42→\n    43→**Entry Point:** `src/App.jsx`\n    44→\n    45→**How to Run:**\n    46→```bash\n    47→npm run dev\n    48→```\n    49→\n    50→**Port:** 5173 (Vite dev server)\n    51→\n    52→### Backend (Python + FastAPI)\n    53→\n    54→**Tech Stack:**\n    55→- Language: Python 3.11\n    56→- Framework: FastAPI + Socket.IO (python-socketio)\n    57→- AI: Google Gemini 2.5 Live API\n    58→- Key directories: `backend/`\n    59→\n    60→**Entry Point:** `backend/server.py`\n    61→\n    62→**How to Run:**\n    63→```bash\n    64→conda activate ada_v2 && python backend/server.py\n    65→```\n    66→\n    67→**Port:** 8000\n    68→\n    69→## Files to Modify\n    70→\n    71→| File | Service | What to Change |\n    72→|------|---------|---------------|\n    73→| `backend/settings.json` | Backend | Add `starting_prompt` field with default value |\n    74→| `backend/server.py` | Backend | Include `starting_prompt` in DEFAULT_SETTINGS, pass to AudioLoop |\n    75→| `backend/ada.py` | Backend | Accept and use custom system_instruction instead of hardcoded value |\n    76→| `src/components/SettingsWindow.jsx` | Frontend | Add textarea for editing starting prompt, save on change |\n    77→\n    78→## Files to Reference\n    79→\n    80→These files show patterns to follow:\n    81→\n    82→| File | Pattern to Copy |\n    83→|------|----------------|\n    84→| `src/components/SettingsWindow.jsx` | Existing settings UI patterns (toggles, dropdowns, Socket.IO integration) |\n    85→| `backend/server.py` | Settings load/save pattern, Socket.IO event handlers (`get_settings`, `update_settings`) |\n    86→| `backend/ada.py` | How `config` is structured with `system_instruction` |\n    87→\n    88→## Patterns to Follow\n    89→\n    90→### Settings Toggle Pattern (SettingsWindow.jsx)\n    91→\n    92→From `src/components/SettingsWindow.jsx`:\n    93→\n    94→```jsx\n    95→const toggleFaceAuth = () => {\n    96→    const newVal = !faceAuthEnabled;\n    97→    setFaceAuthEnabled(newVal); // Optimistic Update\n    98→    localStorage.setItem('face_auth_enabled', newVal);\n    99→    socket.emit('update_settings', { face_auth_enabled: newVal });\n   100→};\n   101→```\n   102→\n   103→**Key Points:**\n   104→- Use optimistic UI update for responsiveness\n   105→- Emit `update_settings` event to backend\n   106→- Backend broadcasts updated settings back to all clients\n   107→\n   108→### Settings Persistence (server.py)\n   109→\n   110→From `backend/server.py`:\n   111→\n   112→```python\n   113→DEFAULT_SETTINGS = {\n   114→    \"face_auth_enabled\": False,\n   115→    \"tool_permissions\": {...},\n   116→    \"printers\": [],\n   117→    \"kasa_devices\": [],\n   118→    \"camera_flipped\": False\n   119→}\n   120→\n   121→@sio.event\n   122→async def update_settings(sid, data):\n   123→    # Handle specific keys\n   124→    if \"camera_flipped\" in data:\n   125→        SETTINGS[\"camera_flipped\"] = data[\"camera_flipped\"]\n   126→    save_settings()\n   127→    await sio.emit('settings', SETTINGS)\n   128→```\n   129→\n   130→**Key Points:**\n   131→- DEFAULT_SETTINGS provides schema and defaults\n   132→- update_settings handler processes incoming changes\n   133→- save_settings() persists to settings.json\n   134→- Broadcast updated settings to all connected clients\n   135→\n   136→### System Instruction Configuration (ada.py)\n   137→\n   138→From `backend/ada.py`:\n   139→\n   140→```python\n   141→config = types.LiveConnectConfig(\n   142→    response_modalities=[\"AUDIO\"],\n   143→    output_audio_transcription={},\n   144→    input_audio_transcription={},\n   145→    system_instruction=\"Your name is Ada, which stands for Advanced Design Assistant. \"\n   146→        \"You have a witty and charming personality. \"\n   147→        \"Your creator is Gábor, and you address him as 'Sir'. ...\",\n   148→    tools=tools,\n   149→    speech_config=types.SpeechConfig(...)\n   150→)\n   151→```\n   152→\n   153→**Key Points:**\n   154→- `system_instruction` is a string passed to LiveConnectConfig\n   155→- This is what needs to be made dynamic\n   156→- The config is used when connecting: `client.aio.live.connect(model=MODEL, config=config)`\n   157→\n   158→## Requirements\n   159→\n   160→### Functional Requirements\n   161→\n   162→1. **Starting Prompt Storage**\n   163→   - Description: Store the custom starting prompt in settings.json\n   164→   - Acceptance: The `starting_prompt` field exists in settings.json and persists across restarts\n   165→\n   166→2. **Starting Prompt UI**\n   167→   - Description: Add a textarea in SettingsWindow for editing the prompt\n   168→   - Acceptance: User can view, edit, and save the starting prompt via the Settings panel\n   169→\n   170→3. **Prompt Application**\n   171→   - Description: The custom prompt is used as the Gemini system_instruction\n   172→   - Acceptance: AI behavior reflects the custom prompt content when session starts\n   173→\n   174→4. **Default Prompt**\n   175→   - Description: Provide a sensible default prompt if none is configured\n   176→   - Acceptance: First-time users get the current default ADA personality\n   177→\n   178→### Edge Cases\n   179→\n   180→1. **Empty Prompt** - Use default prompt if user clears the field completely\n   181→2. **Very Long Prompt** - No hard limit, but display scrollable textarea (Gemini has its own limits)\n   182→3. **Session Already Running** - Show info that changes take effect on next session start\n   183→4. **Special Characters** - Prompt is plain text, no escaping needed\n   184→\n   185→## Implementation Notes\n   186→\n   187→### DO\n   188→- Follow the existing pattern in SettingsWindow.jsx for the textarea styling\n   189→- Use the same Socket.IO event flow (`update_settings` / `settings`) as other settings\n   190→- Add a debounce on the textarea to avoid sending every keystroke\n   191→- Provide a \"Reset to Default\" button for convenience\n   192→- Show a note that changes apply on next session restart\n   193→\n   194→### DON'T\n   195→- Create a new Socket.IO event - reuse existing `update_settings` pattern\n   196→- Store the prompt in localStorage (keep it server-side in settings.json)\n   197→- Try to hot-reload the prompt into an active Gemini session (requires restart)\n   198→- Add complex validation - let the user write whatever they want\n   199→\n   200→## Development Environment\n   201→\n   202→### Start Services\n   203→\n   204→```bash\n   205→# Single command (starts backend automatically)\n   206→conda activate ada_v2 && npm run dev\n   207→\n   208→# Two-terminal setup (recommended for debugging)\n   209→# Terminal 1 - Backend:\n   210→conda activate ada_v2 && python backend/server.py\n   211→# Terminal 2 - Frontend:\n   212→npm run dev\n   213→```\n   214→\n   215→### Service URLs\n   216→- Frontend: http://localhost:5173\n   217→- Backend API: http://localhost:8000\n   218→- Backend Docs: http://localhost:8000/docs\n   219→\n   220→### Required Environment Variables\n   221→- `GEMINI_API_KEY`: Google Gemini API key (in `.env` file)\n   222→\n   223→## Success Criteria\n   224→\n   225→The task is complete when:\n   226→\n   227→1. [ ] `starting_prompt` field exists in settings.json with a default value\n   228→2. [ ] SettingsWindow displays a textarea for editing the starting prompt\n   229→3. [ ] Changes to the prompt are persisted via the existing settings mechanism\n   230→4. [ ] The backend uses the custom prompt when initializing the Gemini session\n   231→5. [ ] Default prompt matches the current hardcoded ADA personality\n   232→6. [ ] No console errors in frontend or backend\n   233→7. [ ] Existing settings functionality remains unaffected\n   234→\n   235→## QA Acceptance Criteria\n   236→\n   237→**CRITICAL**: These criteria must be verified by the QA Agent before sign-off.\n   238→\n   239→### Unit Tests\n   240→| Test | File | What to Verify |\n   241→|------|------|----------------|\n   242→| Settings Load | `tests/test_settings.py` | Default starting_prompt is loaded when not present |\n   243→| Settings Save | `tests/test_settings.py` | starting_prompt is persisted correctly |\n   244→\n   245→### Integration Tests\n   246→| Test | Services | What to Verify |\n   247→|------|----------|----------------|\n   248→| Settings Round-trip | Frontend <-> Backend | Update startin\n\n... [truncated - full output was 12054 chars]",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:48:46.923107+00:00",
+          "type": "text",
+          "content": "Let me check if the project_index.json and context.json already exist:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:46.937628+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...able-starting-prompt-feature/project_index.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...able-starting-prompt-feature/project_index.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:46.946812+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...nfigurable-starting-prompt-feature/context.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...nfigurable-starting-prompt-feature/context.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:48:46.990020+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "planning",
+          "tool_name": "Read",
+          "detail": "     1→{\n     2→  \"project_root\": \"/Users/gglazer/Projects/ada_v2\",\n     3→  \"project_type\": \"single\",\n     4→  \"services\": {\n     5→    \"main\": {\n     6→      \"name\": \"main\",\n     7→      \"path\": \"/Users/gglazer/Projects/ada_v2\",\n     8→      \"language\": \"Python\",\n     9→      \"framework\": \"FastAPI\",\n    10→      \"type\": \"backend\",\n    11→      \"package_manager\": \"pip\",\n    12→      \"default_port\": 8000,\n    13→      \"key_directories\": {\n    14→        \"src\": {\n    15→          \"path\": \"src\",\n    16→          \"purpose\": \"Source code\"\n    17→        },\n    18→        \"tests\": {\n    19→          \"path\": \"tests\",\n    20→          \"purpose\": \"Tests\"\n    21→        }\n    22→      },\n    23→      \"entry_point\": \"src/App.jsx\",\n    24→      \"dependencies\": [\n    25→        \"@mediapipe/tasks-vision\",\n    26→        \"@react-three/drei\",\n    27→        \"@react-three/fiber\",\n    28→        \"@types/three\",\n    29→        \"clsx\",\n    30→        \"framer-motion\",\n    31→        \"lucide-react\",\n    32→        \"react\",\n    33→        \"react-dom\",\n    34→        \"socket.io-client\",\n    35→        \"tailwind-merge\",\n    36→        \"three\"\n    37→      ],\n    38→      \"dev_dependencies\": [\n    39→        \"@vitejs/plugin-react\",\n    40→        \"autoprefixer\",\n    41→        \"concurrently\",\n    42→        \"cross-env\",\n    43→        \"electron\",\n    44→        \"postcss\",\n    45→        \"tailwindcss\",\n    46→        \"vite\",\n    47→        \"wait-on\"\n    48→      ],\n    49→      \"test_directory\": \"tests\",\n    50→      \"environment\": {\n    51→        \"variables\": {\n    52→          \"GEMINI_API_KEY\": {\n    53→            \"value\": \"<REDACTED>\",\n    54→            \"source\": \".env\",\n    55→            \"type\": \"string\",\n    56→            \"sensitive\": true,\n    57→            \"required\": true\n    58→          }\n    59→        },\n    60→        \"required_count\": 1,\n    61→        \"optional_count\": 0,\n    62→        \"detected_count\": 1\n    63→      },\n    64→      \"api\": {\n    65→        \"routes\": [\n    66→          {\n    67→            \"path\": \"/status\",\n    68→            \"methods\": [\n    69→              \"GET\"\n    70→            ],\n    71→            \"file\": \"backend/server.py\",\n    72→            \"framework\": \"FastAPI\",\n    73→            \"requires_auth\": false\n    74→          },\n    75→          {\n    76→            \"path\": \"/status\",\n    77→            \"methods\": [\n    78→              \"GET\"\n    79→            ],\n    80→            \"file\": \".worktrees/001-fix-voice-assistant-noise-sensitivity-issue/backend/server.py\",\n    81→            \"framework\": \"FastAPI\",\n    82→            \"requires_auth\": false\n    83→          }\n    84→        ],\n    85→        \"total_routes\": 2,\n    86→        \"methods\": [\n    87→          \"GET\"\n    88→        ],\n    89→        \"protected_routes\": []\n    90→      },\n    91→      \"api_documentation\": {\n    92→        \"type\": \"openapi\",\n    93→        \"auto_generated\": true,\n    94→        \"docs_url\": \"/docs\",\n    95→        \"redoc_url\": \"/redoc\",\n    96→        \"openapi_url\": \"/openapi.json\"\n    97→      }\n    98→    }\n    99→  },\n   100→  \"infrastructure\": {},\n   101→  \"conventions\": {}\n   102→}\n\n<system-reminder>\nWhenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.\n</system-reminder>\n",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:49:36.800428+00:00",
+          "type": "text",
+          "content": "Excellent! I have completed my investigation. Let me now document my findings and create the required files.\n\n## Phase 0: Investigation Summary\n\n### Existing Patterns Found:\n\n1. **Settings Pattern (server.py)**:\n   - `DEFAULT_SETTINGS` dict at line 60-75 contains schema\n   - `load_settings()` and `save_settings()` handle persistence\n   - `update_settings` Socket.IO event handler (line 937-962)\n   - Changes broadcast via `sio.emit('settings', SETTINGS)`\n\n2. **Frontend Settings Pattern (SettingsWindow.jsx)**:\n   - Uses `socket.emit('get_settings')` on mount\n   - Listens to `socket.on('settings', ...)` for updates\n   - Optimistic UI with localStorage backup\n   - Consistent cyan/dark Tailwind styling\n\n3. **System Instruction (ada.py)**:\n   - Line 186-204: Module-level `config` with hardcoded `system_instruction`\n   - Used in `client.aio.live.connect(model=MODEL, config=config)` at line 1181\n   - Need to make config dynamic (move inside AudioLoop)\n\nNow let me create the context.json, implementation_plan.json, init.sh, and build-progress.txt files:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:49:36.809019+00:00",
+          "type": "tool_start",
+          "content": "[Write] ...nfigurable-starting-prompt-feature/context.json",
+          "phase": "planning",
+          "tool_name": "Write",
+          "tool_input": "...nfigurable-starting-prompt-feature/context.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:49:36.932793+00:00",
+          "type": "tool_end",
+          "content": "[Write] Done",
+          "phase": "planning",
+          "tool_name": "Write",
+          "detail": "The file /Users/gglazer/Projects/ada_v2/.auto-claude/specs/003-add-configurable-starting-prompt-feature/context.json has been updated. Here's the result of running `cat -n` on a snippet of the edited file:\n     1→{\n     2→  \"task_description\": \"Add frontend and backend functionality to enable users to configure a custom starting/system prompt for the AI assistant through the Settings UI\",\n     3→  \"scoped_services\": [\"frontend\", \"backend\"],\n     4→  \"files_to_modify\": {\n     5→    \"backend\": [\n     6→      \"backend/settings.json\",\n     7→      \"backend/server.py\",\n     8→      \"backend/ada.py\"\n     9→    ],\n    10→    \"frontend\": [\n    11→      \"src/components/SettingsWindow.jsx\"\n    12→    ]\n    13→  },\n    14→  \"files_to_reference\": [\n    15→    \"backend/server.py\",\n    16→    \"backend/ada.py\",\n    17→    \"src/components/SettingsWindow.jsx\"\n    18→  ],\n    19→  \"patterns\": {\n    20→    \"settings_storage\": \"Settings stored in backend/settings.json, loaded via load_settings(), saved via save_settings()\",\n    21→    \"settings_update_flow\": \"Frontend emits 'update_settings' with key-value pairs, backend updates SETTINGS dict and broadcasts 'settings' event to all clients\",\n    22→    \"settings_ui_pattern\": \"SettingsWindow.jsx uses sections with h3 headers, consistent Tailwind CSS (bg-gray-900, border-cyan-800, text-cyan-100), optimistic updates with localStorage backup\",\n    23→    \"system_instruction_location\": \"Currently hardcoded in backend/ada.py lines 186-204 in module-level config variable\"\n    24→  },\n    25→  \"existing_implementations\": {\n    26→    \"description\": \"Full settings system exists with Socket.IO events 'get_settings' and 'update_settings', UI toggles, and JSON persistence\",\n    27→    \"relevant_files\": [\n    28→      \"backend/server.py - DEFAULT_SETTINGS dict, load_settings(), save_settings(), update_settings event handler\",\n    29→      \"backend/settings.json - Current settings storage\",\n    30→      \"src/components/SettingsWindow.jsx - Settings UI with toggles, selects, and file upload\"\n    31→    ]\n    32→  },\n    33→  \"key_patterns_identified\": {\n    34→    \"default_prompt_value\": \"Your name is Ada, which stands for Advanced Design Assistant. You have a witty and charming personality. Your creator is Gabor, and you address him as 'Sir'. If you talk to him in Hungarian, you can address him as 'Uram'. When answering, respond using complete and concise sentences to keep a quick pacing and keep the conversation flowing. You have a fun personality.\",\n    35→    \"toggle_function_pattern\": \"const toggleX = () => { setX(newVal); localStorage.setItem('key', newVal); socket.emit('update_settings', { key: newVal }); }\",\n    36→    \"settings_section_pattern\": \"<div className='mb-6'><h3 className='text-cyan-400 font-bold mb-3 text-xs uppercase tracking-wider opacity-80'>Section Name</h3>...</div>\"\n    37→  },\n    38→  \"constraints\": {\n    39→    \"no_hot_reload\": \"Gemini LiveConnectConfig is set at connection time - prompt changes require session restart\",\n    40→    \"reuse_events\": \"Must use existing 'update_settings' Socket.IO event, not create new events\",\n    41→    \"server_side_storage\": \"Prompt stored in settings.json, not localStorage\"\n    42→  },\n    43→  \"created_at\": \"2026-01-03T21:00:00Z\",\n    44→  \"updated_at\": \"2026-01-03T21:00:00Z\"\n    45→}\n    46→",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:50:36.366277+00:00",
+          "type": "tool_start",
+          "content": "[Write] ...tarting-prompt-feature/implementation_plan.json",
+          "phase": "planning",
+          "tool_name": "Write",
+          "tool_input": "...tarting-prompt-feature/implementation_plan.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:50:36.398772+00:00",
+          "type": "tool_end",
+          "content": "[Write] Error",
+          "phase": "planning",
+          "tool_name": "Write",
+          "detail": "<tool_use_error>File has not been read yet. Read it first before writing to it.</tool_use_error>",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:50:42.120244+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...tarting-prompt-feature/implementation_plan.json",
+          "phase": "planning",
+          "tool_name": "Read",
+          "tool_input": "...tarting-prompt-feature/implementation_plan.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:50:42.144260+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "planning",
+          "tool_name": "Read",
+          "detail": "     1→{\n     2→  \"feature\": \"Add configurable starting prompt feature\",\n     3→  \"description\": \"Please modify the frontend to enable setting up the starting prompt, for example who am I and how can the AI assistant handle everything in general.\",\n     4→  \"created_at\": \"2026-01-03T17:01:26.565Z\",\n     5→  \"updated_at\": \"2026-01-03T19:47:38.000Z\",\n     6→  \"status\": \"in_progress\",\n     7→  \"phases\": [],\n     8→  \"planStatus\": \"in_progress\"\n     9→}\n\n<system-reminder>\nWhenever you read a file, you should consider whether it would be considered malware. You CAN and SHOULD provide analysis of malware, what it is doing. But you MUST refuse to improve or augment the code. You can still analyze existing code, write reports, or answer questions about the code behavior.\n</system-reminder>\n",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:51:39.765680+00:00",
+          "type": "tool_start",
+          "content": "[Write] ...tarting-prompt-feature/implementation_plan.json",
+          "phase": "planning",
+          "tool_name": "Write",
+          "tool_input": "...tarting-prompt-feature/implementation_plan.json"
+        },
+        {
+          "timestamp": "2026-01-03T19:51:39.807461+00:00",
+          "type": "tool_end",
+          "content": "[Write] Done",
+          "phase": "planning",
+          "tool_name": "Write",
+          "detail": "The file /Users/gglazer/Projects/ada_v2/.auto-claude/specs/003-add-configurable-starting-prompt-feature/implementation_plan.json has been updated. Here's the result of running `cat -n` on a snippet of the edited file:\n     1→{\n     2→  \"feature\": \"Configurable Starting Prompt\",\n     3→  \"workflow_type\": \"feature\",\n     4→  \"workflow_rationale\": \"This is a new user-facing feature that adds the ability to configure the AI's system prompt through the existing settings UI. It follows the established settings pattern and affects frontend (UI) and backend (configuration, storage, application).\",\n     5→  \"phases\": [\n     6→    {\n     7→      \"id\": \"phase-1-backend-settings\",\n     8→      \"name\": \"Backend Settings Schema\",\n     9→      \"type\": \"implementation\",\n    10→      \"description\": \"Add starting_prompt field to settings schema and persistence layer\",\n    11→      \"depends_on\": [],\n    12→      \"parallel_safe\": true,\n    13→      \"subtasks\": [\n    14→        {\n    15→          \"id\": \"subtask-1-1\",\n    16→          \"description\": \"Add starting_prompt to DEFAULT_SETTINGS in server.py with the default ADA personality prompt\",\n    17→          \"service\": \"backend\",\n    18→          \"files_to_modify\": [\"backend/server.py\"],\n    19→          \"files_to_create\": [],\n    20→          \"patterns_from\": [\"backend/server.py - DEFAULT_SETTINGS dict pattern\"],\n    21→          \"verification\": {\n    22→            \"type\": \"command\",\n    23→            \"command\": \"grep -q 'starting_prompt' backend/server.py && echo 'OK'\",\n    24→            \"expected\": \"OK\"\n    25→          },\n    26→          \"status\": \"pending\",\n    27→          \"notes\": \"Add starting_prompt key to DEFAULT_SETTINGS dict with the full default prompt string currently hardcoded in ada.py lines 191-195\"\n    28→        },\n    29→        {\n    30→          \"id\": \"subtask-1-2\",\n    31→          \"description\": \"Add starting_prompt handler in update_settings Socket.IO event\",\n    32→          \"service\": \"backend\",\n    33→          \"files_to_modify\": [\"backend/server.py\"],\n    34→          \"files_to_create\": [],\n    35→          \"patterns_from\": [\"backend/server.py - camera_flipped handling in update_settings\"],\n    36→          \"verification\": {\n    37→            \"type\": \"command\",\n    38→            \"command\": \"grep -A2 'starting_prompt' backend/server.py | grep -q 'SETTINGS' && echo 'OK'\",\n    39→            \"expected\": \"OK\"\n    40→          },\n    41→          \"status\": \"pending\",\n    42→          \"notes\": \"Follow the pattern: if 'starting_prompt' in data: SETTINGS['starting_prompt'] = data['starting_prompt']\"\n    43→        }\n    44→      ]\n    45→    },\n    46→    {\n    47→      \"id\": \"phase-2-backend-ada\",\n    48→      \"name\": \"Backend Prompt Application\",\n    49→      \"type\": \"implementation\",\n    50→      \"description\": \"Modify ada.py to accept dynamic system_instruction and apply it to Gemini config\",\n    51→      \"depends_on\": [\"phase-1-backend-settings\"],\n    52→      \"parallel_safe\": false,\n    53→      \"subtasks\": [\n    54→        {\n    55→          \"id\": \"subtask-2-1\",\n    56→          \"description\": \"Add system_instruction parameter to AudioLoop.__init__ and store as instance variable\",\n    57→          \"service\": \"backend\",\n    58→          \"files_to_modify\": [\"backend/ada.py\"],\n    59→          \"files_to_create\": [],\n    60→          \"patterns_from\": [\"backend/ada.py - AudioLoop.__init__ existing parameters\"],\n    61→          \"verification\": {\n    62→            \"type\": \"command\",\n    63→            \"command\": \"grep -q 'system_instruction' backend/ada.py && echo 'OK'\",\n    64→            \"expected\": \"OK\"\n    65→          },\n    66→          \"status\": \"pending\",\n    67→          \"notes\": \"Add system_instruction=None parameter to __init__, store as self.system_instruction with fallback to DEFAULT_PROMPT constant\"\n    68→        },\n    69→        {\n    70→          \"id\": \"subtask-2-2\",\n    71→          \"description\": \"Move config creation inside AudioLoop.run() to use dynamic system_instruction\",\n    72→          \"service\": \"backend\",\n    73→          \"files_to_modify\": [\"backend/ada.py\"],\n    74→          \"files_to_create\": [],\n    75→          \"patterns_from\": [\"backend/ada.py - current config = types.LiveConnectConfig(...)\"],\n    76→          \"verification\": {\n    77→            \"type\": \"command\",\n    78→            \"command\": \"grep -B5 'LiveConnectConfig' backend/ada.py | grep -q 'self.system_instruction' && echo 'OK'\",\n    79→            \"expected\": \"OK\"\n    80→          },\n    81→          \"status\": \"pending\",\n    82→          \"notes\": \"Keep DEFAULT_PROMPT as a module constant, create config inside run() using self.system_instruction or DEFAULT_PROMPT\"\n    83→        },\n    84→        {\n    85→          \"id\": \"subtask-2-3\",\n    86→          \"description\": \"Update AudioLoop instantiation in server.py to pass starting_prompt from SETTINGS\",\n    87→          \"service\": \"backend\",\n    88→          \"files_to_modify\": [\"backend/server.py\"],\n    89→          \"files_to_create\": [],\n    90→          \"patterns_from\": [\"backend/server.py - line 274 AudioLoop instantiation\"],\n    91→          \"verification\": {\n    92→            \"type\": \"command\",\n    93→            \"command\": \"grep 'AudioLoop' backend/server.py | grep -q 'system_instruction' && echo 'OK'\",\n    94→            \"expected\": \"OK\"\n    95→          },\n    96→          \"status\": \"pending\",\n    97→          \"notes\": \"Pass system_instruction=SETTINGS.get('starting_prompt') when creating AudioLoop instance\"\n    98→        }\n    99→      ]\n   100→    },\n   101→    {\n   102→      \"id\": \"phase-3-frontend-ui\",\n   103→      \"name\": \"Frontend Settings UI\",\n   104→      \"type\": \"implementation\",\n   105→      \"description\": \"Add textarea UI component in SettingsWindow for editing the starting prompt\",\n   106→      \"depends_on\": [\"phase-1-backend-settings\"],\n   107→      \"parallel_safe\": true,\n   108→      \"subtasks\": [\n   109→        {\n   110→          \"id\": \"subtask-3-1\",\n   111→          \"description\": \"Add startingPrompt state and load it from settings in useEffect\",\n   112→          \"service\": \"frontend\",\n   113→          \"files_to_modify\": [\"src/components/SettingsWindow.jsx\"],\n   114→          \"files_to_create\": [],\n   115→          \"patterns_from\": [\"src/components/SettingsWindow.jsx - faceAuthEnabled state pattern\"],\n   116→          \"verification\": {\n   117→            \"type\": \"command\",\n   118→            \"command\": \"grep -q 'startingPrompt' src/components/SettingsWindow.jsx && echo 'OK'\",\n   119→            \"expected\": \"OK\"\n   120→          },\n   121→          \"status\": \"pending\",\n   122→          \"notes\": \"Add useState for startingPrompt, update in handleSettings when settings.starting_prompt is received\"\n   123→        },\n   124→        {\n   125→          \"id\": \"subtask-3-2\",\n   126→          \"description\": \"Add debounced update function for starting prompt changes\",\n   127→          \"service\": \"frontend\",\n   128→          \"files_to_modify\": [\"src/components/SettingsWindow.jsx\"],\n   129→          \"files_to_create\": [],\n   130→          \"patterns_from\": [\"src/components/SettingsWindow.jsx - toggleFaceAuth pattern\"],\n   131→          \"verification\": {\n   132→            \"type\": \"command\",\n   133→            \"command\": \"grep -q 'debounce\\\\|setTimeout' src/components/SettingsWindow.jsx && echo 'OK'\",\n   134→            \"expected\": \"OK\"\n   135→          },\n   136→          \"status\": \"pending\",\n   137→          \"notes\": \"Use useRef for debounce timer, update after 500ms of no typing to avoid excessive socket emissions\"\n   138→        },\n   139→        {\n   140→          \"id\": \"subtask-3-3\",\n   141→          \"description\": \"Add Starting Prompt section with textarea and Reset button UI\",\n   142→          \"service\": \"frontend\",\n   143→          \"files_to_modify\": [\"src/components/SettingsWindow.jsx\"],\n   144→          \"files_to_create\": [],\n   145→          \"patterns_from\": [\"src/components/SettingsWindow.jsx - existing section structure\"],\n   146→          \"verification\": {\n   147→            \"type\": \"command\",\n   148→            \"command\": \"grep -q 'Starting Prompt' src/components/SettingsWindow.jsx && echo 'OK'\",\n   149→            \"expected\": \"OK\"\n   150→          },\n   151→          \"status\": \"pending\",\n   152→          \"notes\": \"Add section between Security and Microphone, include textarea with rows=6, Reset to Default button, and info text about restart requirement\"\n   153→        }\n   154→      ]\n   155→    },\n   156→    {\n   157→      \"id\": \"phase-4-integration\",\n   158→      \"name\": \"Integration Verification\",\n   159→      \"type\": \"integration\",\n   160→      \"description\": \"Verify end-to-end flow from UI to Gemini session configuration\",\n   161→      \"depends_on\": [\"phase-2-backend-ada\", \"phase-3-frontend-ui\"],\n   162→      \"parallel_safe\": false,\n   163→      \"subtasks\": [\n   164→        {\n   165→          \"id\": \"subtask-4-1\",\n   166→          \"description\": \"Verify settings.json contains starting_prompt after save\",\n   167→          \"all_services\": true,\n   168→          \"files_to_modify\": [],\n   169→          \"files_to_create\": [],\n   170→          \"patterns_from\": [],\n   171→          \"verification\": {\n   172→            \"type\": \"command\",\n   173→            \"command\": \"grep -q 'starting_prompt' backend/settings.json && echo 'OK' || echo 'MISSING'\",\n   174→            \"expected\": \"OK\"\n   175→          },\n   176→          \"status\": \"pending\",\n   177→          \"notes\": \"After running app and saving prompt, settings.json should contain the starting_prompt field\"\n   178→        },\n   179→        {\n   180→          \"id\": \"subtask-4-2\",\n   181→          \"description\": \"End-to-end verification of starting prompt flow\",\n   182→          \"all_services\": true,\n   183→          \"files_to_modify\": [],\n   184→          \"files_to_create\": [],\n   185→          \"patterns_from\": [],\n   186→          \"verification\": {\n   187→            \"type\": \"e2e\",\n   188→            \"steps\": [\n   189→              \"Start application with npm run dev\",\n   190→              \"Open Settings window\",\n   191→              \"Locate Starting Prompt textarea\",\n   192→              \"Modify the prompt text\",\n   193→              \"Verify save completes (no errors)\",\n  \n\n... [truncated - full output was 14350 chars]",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:51:58.020021+00:00",
+          "type": "text",
+          "content": "Now let me create the init.sh setup script:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:51:58.023279+00:00",
+          "type": "tool_start",
+          "content": "[Write] ...dd-configurable-starting-prompt-feature/init.sh",
+          "phase": "planning",
+          "tool_name": "Write",
+          "tool_input": "...dd-configurable-starting-prompt-feature/init.sh"
+        },
+        {
+          "timestamp": "2026-01-03T19:51:58.644134+00:00",
+          "type": "tool_end",
+          "content": "[Write] Done",
+          "phase": "planning",
+          "tool_name": "Write",
+          "detail": "File created successfully at: /Users/gglazer/Projects/ada_v2/.auto-claude/specs/003-add-configurable-starting-prompt-feature/init.sh",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:52:03.264571+00:00",
+          "type": "tool_start",
+          "content": "[Bash] chmod +x /Users/gglazer/Projects/ada_v2/.auto-c...",
+          "phase": "planning",
+          "tool_name": "Bash",
+          "tool_input": "chmod +x /Users/gglazer/Projects/ada_v2/.auto-c..."
+        },
+        {
+          "timestamp": "2026-01-03T19:52:04.243515+00:00",
+          "type": "tool_end",
+          "content": "[Bash] Done",
+          "phase": "planning",
+          "tool_name": "Bash",
+          "detail": "",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:52:31.892982+00:00",
+          "type": "tool_start",
+          "content": "[Write] ...able-starting-prompt-feature/build-progress.txt",
+          "phase": "planning",
+          "tool_name": "Write",
+          "tool_input": "...able-starting-prompt-feature/build-progress.txt"
+        },
+        {
+          "timestamp": "2026-01-03T19:52:31.986862+00:00",
+          "type": "tool_end",
+          "content": "[Write] Done",
+          "phase": "planning",
+          "tool_name": "Write",
+          "detail": "File created successfully at: /Users/gglazer/Projects/ada_v2/.auto-claude/specs/003-add-configurable-starting-prompt-feature/build-progress.txt",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:52:37.527522+00:00",
+          "type": "text",
+          "content": "Let me verify all the plan files were created correctly:",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:52:37.534074+00:00",
+          "type": "tool_start",
+          "content": "[Bash] ls -la /Users/gglazer/Projects/ada_v2/.auto-cla...",
+          "phase": "planning",
+          "tool_name": "Bash",
+          "tool_input": "ls -la /Users/gglazer/Projects/ada_v2/.auto-cla..."
+        },
+        {
+          "timestamp": "2026-01-03T19:52:37.735639+00:00",
+          "type": "tool_end",
+          "content": "[Bash] Done",
+          "phase": "planning",
+          "tool_name": "Bash",
+          "detail": "total 344\ndrwxr-xr-x  12 gglazer  staff     384 Jan  3 20:52 .\ndrwxr-xr-x   6 gglazer  staff     192 Jan  3 18:01 ..\n-rw-------@  1 gglazer  staff    4406 Jan  3 20:52 build-progress.txt\n-rw-------@  1 gglazer  staff    3541 Jan  3 20:44 complexity_assessment.json\n-rw-r--r--@  1 gglazer  staff    2802 Jan  3 20:49 context.json\n-rw-r--r--@  1 gglazer  staff   12046 Jan  3 20:51 implementation_plan.json\n-rwx--x--x@  1 gglazer  staff    2202 Jan  3 20:51 init.sh\n-rw-r--r--@  1 gglazer  staff    2436 Jan  3 20:42 project_index.json\n-rw-r--r--   1 gglazer  staff     206 Jan  3 18:01 requirements.json\n-rw-------@  1 gglazer  staff    9776 Jan  3 20:46 spec.md\n-rw-------@  1 gglazer  staff  118598 Jan  3 20:52 task_logs.json\n-rw-r--r--   1 gglazer  staff     356 Jan  3 18:01 task_metadata.json",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T19:52:51.993781+00:00",
+          "type": "text",
+          "content": "All planning files have been created successfully. Here's a summary of the planning session:\n\n---\n\n## Planning Session Complete\n\n### Files Created/Updated:\n\n| File | Purpose |\n|------|---------|\n| `implementation_plan.json` | Complete 4-phase, 9-subtask implementation plan |\n| `context.json` | Patterns, files to modify, and constraints |\n| `init.sh` | Development environment startup script |\n| `build-progress.txt` | Session progress tracking document |\n\n### Implementation Plan Summary:\n\n**Feature**: Configurable Starting Prompt  \n**Workflow Type**: Feature (new user-facing functionality)  \n**Risk Level**: Low  \n\n**Phases:**\n\n| Phase | Name | Subtasks | Dependencies |\n|-------|------|----------|--------------|\n| 1 | Backend Settings Schema | 2 | None |\n| 2 | Backend Prompt Application | 3 | Phase 1 |\n| 3 | Frontend Settings UI | 3 | Phase 1 |\n| 4 | Integration Verification | 2 | Phase 2, 3 |\n\n**Key Changes:**\n\n1. **backend/server.py** - Add `starting_prompt` to DEFAULT_SETTINGS, update handler\n2. **backend/ada.py** - Accept dynamic `system_instruction`, move config creation to run()\n3. **src/components/SettingsWindow.jsx** - Add textarea section with debounced save\n\n### Parallelism:\n- **Recommended workers**: 1 (sequential)\n- Phase 2 and Phase 3 can run in parallel after Phase 1 completes\n\n### Next Steps:\nA coder agent will:\n1. Read `implementation_plan.json`\n2. Execute subtasks in dependency order\n3. Verify each step with the defined verification commands\n4. Mark subtasks complete as they finish\n\n**Startup Command for Implementation:**\n```bash\nsource auto-claude/.venv/bin/activate && python auto-claude/run.py --spec 003 --parallel 1\n```\n\n---\n\n**PLANNING COMPLETE** - This session is finished. The implementation plan is ready for the coder agent to execute.",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:53:29.379251+00:00",
+          "type": "info",
+          "content": "Starting phase 7: FINAL VALIDATION",
+          "phase": "planning"
+        },
+        {
+          "timestamp": "2026-01-03T19:53:29.387315+00:00",
+          "type": "phase_end",
+          "content": "Spec creation complete",
+          "phase": "planning"
+        }
+      ]
+    },
+    "coding": {
+      "phase": "coding",
+      "status": "active",
+      "started_at": "2026-01-03T20:31:11.493945+00:00",
+      "completed_at": null,
+      "entries": [
+        {
+          "timestamp": "2026-01-03T20:31:11.494607+00:00",
+          "type": "phase_start",
+          "content": "Continuing implementation...",
+          "phase": "coding"
+        },
+        {
+          "timestamp": "2026-01-03T20:31:22.982870+00:00",
+          "type": "text",
+          "content": "I'll start by reading the spec and pattern files to understand the requirements and code conventions.",
+          "phase": "coding",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:31:24.566754+00:00",
+          "type": "tool_start",
+          "content": "[Read] ...dd-configurable-starting-prompt-feature/spec.md",
+          "phase": "coding",
+          "tool_name": "Read",
+          "tool_input": "...dd-configurable-starting-prompt-feature/spec.md",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:31:25.024620+00:00",
+          "type": "tool_start",
+          "content": "[Read] ./backend/server.py",
+          "phase": "coding",
+          "tool_name": "Read",
+          "tool_input": "./backend/server.py",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:31:25.051806+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "coding",
+          "tool_name": "Read",
+          "subtask_id": "subtask-1-1",
+          "session": 1,
+          "detail": "     1→# Specification: Add Configurable Starting Prompt Feature\n     2→\n     3→## Overview\n     4→\n     5→This feature enables users to configure a custom starting/system prompt for the AI assistant through the frontend settings UI. The prompt defines the AI's identity (\"who am I\") and general behavior guidelines. Currently, the system prompt is hardcoded in the backend (`ada.py`). This change will make it user-configurable, persisted in `settings.json`, and editable via the existing Settings Window.\n     6→\n     7→## Workflow Type\n     8→\n     9→**Type**: feature\n    10→\n    11→**Rationale**: This is a new user-facing feature that requires changes across the frontend (UI), backend (settings handling), and core AI configuration (system instruction). It follows the existing settings pattern already established in the codebase.\n    12→\n    13→## Task Scope\n    14→\n    15→### Services Involved\n    16→- **Frontend (React/Electron)** (primary) - Add UI for editing the starting prompt in SettingsWindow\n    17→- **Backend (Python/FastAPI)** (primary) - Handle storage and application of the starting prompt\n    18→\n    19→### This Task Will:\n    20→- [ ] Add a `starting_prompt` field to settings.json schema\n    21→- [ ] Add a textarea UI component in SettingsWindow.jsx for editing the prompt\n    22→- [ ] Modify backend to read the custom prompt from settings\n    23→- [ ] Pass the custom prompt to the Gemini API session configuration\n    24→- [ ] Persist and load the prompt via the existing settings mechanism\n    25→\n    26→### Out of Scope:\n    27→- Multiple prompt profiles/presets\n    28→- Prompt templates with placeholders\n    29→- Real-time prompt switching (requires session restart)\n    30→- Prompt validation or sanitization (user has full control)\n    31→\n    32→## Service Context\n    33→\n    34→### Frontend (React + Electron + Vite)\n    35→\n    36→**Tech Stack:**\n    37→- Language: JavaScript/JSX\n    38→- Framework: React 18 with Vite bundler\n    39→- Styling: Tailwind CSS\n    40→- Communication: Socket.IO client\n    41→- Key directories: `src/`, `src/components/`\n    42→\n    43→**Entry Point:** `src/App.jsx`\n    44→\n    45→**How to Run:**\n    46→```bash\n    47→npm run dev\n    48→```\n    49→\n    50→**Port:** 5173 (Vite dev server)\n    51→\n    52→### Backend (Python + FastAPI)\n    53→\n    54→**Tech Stack:**\n    55→- Language: Python 3.11\n    56→- Framework: FastAPI + Socket.IO (python-socketio)\n    57→- AI: Google Gemini 2.5 Live API\n    58→- Key directories: `backend/`\n    59→\n    60→**Entry Point:** `backend/server.py`\n    61→\n    62→**How to Run:**\n    63→```bash\n    64→conda activate ada_v2 && python backend/server.py\n    65→```\n    66→\n    67→**Port:** 8000\n    68→\n    69→## Files to Modify\n    70→\n    71→| File | Service | What to Change |\n    72→|------|---------|---------------|\n    73→| `backend/settings.json` | Backend | Add `starting_prompt` field with default value |\n    74→| `backend/server.py` | Backend | Include `starting_prompt` in DEFAULT_SETTINGS, pass to AudioLoop |\n    75→| `backend/ada.py` | Backend | Accept and use custom system_instruction instead of hardcoded value |\n    76→| `src/components/SettingsWindow.jsx` | Frontend | Add textarea for editing starting prompt, save on change |\n    77→\n    78→## Files to Reference\n    79→\n    80→These files show patterns to follow:\n    81→\n    82→| File | Pattern to Copy |\n    83→|------|----------------|\n    84→| `src/components/SettingsWindow.jsx` | Existing settings UI patterns (toggles, dropdowns, Socket.IO integration) |\n    85→| `backend/server.py` | Settings load/save pattern, Socket.IO event handlers (`get_settings`, `update_settings`) |\n    86→| `backend/ada.py` | How `config` is structured with `system_instruction` |\n    87→\n    88→## Patterns to Follow\n    89→\n    90→### Settings Toggle Pattern (SettingsWindow.jsx)\n    91→\n    92→From `src/components/SettingsWindow.jsx`:\n    93→\n    94→```jsx\n    95→const toggleFaceAuth = () => {\n    96→    const newVal = !faceAuthEnabled;\n    97→    setFaceAuthEnabled(newVal); // Optimistic Update\n    98→    localStorage.setItem('face_auth_enabled', newVal);\n    99→    socket.emit('update_settings', { face_auth_enabled: newVal });\n   100→};\n   101→```\n   102→\n   103→**Key Points:**\n   104→- Use optimistic UI update for responsiveness\n   105→- Emit `update_settings` event to backend\n   106→- Backend broadcasts updated settings back to all clients\n   107→\n   108→### Settings Persistence (server.py)\n   109→\n   110→From `backend/server.py`:\n   111→\n   112→```python\n   113→DEFAULT_SETTINGS = {\n   114→    \"face_auth_enabled\": False,\n   115→    \"tool_permissions\": {...},\n   116→    \"printers\": [],\n   117→    \"kasa_devices\": [],\n   118→    \"camera_flipped\": False\n   119→}\n   120→\n   121→@sio.event\n   122→async def update_settings(sid, data):\n   123→    # Handle specific keys\n   124→    if \"camera_flipped\" in data:\n   125→        SETTINGS[\"camera_flipped\"] = data[\"camera_flipped\"]\n   126→    save_settings()\n   127→    await sio.emit('settings', SETTINGS)\n   128→```\n   129→\n   130→**Key Points:**\n   131→- DEFAULT_SETTINGS provides schema and defaults\n   132→- update_settings handler processes incoming changes\n   133→- save_settings() persists to settings.json\n   134→- Broadcast updated settings to all connected clients\n   135→\n   136→### System Instruction Configuration (ada.py)\n   137→\n   138→From `backend/ada.py`:\n   139→\n   140→```python\n   141→config = types.LiveConnectConfig(\n   142→    response_modalities=[\"AUDIO\"],\n   143→    output_audio_transcription={},\n   144→    input_audio_transcription={},\n   145→    system_instruction=\"Your name is Ada, which stands for Advanced Design Assistant. \"\n   146→        \"You have a witty and charming personality. \"\n   147→        \"Your creator is Gábor, and you address him as 'Sir'. ...\",\n   148→    tools=tools,\n   149→    speech_config=types.SpeechConfig(...)\n   150→)\n   151→```\n   152→\n   153→**Key Points:**\n   154→- `system_instruction` is a string passed to LiveConnectConfig\n   155→- This is what needs to be made dynamic\n   156→- The config is used when connecting: `client.aio.live.connect(model=MODEL, config=config)`\n   157→\n   158→## Requirements\n   159→\n   160→### Functional Requirements\n   161→\n   162→1. **Starting Prompt Storage**\n   163→   - Description: Store the custom starting prompt in settings.json\n   164→   - Acceptance: The `starting_prompt` field exists in settings.json and persists across restarts\n   165→\n   166→2. **Starting Prompt UI**\n   167→   - Description: Add a textarea in SettingsWindow for editing the prompt\n   168→   - Acceptance: User can view, edit, and save the starting prompt via the Settings panel\n   169→\n   170→3. **Prompt Application**\n   171→   - Description: The custom prompt is used as the Gemini system_instruction\n   172→   - Acceptance: AI behavior reflects the custom prompt content when session starts\n   173→\n   174→4. **Default Prompt**\n   175→   - Description: Provide a sensible default prompt if none is configured\n   176→   - Acceptance: First-time users get the current default ADA personality\n   177→\n   178→### Edge Cases\n   179→\n   180→1. **Empty Prompt** - Use default prompt if user clears the field completely\n   181→2. **Very Long Prompt** - No hard limit, but display scrollable textarea (Gemini has its own limits)\n   182→3. **Session Already Running** - Show info that changes take effect on next session start\n   183→4. **Special Characters** - Prompt is plain text, no escaping needed\n   184→\n   185→## Implementation Notes\n   186→\n   187→### DO\n   188→- Follow the existing pattern in SettingsWindow.jsx for the textarea styling\n   189→- Use the same Socket.IO event flow (`update_settings` / `settings`) as other settings\n   190→- Add a debounce on the textarea to avoid sending every keystroke\n   191→- Provide a \"Reset to Default\" button for convenience\n   192→- Show a note that changes apply on next session restart\n   193→\n   194→### DON'T\n   195→- Create a new Socket.IO event - reuse existing `update_settings` pattern\n   196→- Store the prompt in localStorage (keep it server-side in settings.json)\n   197→- Try to hot-reload the prompt into an active Gemini session (requires restart)\n   198→- Add complex validation - let the user write whatever they want\n   199→\n   200→## Development Environment\n   201→\n   202→### Start Services\n   203→\n   204→```bash\n   205→# Single command (starts backend automatically)\n   206→conda activate ada_v2 && npm run dev\n   207→\n   208→# Two-terminal setup (recommended for debugging)\n   209→# Terminal 1 - Backend:\n   210→conda activate ada_v2 && python backend/server.py\n   211→# Terminal 2 - Frontend:\n   212→npm run dev\n   213→```\n   214→\n   215→### Service URLs\n   216→- Frontend: http://localhost:5173\n   217→- Backend API: http://localhost:8000\n   218→- Backend Docs: http://localhost:8000/docs\n   219→\n   220→### Required Environment Variables\n   221→- `GEMINI_API_KEY`: Google Gemini API key (in `.env` file)\n   222→\n   223→## Success Criteria\n   224→\n   225→The task is complete when:\n   226→\n   227→1. [ ] `starting_prompt` field exists in settings.json with a default value\n   228→2. [ ] SettingsWindow displays a textarea for editing the starting prompt\n   229→3. [ ] Changes to the prompt are persisted via the existing settings mechanism\n   230→4. [ ] The backend uses the custom prompt when initializing the Gemini session\n   231→5. [ ] Default prompt matches the current hardcoded ADA personality\n   232→6. [ ] No console errors in frontend or backend\n   233→7. [ ] Existing settings functionality remains unaffected\n   234→\n   235→## QA Acceptance Criteria\n   236→\n   237→**CRITICAL**: These criteria must be verified by the QA Agent before sign-off.\n   238→\n   239→### Unit Tests\n   240→| Test | File | What to Verify |\n   241→|------|------|----------------|\n   242→| Settings Load | `tests/test_settings.py` | Default starting_prompt is loaded when not present |\n   243→| Settings Save | `tests/test_settings.py` | starting_prompt is persisted correctly |\n   244→\n   245→### Integration Tests\n   246→| Test | Services | What to Verify |\n   247→|------|----------|----------------|\n   248→| Settings Round-trip | Frontend <-> Backend | Update startin\n\n... [truncated - full output was 12054 chars]",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:31:29.935308+00:00",
+          "type": "text",
+          "content": "Now I need to read the ada.py file to find the current hardcoded system prompt that will become the default value:",
+          "phase": "coding",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:31:30.463678+00:00",
+          "type": "tool_start",
+          "content": "[Read] ./backend/ada.py",
+          "phase": "coding",
+          "tool_name": "Read",
+          "tool_input": "./backend/ada.py",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:31:30.838118+00:00",
+          "type": "tool_end",
+          "content": "[Read] Done",
+          "phase": "coding",
+          "tool_name": "Read",
+          "subtask_id": "subtask-1-1",
+          "session": 1,
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:31:39.133699+00:00",
+          "type": "text",
+          "content": "I now have all the information I need. I found the hardcoded system prompt in `ada.py` (lines 191-195). Now I'll add `starting_prompt` to `DEFAULT_SETTINGS` in `server.py` with this default value.",
+          "phase": "coding",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:31:46.360512+00:00",
+          "type": "tool_start",
+          "content": "[Edit] ./backend/server.py",
+          "phase": "coding",
+          "tool_name": "Edit",
+          "tool_input": "./backend/server.py",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:31:46.516451+00:00",
+          "type": "tool_end",
+          "content": "[Edit] Done",
+          "phase": "coding",
+          "tool_name": "Edit",
+          "subtask_id": "subtask-1-1",
+          "session": 1,
+          "detail": "The file ./backend/server.py has been updated. Here's the result of running `cat -n` on a snippet of the edited file:\n    56→authenticator = None\n    57→kasa_agent = KasaAgent()\n    58→SETTINGS_FILE = \"settings.json\"\n    59→\n    60→DEFAULT_SETTINGS = {\n    61→    \"face_auth_enabled\": False, # Default OFF as requested\n    62→    \"tool_permissions\": {\n    63→        \"generate_cad\": True,\n    64→        \"run_web_agent\": True,\n    65→        \"write_file\": True,\n    66→        \"read_directory\": True,\n    67→        \"read_file\": True,\n    68→        \"create_project\": True,\n    69→        \"switch_project\": True,\n    70→        \"list_projects\": True\n    71→    },\n    72→    \"printers\": [], # List of {host, port, name, type}\n    73→    \"kasa_devices\": [], # List of {ip, alias, model}\n    74→    \"camera_flipped\": False, # Invert cursor horizontal direction\n    75→    \"starting_prompt\": \"Your name is Ada, which stands for Advanced Design Assistant. \"\n    76→        \"You have a witty and charming personality. \"\n    77→        \"Your creator is Naz, and you address him as 'Sir'. \"\n    78→        \"When answering, respond using complete and concise sentences to keep a quick pacing and keep the conversation flowing. \"\n    79→        \"You have a fun personality.\"\n    80→}\n    81→\n    82→SETTINGS = DEFAULT_SETTINGS.copy()\n    83→\n    84→def load_settings():",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:31:54.628991+00:00",
+          "type": "text",
+          "content": "Now let me verify the change was successful:",
+          "phase": "coding",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:31:56.475412+00:00",
+          "type": "tool_start",
+          "content": "[Bash] grep -q 'starting_prompt' backend/server.py && ...",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "tool_input": "grep -q 'starting_prompt' backend/server.py && ...",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:31:57.070761+00:00",
+          "type": "tool_end",
+          "content": "[Bash] Done",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "subtask_id": "subtask-1-1",
+          "session": 1,
+          "detail": "OK",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:32:01.400423+00:00",
+          "type": "text",
+          "content": "Verification passed. Now let me commit the changes:",
+          "phase": "coding",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:32:05.622866+00:00",
+          "type": "tool_start",
+          "content": "[Bash] git add backend/server.py && git commit -m \"$(c...",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "tool_input": "git add backend/server.py && git commit -m \"$(c...",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:32:07.250734+00:00",
+          "type": "tool_end",
+          "content": "[Bash] Done",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "subtask_id": "subtask-1-1",
+          "session": 1,
+          "detail": "[auto-claude/003-add-configurable-starting-prompt-feature 5f82dac] auto-claude: subtask-1-1 - Add starting_prompt to DEFAULT_SETTINGS in server.py\n 1 file changed, 6 insertions(+), 1 deletion(-)",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:32:10.386208+00:00",
+          "type": "text",
+          "content": "Now let me update the subtask status in the implementation plan:",
+          "phase": "coding",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:32:11.920238+00:00",
+          "type": "tool_start",
+          "content": "[mcp__auto-claude__update_subtask_status]",
+          "phase": "coding",
+          "tool_name": "mcp__auto-claude__update_subtask_status",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:32:11.975121+00:00",
+          "type": "tool_end",
+          "content": "[mcp__auto-claude__update_subtask_status] Done",
+          "phase": "coding",
+          "tool_name": "mcp__auto-claude__update_subtask_status",
+          "subtask_id": "subtask-1-1",
+          "session": 1,
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:32:18.532684+00:00",
+          "type": "text",
+          "content": "## Subtask 1-1 Completed ✓\n\n**Summary:**\n- Added `starting_prompt` field to `DEFAULT_SETTINGS` in `backend/server.py`\n- Default value matches the hardcoded system instruction from `ada.py`:\n  - \"Your name is Ada, which stands for Advanced Design Assistant...\"\n  - Includes personality traits: witty, charming, fun\n  - Creator attribution and communication style guidelines\n- Verification passed (`grep` found `starting_prompt` in file)\n- Changes committed with descriptive message\n- Subtask status updated to \"completed\" in implementation plan",
+          "phase": "coding",
+          "subtask_id": "subtask-1-1",
+          "session": 1
+        },
+        {
+          "timestamp": "2026-01-03T20:32:33.123810+00:00",
+          "type": "text",
+          "content": "I'll start by reading the pattern file to understand how the `camera_flipped` handling works in the `update_settings` event, then implement the `starting_prompt` handler.",
+          "phase": "coding",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:32:34.395513+00:00",
+          "type": "tool_start",
+          "content": "[Grep] pattern: update_settings",
+          "phase": "coding",
+          "tool_name": "Grep",
+          "tool_input": "pattern: update_settings",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:32:34.962558+00:00",
+          "type": "tool_end",
+          "content": "[Grep] Done",
+          "phase": "coding",
+          "tool_name": "Grep",
+          "subtask_id": "subtask-1-2",
+          "session": 2,
+          "detail": "942:async def update_settings(sid, data):\n943-    # Generic update\n944-    print(f\"Updating settings: {data}\")\n945-    \n946-    # Handle specific keys if needed\n947-    if \"tool_permissions\" in data:\n948-        SETTINGS[\"tool_permissions\"].update(data[\"tool_permissions\"])\n949-        if audio_loop:\n950-            audio_loop.update_permissions(SETTINGS[\"tool_permissions\"])\n951-            \n952-    if \"face_auth_enabled\" in data:\n953-        SETTINGS[\"face_auth_enabled\"] = data[\"face_auth_enabled\"]\n954-        # If turned OFF, maybe emit auth status true?\n955-        if not data[\"face_auth_enabled\"]:\n956-             await sio.emit('auth_status', {'authenticated': True})\n957-             # Stop auth loop if running?\n958-             if authenticator:\n959-                 authenticator.stop() \n960-\n961-    if \"camera_flipped\" in data:\n962-        SETTINGS[\"camera_flipped\"] = data[\"camera_flipped\"]\n963-        print(f\"[SERVER] Camera flip set to: {data['camera_flipped']}\")\n964-\n965-    save_settings()\n966-    # Broadcast new full settings\n967-    await sio.emit('settings', SETTINGS)\n968-\n969-\n970-# Deprecated/Mapped for compatibility if frontend still uses specific events\n971-@sio.event\n972-async def get_tool_permissions(sid):\n973-    await sio.emit('tool_permissions', SETTINGS[\"tool_permissions\"])\n974-\n975-@sio.event\n976-async def update_tool_permissions(sid, data):\n977-    print(f\"Updating permissions (legacy event): {data}\")\n978-    SETTINGS[\"tool_permissions\"].update(data)\n979-    save_settings()\n980-    \n981-    if audio_loop:\n982-        audio_loop.update_permissions(SETTINGS[\"tool_permissions\"])\n983-    # Broadcast update to all\n984-    await sio.emit('tool_permissions', SETTINGS[\"tool_permissions\"])\n985-\n986-if __name__ == \"__main__\":\n987-    uvicorn.run(\n988-        \"server:app_socketio\", \n989-        host=\"127.0.0.1\", \n990-        port=8000, \n991-        reload=False, # Reload enabled causes spawn of worker which might miss the event loop policy patch\n992-        loop=\"asyncio\",",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:32:40.232332+00:00",
+          "type": "text",
+          "content": "Now I understand the pattern. I need to add a similar handler for `starting_prompt` right after the `camera_flipped` handler. Let me implement this:",
+          "phase": "coding",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:32:43.094014+00:00",
+          "type": "tool_start",
+          "content": "[Edit] ./backend/server.py",
+          "phase": "coding",
+          "tool_name": "Edit",
+          "tool_input": "./backend/server.py",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:32:43.107133+00:00",
+          "type": "tool_end",
+          "content": "[Edit] Error: <tool_use_error>File has not been read yet. Read it first before writing to it.</tool_use_error>",
+          "phase": "coding",
+          "tool_name": "Edit",
+          "subtask_id": "subtask-1-2",
+          "session": 2,
+          "detail": "<tool_use_error>File has not been read yet. Read it first before writing to it.</tool_use_error>",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:32:48.361255+00:00",
+          "type": "tool_start",
+          "content": "[Read] ./backend/server.py",
+          "phase": "coding",
+          "tool_name": "Read",
+          "tool_input": "./backend/server.py",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:32:48.649484+00:00",
+          "type": "tool_end",
+          "content": "[Read] Error: BLOCKED",
+          "phase": "coding",
+          "tool_name": "Read",
+          "subtask_id": "subtask-1-2",
+          "session": 2,
+          "detail": "     1→import sys\n     2→import asyncio\n     3→\n     4→# Fix for asyncio subprocess support on Windows\n     5→# MUST BE SET BEFORE OTHER IMPORTS\n     6→if sys.platform == 'win32':\n     7→    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())\n     8→\n     9→import socketio\n    10→import uvicorn\n    11→from fastapi import FastAPI\n    12→import asyncio\n    13→import threading\n    14→import sys\n    15→import os\n    16→import json\n    17→from datetime import datetime\n    18→from pathlib import Path\n    19→\n    20→\n    21→\n    22→# Ensure we can import ada\n    23→sys.path.append(os.path.dirname(os.path.abspath(__file__)))\n    24→\n    25→import ada\n    26→from authenticator import FaceAuthenticator\n    27→from kasa_agent import KasaAgent\n    28→\n    29→# Create a Socket.IO server\n    30→sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')\n    31→app = FastAPI()\n    32→app_socketio = socketio.ASGIApp(sio, app)\n    33→\n    34→import signal\n    35→\n    36→# --- SHUTDOWN HANDLER ---\n    37→def signal_handler(sig, frame):\n    38→    print(f\"\\n[SERVER] Caught signal {sig}. Exiting gracefully...\")\n    39→    # Clean up audio loop\n    40→    if audio_loop:\n    41→        try:\n    42→            print(\"[SERVER] Stopping Audio Loop...\")\n    43→            audio_loop.stop() \n    44→        except:\n    45→            pass\n    46→    # Force kill\n    47→    print(\"[SERVER] Force exiting...\")\n    48→    os._exit(0)\n    49→\n    50→signal.signal(signal.SIGINT, signal_handler)\n    51→signal.signal(signal.SIGTERM, signal_handler)\n    52→\n    53→# Global state\n    54→audio_loop = None\n    55→loop_task = None\n    56→authenticator = None\n    57→kasa_agent = KasaAgent()\n    58→SETTINGS_FILE = \"settings.json\"\n    59→\n    60→DEFAULT_SETTINGS = {\n    61→    \"face_auth_enabled\": False, # Default OFF as requested\n    62→    \"tool_permissions\": {\n    63→        \"generate_cad\": True,\n    64→        \"run_web_agent\": True,\n    65→        \"write_file\": True,\n    66→        \"read_directory\": True,\n    67→        \"read_file\": True,\n    68→        \"create_project\": True,\n    69→        \"switch_project\": True,\n    70→        \"list_projects\": True\n    71→    },\n    72→    \"printers\": [], # List of {host, port, name, type}\n    73→    \"kasa_devices\": [], # List of {ip, alias, model}\n    74→    \"camera_flipped\": False, # Invert cursor horizontal direction\n    75→    \"starting_prompt\": \"Your name is Ada, which stands for Advanced Design Assistant. \"\n    76→        \"You have a witty and charming personality. \"\n    77→        \"Your creator is Naz, and you address him as 'Sir'. \"\n    78→        \"When answering, respond using complete and concise sentences to keep a quick pacing and keep the conversation flowing. \"\n    79→        \"You have a fun personality.\"\n    80→}\n    81→\n    82→SETTINGS = DEFAULT_SETTINGS.copy()\n    83→\n    84→def load_settings():\n    85→    global SETTINGS\n    86→    if os.path.exists(SETTINGS_FILE):\n    87→        try:\n    88→            with open(SETTINGS_FILE, 'r') as f:\n    89→                loaded = json.load(f)\n    90→                # Merge with defaults to ensure new keys exist\n    91→                # Deep merge for tool_permissions would be better but shallow merge of top keys + tool_permissions check is okay for now\n    92→                for k, v in loaded.items():\n    93→                    if k == \"tool_permissions\" and isinstance(v, dict):\n    94→                         SETTINGS[\"tool_permissions\"].update(v)\n    95→                    else:\n    96→                        SETTINGS[k] = v\n    97→            print(f\"Loaded settings: {SETTINGS}\")\n    98→        except Exception as e:\n    99→            print(f\"Error loading settings: {e}\")\n   100→\n   101→def save_settings():\n   102→    try:\n   103→        with open(SETTINGS_FILE, 'w') as f:\n   104→            json.dump(SETTINGS, f, indent=4)\n   105→        print(\"Settings saved.\")\n   106→    except Exception as e:\n   107→        print(f\"Error saving settings: {e}\")\n   108→\n   109→# Load on startup\n   110→load_settings()\n   111→\n   112→authenticator = None\n   113→kasa_agent = KasaAgent(known_devices=SETTINGS.get(\"kasa_devices\"))\n   114→# tool_permissions is now SETTINGS[\"tool_permissions\"]\n   115→\n   116→@app.on_event(\"startup\")\n   117→async def startup_event():\n   118→    import sys\n   119→    print(f\"[SERVER DEBUG] Startup Event Triggered\")\n   120→    print(f\"[SERVER DEBUG] Python Version: {sys.version}\")\n   121→    try:\n   122→        loop = asyncio.get_running_loop()\n   123→        print(f\"[SERVER DEBUG] Running Loop: {type(loop)}\")\n   124→        policy = asyncio.get_event_loop_policy()\n   125→        print(f\"[SERVER DEBUG] Current Policy: {type(policy)}\")\n   126→    except Exception as e:\n   127→        print(f\"[SERVER DEBUG] Error checking loop: {e}\")\n   128→\n   129→    print(\"[SERVER] Startup: Initializing Kasa Agent...\")\n   130→    await kasa_agent.initialize()\n   131→\n   132→@app.get(\"/status\")\n   133→async def status():\n   134→    return {\"status\": \"running\", \"service\": \"A.D.A Backend\"}\n   135→\n   136→@sio.event\n   137→async def connect(sid, environ):\n   138→    print(f\"Client connected: {sid}\")\n   139→    await sio.emit('status', {'msg': 'Connected to A.D.A Backend'}, room=sid)\n   140→\n   141→    global authenticator\n   142→    \n   143→    # Callback for Auth Status\n   144→    async def on_auth_status(is_auth):\n   145→        print(f\"[SERVER] Auth status change: {is_auth}\")\n   146→        await sio.emit('auth_status', {'authenticated': is_auth})\n   147→\n   148→    # Callback for Auth Camera Frames\n   149→    async def on_auth_frame(frame_b64):\n   150→        await sio.emit('auth_frame', {'image': frame_b64})\n   151→\n   152→    # Initialize Authenticator if not already done\n   153→    if authenticator is None:\n   154→        authenticator = FaceAuthenticator(\n   155→            reference_image_path=\"reference.jpg\",\n   156→            on_status_change=on_auth_status,\n   157→            on_frame=on_auth_frame\n   158→        )\n   159→    \n   160→    # Check if already authenticated or needs to start\n   161→    if authenticator.authenticated:\n   162→        await sio.emit('auth_status', {'authenticated': True})\n   163→    else:\n   164→        # Check Settings for Auth\n   165→        if SETTINGS.get(\"face_auth_enabled\", False):\n   166→            await sio.emit('auth_status', {'authenticated': False})\n   167→            # Start the auth loop in background\n   168→            asyncio.create_task(authenticator.start_authentication_loop())\n   169→        else:\n   170→            # Bypass Auth\n   171→            print(\"Face Auth Disabled. Auto-authenticating.\")\n   172→            # We don't change authenticator state to true to avoid confusion if re-enabled? \n   173→            # Or we should just tell client it's auth'd.\n   174→            await sio.emit('auth_status', {'authenticated': True})\n   175→\n   176→@sio.event\n   177→async def disconnect(sid):\n   178→    print(f\"Client disconnected: {sid}\")\n   179→\n   180→@sio.event\n   181→async def start_audio(sid, data=None):\n   182→    global audio_loop, loop_task\n   183→    \n   184→    # Optional: Block if not authenticated\n   185→    # Only block if auth is ENABLED and not authenticated\n   186→    if SETTINGS.get(\"face_auth_enabled\", False):\n   187→        if authenticator and not authenticator.authenticated:\n   188→            print(\"Blocked start_audio: Not authenticated.\")\n   189→            await sio.emit('error', {'msg': 'Authentication Required'})\n   190→            return\n   191→\n   192→    print(\"Starting Audio Loop...\")\n   193→    \n   194→    device_index = None\n   195→    device_name = None\n   196→    if data:\n   197→        if 'device_index' in data:\n   198→            device_index = data['device_index']\n   199→        if 'device_name' in data:\n   200→            device_name = data['device_name']\n   201→            \n   202→    print(f\"Using input device: Name='{device_name}', Index={device_index}\")\n   203→    \n   204→    if audio_loop:\n   205→        if loop_task and (loop_task.done() or loop_task.cancelled()):\n   206→             print(\"Audio loop task appeared finished/cancelled. Clearing and restarting...\")\n   207→             audio_loop = None\n   208→             loop_task = None\n   209→        else:\n   210→             print(\"Audio loop already running. Re-connecting client to session.\")\n   211→             await sio.emit('status', {'msg': 'A.D.A Already Running'})\n   212→             return\n   213→\n   214→\n   215→    # Callback to send audio data to frontend\n   216→    def on_audio_data(data_bytes):\n   217→        # We need to schedule this on the event loop\n   218→        # This is high frequency, so we might want to downsample or batch if it's too much\n   219→        asyncio.create_task(sio.emit('audio_data', {'data': list(data_bytes)}))\n   220→\n   221→    # Callback to send CAL data to frontend\n   222→    def on_cad_data(data):\n   223→        info = f\"{len(data.get('vertices', []))} vertices\" if 'vertices' in data else f\"{len(data.get('data', ''))} bytes (STL)\"\n   224→        print(f\"Sending CAD data to frontend: {info}\")\n   225→        asyncio.create_task(sio.emit('cad_data', data))\n   226→\n   227→    # Callback to send Browser data to frontend\n   228→    def on_web_data(data):\n   229→        print(f\"Sending Browser data to frontend: {len(data.get('log', ''))} chars logs\")\n   230→        asyncio.create_task(sio.emit('browser_frame', data))\n   231→        \n   232→    # Callback to send Transcription data to frontend\n   233→    def on_transcription(data):\n   234→        # data = {\"sender\": \"User\"|\"ADA\", \"text\": \"...\"}\n   235→        asyncio.create_task(sio.emit('transcription', data))\n   236→\n   237→    # Callback to send Confirmation Request to frontend\n   238→    def on_tool_confirmation(data):\n   239→        # data = {\"id\": \"uuid\", \"tool\": \"tool_name\", \"args\": {...}}\n   240→        print(f\"Requesting confirmation for tool: {data.get('tool')}\")\n   241→        asyncio.create_task(sio.emit('tool_confirmation_request', data))\n   242→\n   243→    # Callback to send CAD status to frontend\n   244→    def on_cad_status(status):\n   245→        # status can be: \n   246→        # - a string like \"generating\" (fro\n\n... [truncated - full output was 44434 chars]",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:32:52.618439+00:00",
+          "type": "text",
+          "content": "Now I can make the edit to add the `starting_prompt` handler:",
+          "phase": "coding",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:32:55.845042+00:00",
+          "type": "tool_start",
+          "content": "[Edit] ./backend/server.py",
+          "phase": "coding",
+          "tool_name": "Edit",
+          "tool_input": "./backend/server.py",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:32:55.863568+00:00",
+          "type": "tool_end",
+          "content": "[Edit] Done",
+          "phase": "coding",
+          "tool_name": "Edit",
+          "subtask_id": "subtask-1-2",
+          "session": 2,
+          "detail": "The file ./backend/server.py has been updated. Here's the result of running `cat -n` on a snippet of the edited file:\n   957→             # Stop auth loop if running?\n   958→             if authenticator:\n   959→                 authenticator.stop() \n   960→\n   961→    if \"camera_flipped\" in data:\n   962→        SETTINGS[\"camera_flipped\"] = data[\"camera_flipped\"]\n   963→        print(f\"[SERVER] Camera flip set to: {data['camera_flipped']}\")\n   964→\n   965→    if \"starting_prompt\" in data:\n   966→        SETTINGS[\"starting_prompt\"] = data[\"starting_prompt\"]\n   967→        print(f\"[SERVER] Starting prompt updated\")\n   968→\n   969→    save_settings()\n   970→    # Broadcast new full settings\n   971→    await sio.emit('settings', SETTINGS)\n   972→\n   973→",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:33:02.682693+00:00",
+          "type": "text",
+          "content": "Now let me run the verification command:",
+          "phase": "coding",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:33:04.764701+00:00",
+          "type": "tool_start",
+          "content": "[Bash] grep -A2 'starting_prompt' backend/server.py | ...",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "tool_input": "grep -A2 'starting_prompt' backend/server.py | ...",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:33:04.961102+00:00",
+          "type": "tool_end",
+          "content": "[Bash] Done",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "subtask_id": "subtask-1-2",
+          "session": 2,
+          "detail": "OK",
+          "collapsed": true
+        },
+        {
+          "timestamp": "2026-01-03T20:33:08.314332+00:00",
+          "type": "text",
+          "content": "Verification passes. Now let me commit the changes:",
+          "phase": "coding",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        },
+        {
+          "timestamp": "2026-01-03T20:33:11.400685+00:00",
+          "type": "tool_start",
+          "content": "[Bash] git add . && git commit -m \"auto-claude: subtas...",
+          "phase": "coding",
+          "tool_name": "Bash",
+          "tool_input": "git add . && git commit -m \"auto-claude: subtas...",
+          "subtask_id": "subtask-1-2",
+          "session": 2
+        }
+      ]
+    },
+    "validation": {
+      "phase": "validation",
+      "status": "pending",
+      "started_at": null,
+      "completed_at": null,
+      "entries": []
+    }
+  }
+}

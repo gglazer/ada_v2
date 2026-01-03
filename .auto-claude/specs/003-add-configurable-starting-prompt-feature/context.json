@@ -1,0 +1,45 @@
+{
+  "task_description": "Add frontend and backend functionality to enable users to configure a custom starting/system prompt for the AI assistant through the Settings UI",
+  "scoped_services": ["frontend", "backend"],
+  "files_to_modify": {
+    "backend": [
+      "backend/settings.json",
+      "backend/server.py",
+      "backend/ada.py"
+    ],
+    "frontend": [
+      "src/components/SettingsWindow.jsx"
+    ]
+  },
+  "files_to_reference": [
+    "backend/server.py",
+    "backend/ada.py",
+    "src/components/SettingsWindow.jsx"
+  ],
+  "patterns": {
+    "settings_storage": "Settings stored in backend/settings.json, loaded via load_settings(), saved via save_settings()",
+    "settings_update_flow": "Frontend emits 'update_settings' with key-value pairs, backend updates SETTINGS dict and broadcasts 'settings' event to all clients",
+    "settings_ui_pattern": "SettingsWindow.jsx uses sections with h3 headers, consistent Tailwind CSS (bg-gray-900, border-cyan-800, text-cyan-100), optimistic updates with localStorage backup",
+    "system_instruction_location": "Currently hardcoded in backend/ada.py lines 186-204 in module-level config variable"
+  },
+  "existing_implementations": {
+    "description": "Full settings system exists with Socket.IO events 'get_settings' and 'update_settings', UI toggles, and JSON persistence",
+    "relevant_files": [
+      "backend/server.py - DEFAULT_SETTINGS dict, load_settings(), save_settings(), update_settings event handler",
+      "backend/settings.json - Current settings storage",
+      "src/components/SettingsWindow.jsx - Settings UI with toggles, selects, and file upload"
+    ]
+  },
+  "key_patterns_identified": {
+    "default_prompt_value": "Your name is Ada, which stands for Advanced Design Assistant. You have a witty and charming personality. Your creator is Gabor, and you address him as 'Sir'. If you talk to him in Hungarian, you can address him as 'Uram'. When answering, respond using complete and concise sentences to keep a quick pacing and keep the conversation flowing. You have a fun personality.",
+    "toggle_function_pattern": "const toggleX = () => { setX(newVal); localStorage.setItem('key', newVal); socket.emit('update_settings', { key: newVal }); }",
+    "settings_section_pattern": "<div className='mb-6'><h3 className='text-cyan-400 font-bold mb-3 text-xs uppercase tracking-wider opacity-80'>Section Name</h3>...</div>"
+  },
+  "constraints": {
+    "no_hot_reload": "Gemini LiveConnectConfig is set at connection time - prompt changes require session restart",
+    "reuse_events": "Must use existing 'update_settings' Socket.IO event, not create new events",
+    "server_side_storage": "Prompt stored in settings.json, not localStorage"
+  },
+  "created_at": "2026-01-03T21:00:00Z",
+  "updated_at": "2026-01-03T21:00:00Z"
+}

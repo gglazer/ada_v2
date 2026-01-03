@@ -1,0 +1,4 @@
+{
+  "task_description": "Please modify the frontend to enable setting up the starting prompt, for example who am I and how can the AI assistant handle everything in general.",
+  "workflow_type": "feature"
+}

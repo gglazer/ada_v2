@@ -962,6 +962,10 @@ async def update_settings(sid, data):
         SETTINGS["camera_flipped"] = data["camera_flipped"]
         print(f"[SERVER] Camera flip set to: {data['camera_flipped']}")
 
+    if "starting_prompt" in data:
+        SETTINGS["starting_prompt"] = data["starting_prompt"]
+        print(f"[SERVER] Starting prompt updated")
+
     save_settings()
     # Broadcast new full settings
     await sio.emit('settings', SETTINGS)
