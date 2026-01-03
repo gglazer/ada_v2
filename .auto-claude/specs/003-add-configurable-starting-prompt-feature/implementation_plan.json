@@ -99,8 +99,9 @@
             "command": "grep -B5 'LiveConnectConfig' backend/ada.py | grep -q 'self.system_instruction' && echo 'OK'",
             "expected": "OK"
           },
-          "status": "pending",
-          "notes": "Keep DEFAULT_PROMPT as a module constant, create config inside run() using self.system_instruction or DEFAULT_PROMPT"
+          "status": "completed",
+          "notes": "Moved LiveConnectConfig creation from module level into AudioLoop.run(). Added DEFAULT_SYSTEM_INSTRUCTION constant with the original hardcoded prompt. Config now uses self.system_instruction if provided, with fallback to DEFAULT_SYSTEM_INSTRUCTION. Verification passed with corrected grep command (using -A10 instead of -B5 since system_instruction is inside the config block, not before it).",
+          "updated_at": "2026-01-03T20:36:33.254435+00:00"
         },
         {
           "id": "subtask-2-3",
@@ -353,5 +354,5 @@
   "updated_at": "2026-01-03T20:31:10.600Z",
   "status": "in_progress",
   "planStatus": "in_progress",
-  "last_updated": "2026-01-03T20:34:23.991190+00:00"
+  "last_updated": "2026-01-03T20:36:33.254442+00:00"
 }

@@ -277,7 +277,7 @@ async def start_audio(sid, data=None):
     try:
         print(f"Initializing AudioLoop with device_index={device_index}")
         audio_loop = ada.AudioLoop(
-            video_mode="none", 
+            video_mode="none",
             on_audio_data=on_audio_data,
             on_cad_data=on_cad_data,
             on_web_data=on_web_data,
@@ -291,7 +291,8 @@ async def start_audio(sid, data=None):
 
             input_device_index=device_index,
             input_device_name=device_name,
-            kasa_agent=kasa_agent
+            kasa_agent=kasa_agent,
+            system_instruction=SETTINGS.get("starting_prompt")
         )
         print("AudioLoop initialized successfully.")
 
